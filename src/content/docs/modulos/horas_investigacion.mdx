@@ -1,0 +1,261 @@
+---
+title: Horas de Investigación
+description: Módulo para la asignación y control de las horas dedicadas a actividades de investigación por cada investigador según el período académico.
+template: doc
+sidebar:
+    label: Horas de Investigación
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Horas de Investigación** permite gestionar la asignación de horas 
+    semanales dedicadas a investigación para cada investigador en un período académico 
+    específico. Este módulo es fundamental para el control de la carga laboral y el 
+    seguimiento del cumplimiento de actividades investigativas.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Módulos → Horas de Investigación**
+
+{/* ![Vista inicial de Horas de Investigación](@assets/guias/horas/vista_inicial_horas.png) */}
+
+---
+
+## Conceptos clave
+
+Antes de utilizar este módulo, es importante entender los siguientes conceptos:
+
+<CardGrid>
+  <Card title="Período Académico" icon="calendar">
+    Unidad de tiempo (generalmente un semestre) durante la cual se asignan 
+    y controlan las horas de investigación.
+  </Card>
+  <Card title="Horas Semanales" icon="clock">
+    Cantidad de horas por semana que el investigador debe dedicar a 
+    actividades de investigación.
+  </Card>
+  <Card title="Estado" icon="toggle-on">
+    Indica si la asignación de horas está **Activa** (el investigador puede 
+    registrar actividades) o **Inactiva**.
+  </Card>
+  <Card title="Escalafón Base" icon="list">
+    Las horas se sugieren automáticamente según el escalafón profesoral 
+    del investigador.
+  </Card>
+</CardGrid>
+
+---
+
+## Funcionalidades principales
+
+### 1. Listado de Asignaciones de Horas
+
+La vista principal muestra las asignaciones de horas por período:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Investigador** | Nombre del investigador |
+| **Período** | Período académico de la asignación |
+| **Horas Semanales** | Cantidad de horas asignadas por semana |
+| **Estado** | Activo o Inactivo |
+| **Acciones** | Opciones de editar o cambiar estado |
+
+<Aside type="tip" title="Filtros disponibles">
+Utiliza los filtros para ver asignaciones por:
+- **Período académico**
+- **Grupo de investigación**
+- **Estado** (Activo/Inactivo)
+</Aside>
+
+### 2. Asignar Horas a un Investigador
+
+<Steps>
+1. **Seleccionar período activo**
+    
+    Asegúrate de tener seleccionado el período académico correcto en el 
+    filtro superior.
+
+    {/* ![Selector de período](@assets/guias/horas/selector_periodo.png) */}
+
+2. **Iniciar asignación**
+    
+    Presiona el botón **`+ Asignar Horas`** para abrir el formulario de asignación.
+
+3. **Seleccionar investigador**
+    
+    En el campo **Investigador**, busca y selecciona al investigador. 
+    El sistema mostrará automáticamente:
+    - Su escalafón profesoral
+    - Las horas sugeridas según su escalafón
+    - Su grupo de investigación
+
+    {/* ![Formulario asignación de horas](@assets/guias/horas/formulario_asignar_horas.png) */}
+
+    <Aside type="note" title="Horas sugeridas">
+    El sistema sugiere automáticamente las horas según el escalafón:
+    | Escalafón | Horas Sugeridas |
+    |-----------|-----------------|
+    | Titular | 10 horas/semana |
+    | Asociado | 8 horas/semana |
+    | Asistente | 6 horas/semana |
+    | Auxiliar | 4 horas/semana |
+    </Aside>
+
+4. **Ajustar horas (opcional)**
+    
+    Puedes modificar las horas sugeridas según las necesidades específicas. 
+    Ingresa el valor en el campo **Horas Semanales**.
+
+    <Aside type="caution" title="Límites de horas">
+    Las horas asignadas no pueden exceder las horas máximas definidas para 
+    el escalafón del investigador. Si necesitas asignar más horas, contacta 
+    al administrador.
+    </Aside>
+
+5. **Definir estado inicial**
+    
+    Selecciona el estado de la asignación:
+    - **Activo:** El investigador puede comenzar a registrar actividades
+    - **Inactivo:** La asignación queda registrada pero sin efecto
+
+6. **Guardar asignación**
+    
+    Presiona **`Guardar`** para confirmar la asignación de horas.
+
+</Steps>
+
+### 3. Asignación Masiva de Horas
+
+Para asignar horas a múltiples investigadores simultáneamente:
+
+<Steps>
+1. **Acceder a asignación masiva**
+    
+    Presiona el botón **`Asignación Masiva`** en la barra de herramientas.
+
+2. **Seleccionar criterios**
+    
+    Define los parámetros de la asignación:
+    - **Período:** Período académico destino
+    - **Grupo:** Selecciona un grupo específico o "Todos"
+    - **Tipo de asignación:** 
+      - *Por escalafón:* Usa las horas predeterminadas del escalafón
+      - *Personalizada:* Define un valor fijo para todos
+
+    {/* ![Asignación masiva](@assets/guias/horas/asignacion_masiva.png) */}
+
+3. **Previsualizar y confirmar**
+    
+    El sistema mostrará un resumen de los investigadores que recibirán 
+    la asignación. Revisa y presiona **`Confirmar Asignación`**.
+
+</Steps>
+
+<Aside type="caution" title="Asignaciones existentes">
+La asignación masiva **no sobrescribe** asignaciones existentes. Solo 
+crea asignaciones para investigadores que no tengan horas en el período 
+seleccionado.
+</Aside>
+
+### 4. Modificar Asignación de Horas
+
+<Steps>
+1. Localiza la asignación en la tabla
+2. Presiona el botón de **edición** (ícono de lápiz)
+3. Modifica las horas o el estado según sea necesario
+4. Presiona **`Actualizar`** para guardar los cambios
+</Steps>
+
+### 5. Cambiar Estado de Asignación
+
+Puedes activar o desactivar una asignación rápidamente:
+
+1. Localiza la asignación en la tabla
+2. Haz clic en el interruptor de la columna **Estado**
+3. Confirma el cambio en el diálogo emergente
+
+<Aside type="note" title="Efecto del estado">
+- **Activo → Inactivo:** El investigador no podrá crear nuevos planes de 
+  trabajo ni registrar avances en el período.
+- **Inactivo → Activo:** Se habilitan todas las funcionalidades de registro.
+</Aside>
+
+---
+
+## Reportes y estadísticas
+
+### Resumen por Período
+
+Accede a **Reportes → Horas por Período** para visualizar:
+
+- Total de horas asignadas en el período
+- Distribución por grupo de investigación
+- Comparativo con períodos anteriores
+- Investigadores sin asignación
+
+### Exportar Datos
+
+Presiona el botón **`Exportar`** para descargar la información en formato:
+- Excel (.xlsx)
+- PDF
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Una asignación por período" icon="warning">
+    Cada investigador solo puede tener una asignación de horas por 
+    período académico.
+  </Card>
+  <Card title="Período activo requerido" icon="warning">
+    Solo se pueden crear o modificar asignaciones en períodos con 
+    estado "Activo".
+  </Card>
+  <Card title="Horas mínimas" icon="information">
+    El valor mínimo de horas asignables es 1 hora semanal.
+  </Card>
+  <Card title="Dependencia del Plan" icon="link">
+    Las horas asignadas determinan el límite de horas que el investigador 
+    puede planificar en su Plan de Trabajo.
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Ya existe una asignación" | El investigador ya tiene horas en ese período | Edita la asignación existente en lugar de crear una nueva |
+| "Período no activo" | El período seleccionado está cerrado | Selecciona un período con estado "Activo" |
+| "Horas exceden el límite" | Las horas superan el máximo del escalafón | Reduce las horas o solicita autorización especial |
+| "Investigador no encontrado" | El investigador fue eliminado o desactivado | Verifica el estado del investigador |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Qué pasa si no asigno horas a un investigador?">
+El investigador no podrá crear planes de trabajo ni registrar actividades 
+de investigación durante ese período.
+</Aside>
+
+<Aside type="tip" title="¿Puedo modificar horas de períodos cerrados?">
+No, las asignaciones de períodos cerrados quedan bloqueadas para mantener 
+la integridad histórica de los datos.
+</Aside>
+
+<Aside type="tip" title="¿Las horas se acumulan entre períodos?">
+No, cada período tiene su propia asignación independiente. Las horas 
+no utilizadas no se transfieren al siguiente período.
+</Aside>

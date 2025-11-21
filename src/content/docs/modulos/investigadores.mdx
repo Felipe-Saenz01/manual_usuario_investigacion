@@ -1,0 +1,223 @@
+---
+title: Investigadores
+description: Módulo para la gestión del personal investigador, incluyendo su información personal, escalafón profesoral, tipo de contrato y asignación a grupos de investigación.
+template: doc
+sidebar:
+    label: Investigadores
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Investigadores** permite administrar la información del personal 
+    vinculado a las actividades de investigación. Aquí se gestionan los datos personales, 
+    la clasificación en el escalafón profesoral, el tipo de contrato y la asignación 
+    a grupos de investigación.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Módulos → Investigadores**
+
+{/* ![Vista inicial del módulo de Investigadores](@assets/guias/investigadores/vista_inicial_investigadores.png) */}
+
+---
+
+## Funcionalidades principales
+
+### 1. Listado de Investigadores
+
+La vista principal muestra una tabla con todos los investigadores registrados:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Nombre completo del investigador |
+| **Cédula** | Número de identificación |
+| **Correo** | Correo electrónico institucional |
+| **Grupo** | Grupo de investigación al que pertenece |
+| **Escalafón** | Categoría en el escalafón profesoral |
+| **Tipo Contrato** | Modalidad de vinculación |
+| **Acciones** | Opciones de ver, editar o eliminar |
+
+<Aside type="tip" title="Filtros disponibles">
+Puedes filtrar la lista por grupo de investigación, escalafón profesoral o 
+tipo de contrato usando los selectores en la parte superior.
+</Aside>
+
+### 2. Registrar un Nuevo Investigador
+
+<Steps>
+1. **Iniciar registro**
+    
+    Presiona el botón **`+ Nuevo Investigador`** en la parte superior derecha.
+
+    {/* ![Botón nuevo investigador](@assets/guias/investigadores/boton_nuevo_investigador.png) */}
+
+2. **Completar datos personales**
+    
+    Ingresa la información requerida en el formulario:
+
+    - **Nombre completo:** Nombres y apellidos del investigador (requerido)
+    - **Cédula:** Número de documento de identidad (requerido, único)
+    - **Correo electrónico:** Email institucional (requerido, único)
+    - **Contraseña:** Contraseña para acceso al sistema (requerido)
+
+    {/* ![Formulario datos personales](@assets/guias/investigadores/formulario_datos_personales.png) */}
+
+3. **Asignar clasificación institucional**
+    
+    Selecciona las opciones correspondientes:
+
+    - **Grupo de Investigación:** Grupo al que pertenecerá el investigador
+    - **Escalafón Profesoral:** Categoría según el escalafón docente
+    - **Tipo de Contrato:** Modalidad de vinculación contractual
+
+    <Aside type="note" title="Escalafón Profesoral">
+    El escalafón determina las horas semanales de investigación asignadas 
+    automáticamente al investigador. Por ejemplo:
+    - **Titular:** 10 horas semanales
+    - **Asociado:** 8 horas semanales
+    - **Asistente:** 6 horas semanales
+    - **Auxiliar:** 4 horas semanales
+    </Aside>
+
+4. **Asignar rol en el sistema**
+    
+    Selecciona el rol que tendrá el investigador:
+
+    - **Investigador:** Acceso básico para gestionar sus propios productos y entregas
+    - **Coordinador:** Puede gestionar el grupo de investigación y revisar entregas
+    - **Administrador:** Acceso completo al sistema
+
+5. **Guardar registro**
+    
+    Presiona **`Guardar`** para completar el registro. El investigador recibirá 
+    un correo de bienvenida con sus credenciales de acceso.
+
+</Steps>
+
+### 3. Editar Información de un Investigador
+
+<Steps>
+1. **Seleccionar investigador**
+    
+    Localiza al investigador en la tabla y presiona el botón de **edición** 
+    (ícono de lápiz).
+
+2. **Modificar datos**
+    
+    Actualiza los campos necesarios. Todos los campos son editables excepto 
+    la cédula una vez registrada.
+
+    <Aside type="caution" title="Cambio de grupo">
+    Al cambiar el grupo de investigación de un investigador, este mantendrá 
+    su participación en los proyectos anteriores pero las nuevas asignaciones 
+    serán al nuevo grupo.
+    </Aside>
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para confirmar las modificaciones.
+
+</Steps>
+
+### 4. Ver Perfil Completo
+
+Al presionar el botón **ver** (ícono de ojo), se muestra el perfil completo:
+
+<Tabs>
+  <TabItem label="Información Personal">
+    Datos básicos del investigador: nombre, cédula, correo, grupo, 
+    escalafón y tipo de contrato.
+  </TabItem>
+  <TabItem label="Proyectos">
+    Lista de proyectos de investigación en los que participa, con su rol 
+    (investigador principal o coinvestigador) y estado del proyecto.
+  </TabItem>
+  <TabItem label="Productos">
+    Productos investigativos donde figura como autor, mostrando título, 
+    tipo de producto y porcentaje de avance.
+  </TabItem>
+  <TabItem label="Plan de Trabajo">
+    Planes de trabajo del investigador por período, con estado de aprobación 
+    y porcentaje de cumplimiento.
+  </TabItem>
+  <TabItem label="Horas de Investigación">
+    Resumen de horas asignadas y utilizadas por período académico.
+  </TabItem>
+</Tabs>
+
+---
+
+## Gestión de Credenciales
+
+### Restablecer Contraseña
+
+<Steps>
+1. Localiza al investigador en la tabla
+2. Presiona el menú de opciones (tres puntos) en la columna de acciones
+3. Selecciona **"Restablecer contraseña"**
+4. Confirma la acción en el diálogo emergente
+5. El sistema enviará un correo al investigador con la nueva contraseña temporal
+</Steps>
+
+<Aside type="caution" title="Seguridad">
+El investigador deberá cambiar la contraseña temporal en su primer inicio de sesión.
+</Aside>
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Cédula única" icon="warning">
+    No pueden existir dos investigadores con el mismo número de cédula.
+  </Card>
+  <Card title="Correo único" icon="warning">
+    El correo electrónico debe ser único en todo el sistema.
+  </Card>
+  <Card title="Eliminación restringida" icon="warning">
+    Un investigador no puede eliminarse si tiene productos, proyectos o 
+    planes de trabajo asociados.
+  </Card>
+  <Card title="Un solo grupo" icon="information">
+    Cada investigador pertenece a un único grupo de investigación.
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "La cédula ya está registrada" | Existe otro usuario con esa cédula | Verifica que la cédula sea correcta o busca el registro existente |
+| "El correo ya está en uso" | El email pertenece a otro usuario | Usa un correo diferente o contacta al administrador |
+| "No se puede eliminar" | Tiene registros asociados | Reasigna productos y proyectos antes de eliminar |
+| "Grupo no encontrado" | El grupo fue eliminado | Selecciona otro grupo de investigación válido |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Cómo cambio mi contraseña?">
+Desde tu perfil personal (esquina superior derecha → Mi Perfil), puedes 
+acceder a la opción "Cambiar contraseña".
+</Aside>
+
+<Aside type="tip" title="¿Puedo pertenecer a varios grupos?">
+No directamente, pero puedes participar en proyectos de otros grupos 
+siendo agregado como coinvestigador en dichos proyectos.
+</Aside>
+
+<Aside type="tip" title="¿Qué pasa si cambia mi escalafón?">
+Al actualizar el escalafón, las horas semanales de investigación se 
+ajustarán automáticamente para los próximos períodos.
+</Aside>

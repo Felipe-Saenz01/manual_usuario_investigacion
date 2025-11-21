@@ -1,0 +1,317 @@
+---
+title: Proyectos de Investigación
+description: Módulo para la formulación, gestión y seguimiento de proyectos de investigación, incluyendo la definición de participantes, actividades y productos esperados.
+template: doc
+sidebar:
+    label: Proyectos de Investigación
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Proyectos de Investigación** es el núcleo del sistema, permitiendo 
+    crear y gestionar proyectos desde su formulación hasta su finalización. Incluye 
+    la definición del problema, metodología, participantes, actividades programadas 
+    y productos esperados.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Investigación → Proyectos**
+
+{/* ![Vista inicial de Proyectos](@assets/guias/proyectos/vista_inicial_proyectos.png) */}
+
+---
+
+## Estados del proyecto
+
+Un proyecto puede encontrarse en los siguientes estados:
+
+| Estado | Descripción | Acciones permitidas |
+|--------|-------------|---------------------|
+| **En formulación** | El proyecto está siendo creado o editado | Editar todos los campos |
+| **En revisión** | Enviado para aprobación del coordinador | Solo lectura |
+| **Corrección** | Requiere ajustes según observaciones | Editar y reenviar |
+| **Aprobado** | Aprobado y listo para ejecución | Gestionar actividades y productos |
+| **En ejecución** | Proyecto activo con actividades en curso | Registrar avances |
+| **Finalizado** | Proyecto completado | Solo lectura |
+| **Rechazado** | No aprobado definitivamente | Solo lectura |
+
+---
+
+## Funcionalidades principales
+
+### 1. Listado de Proyectos
+
+La vista principal muestra todos los proyectos según tu rol:
+
+- **Investigador:** Proyectos donde participa
+- **Coordinador:** Proyectos de su grupo de investigación
+- **Administrador:** Todos los proyectos del sistema
+
+| Campo | Descripción |
+|-------|-------------|
+| **Título** | Nombre del proyecto |
+| **Eje Temático** | Línea de investigación |
+| **Estado** | Estado actual del proyecto |
+| **Grupos** | Grupos de investigación vinculados |
+| **Participantes** | Número de investigadores |
+| **Acciones** | Ver, editar, enviar a revisión |
+
+### 2. Crear un Nuevo Proyecto
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Proyecto`** en la parte superior.
+
+    {/* ![Botón nuevo proyecto](@assets/guias/proyectos/boton_nuevo_proyecto.png) */}
+
+2. **Información básica**
+    
+    Completa los campos iniciales:
+    - **Título:** Nombre descriptivo del proyecto (requerido)
+    - **Eje Temático:** Selecciona la línea de investigación
+
+    {/* ![Formulario información básica](@assets/guias/proyectos/formulario_info_basica.png) */}
+
+3. **Resumen ejecutivo**
+    
+    Redacta un resumen conciso del proyecto que incluya:
+    - Objetivo principal
+    - Alcance
+    - Resultados esperados
+
+    <Aside type="tip" title="Extensión recomendada">
+    El resumen ejecutivo debe tener entre 200 y 500 palabras, presentando 
+    de forma clara y concisa los aspectos más relevantes del proyecto.
+    </Aside>
+
+4. **Planteamiento del problema**
+    
+    Describe detalladamente:
+    - La situación problemática identificada
+    - El contexto en el que se presenta
+    - La pregunta de investigación
+
+5. **Antecedentes**
+    
+    Presenta los trabajos previos relacionados con tu investigación:
+    - Investigaciones anteriores sobre el tema
+    - Estado actual del conocimiento
+    - Vacíos identificados en la literatura
+
+6. **Justificación**
+    
+    Argumenta la importancia y pertinencia del proyecto:
+    - Relevancia académica
+    - Impacto social o económico
+    - Aportes esperados al campo de conocimiento
+
+7. **Objetivos**
+    
+    Define claramente:
+    - **Objetivo general:** Meta principal del proyecto
+    - **Objetivos específicos:** Metas parciales que contribuyen al objetivo general
+
+    <Aside type="note" title="Formato sugerido">
+    Utiliza verbos en infinitivo para redactar los objetivos:
+    - Analizar, Diseñar, Desarrollar, Evaluar, Implementar, etc.
+    </Aside>
+
+8. **Metodología**
+    
+    Describe el enfoque metodológico:
+    - Tipo de investigación
+    - Población y muestra
+    - Técnicas e instrumentos de recolección
+    - Procedimiento de análisis
+
+9. **Resultados esperados**
+    
+    Lista los productos y resultados que se obtendrán:
+    - Artículos científicos
+    - Software
+    - Prototipos
+    - Patentes
+    - Otros entregables
+
+10. **Riesgos**
+    
+    Identifica posibles riesgos y estrategias de mitigación:
+    - Riesgos técnicos
+    - Riesgos de recursos
+    - Riesgos de tiempo
+
+11. **Bibliografía**
+    
+    Incluye las referencias bibliográficas utilizadas en formato APA, IEEE 
+    o el estándar de tu institución.
+
+12. **Guardar borrador**
+    
+    Presiona **`Guardar`** para almacenar el proyecto como borrador. 
+    Podrás continuar editándolo posteriormente.
+
+</Steps>
+
+### 3. Gestionar Participantes
+
+Una vez creado el proyecto, puedes agregar participantes:
+
+<Steps>
+1. **Acceder al proyecto**
+    
+    Abre el proyecto y navega a la pestaña **"Participantes"**.
+
+2. **Agregar investigador**
+    
+    Presiona **`+ Agregar Participante`** y busca al investigador.
+
+    {/* ![Agregar participante](@assets/guias/proyectos/agregar_participante.png) */}
+
+    <Aside type="note" title="Investigadores de otros grupos">
+    Puedes agregar investigadores de cualquier grupo de investigación 
+    como participantes del proyecto.
+    </Aside>
+
+3. **Confirmar adición**
+    
+    Selecciona al investigador y presiona **`Agregar`**.
+
+</Steps>
+
+### 4. Vincular Grupos de Investigación
+
+Para proyectos intergrupos:
+
+<Steps>
+1. Navega a la pestaña **"Grupos"**
+2. Presiona **`+ Vincular Grupo`**
+3. Selecciona el grupo de investigación
+4. Confirma la vinculación
+</Steps>
+
+### 5. Definir Actividades del Proyecto
+
+<Steps>
+1. **Acceder a actividades**
+    
+    En el proyecto, navega a la pestaña **"Actividades"**.
+
+2. **Crear actividad**
+    
+    Presiona **`+ Nueva Actividad`** y completa:
+    - **Nombre:** Descripción de la actividad
+    - **Responsable:** Investigador a cargo
+    - **Fecha inicio:** Fecha de inicio programada
+    - **Fecha fin:** Fecha de finalización esperada
+
+    {/* ![Formulario actividad](@assets/guias/proyectos/formulario_actividad.png) */}
+
+3. **Guardar actividad**
+    
+    Presiona **`Guardar`** para registrar la actividad.
+
+</Steps>
+
+### 6. Enviar a Revisión
+
+Cuando el proyecto esté completo:
+
+<Steps>
+1. Verifica que todos los campos obligatorios estén diligenciados
+2. Presiona el botón **`Enviar a Revisión`**
+3. Confirma la acción en el diálogo emergente
+4. El proyecto cambiará a estado "En revisión"
+</Steps>
+
+<Aside type="caution" title="Cambios bloqueados">
+Una vez enviado a revisión, no podrás editar el proyecto hasta que 
+el coordinador emita su concepto.
+</Aside>
+
+### 7. Proceso de Revisión (Coordinadores)
+
+<Tabs>
+  <TabItem label="Aprobar">
+    1. Revisa toda la información del proyecto
+    2. Presiona **`Aprobar`**
+    3. Agrega comentarios (opcional)
+    4. Confirma la aprobación
+    
+    El proyecto pasará a estado "Aprobado".
+  </TabItem>
+  <TabItem label="Solicitar Corrección">
+    1. Identifica los aspectos a mejorar
+    2. Presiona **`Solicitar Corrección`**
+    3. Detalla las observaciones en el campo de comentarios
+    4. Confirma el envío
+    
+    El proyecto volverá al investigador para ajustes.
+  </TabItem>
+  <TabItem label="Rechazar">
+    1. Documenta las razones del rechazo
+    2. Presiona **`Rechazar`**
+    3. Ingresa la justificación detallada
+    4. Confirma el rechazo
+    
+    El proyecto quedará en estado "Rechazado".
+  </TabItem>
+</Tabs>
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Mínimo un participante" icon="warning">
+    Todo proyecto debe tener al menos un investigador participante.
+  </Card>
+  <Card title="Mínimo un grupo" icon="warning">
+    El proyecto debe estar vinculado a al menos un grupo de investigación.
+  </Card>
+  <Card title="Campos obligatorios" icon="warning">
+    Todos los campos de formulación son requeridos para enviar a revisión.
+  </Card>
+  <Card title="Edición restringida" icon="information">
+    Solo se puede editar en estados "En formulación" o "Corrección".
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Campos incompletos" | Faltan campos obligatorios | Completa todos los campos marcados con (*) |
+| "Sin participantes" | El proyecto no tiene investigadores | Agrega al menos un participante |
+| "Sin grupos vinculados" | No hay grupos asociados | Vincula al menos un grupo de investigación |
+| "No puede editar" | El proyecto está en revisión | Espera el concepto del coordinador |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Puedo eliminar un proyecto?">
+Solo puedes eliminar proyectos en estado "En formulación" y si eres 
+el creador o tienes rol de administrador.
+</Aside>
+
+<Aside type="tip" title="¿Cómo agrego productos al proyecto?">
+Los productos se gestionan desde el módulo de **Productos Investigativos** 
+y se vinculan al proyecto durante su creación.
+</Aside>
+
+<Aside type="tip" title="¿Qué pasa si rechazan mi proyecto?">
+Puedes crear un nuevo proyecto corrigiendo las observaciones. El proyecto 
+rechazado quedará en el historial como referencia.
+</Aside>

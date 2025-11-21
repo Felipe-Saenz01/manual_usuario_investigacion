@@ -1,0 +1,357 @@
+---
+title: Revisión Inteligente
+description: Módulo de comparación y detección de similitudes entre evidencias de productos investigativos, permitiendo identificar coincidencias y posibles casos de plagio entre entregas.
+template: doc
+sidebar:
+    label: Revisión Inteligente
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Revisión Inteligente** proporciona herramientas automatizadas para 
+    comparar el contenido de las evidencias entregadas por los investigadores. El sistema 
+    analiza las secciones de cada entrega, calcula el grado de similitud y genera reportes 
+    detallados que apoyan a los coordinadores en la detección de posibles coincidencias 
+    o casos de plagio.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Módulos → Revisión Inteligente**
+
+{/* ![Vista inicial Revisión Inteligente](@assets/guias/revision_inteligente/vista_inicial_revision.png) */}
+
+<Aside type="note" title="Permisos requeridos">
+Este módulo está disponible únicamente para usuarios con rol de 
+**Coordinador** o **Administrador**.
+</Aside>
+
+---
+
+## ¿Cómo funciona?
+
+El sistema de Revisión Inteligente utiliza algoritmos de comparación textual 
+para analizar las similitudes entre evidencias:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    FLUJO DE COMPARACIÓN                     │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   Evidencia A                    Evidencia B                │
+│   ┌──────────┐                   ┌──────────┐               │
+│   │ Sección 1│ ◄─── Compara ───► │ Sección 1│               │
+│   │ Sección 2│ ◄─── Compara ───► │ Sección 2│               │
+│   │ Sección 3│ ◄─── Compara ───► │ Sección 3│               │
+│   └──────────┘                   └──────────┘               │
+│         │                              │                    │
+│         └──────────┬───────────────────┘                    │
+│                    ▼                                        │
+│           ┌───────────────┐                                 │
+│           │  Resultado de │                                 │
+│           │  Similitud %  │                                 │
+│           └───────────────┘                                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Proceso de análisis
+
+1. **Extracción de texto:** Se obtiene el contenido de cada sección de la evidencia
+2. **Normalización:** Se estandariza el texto (minúsculas, eliminación de caracteres especiales)
+3. **Tokenización:** Se divide el texto en unidades comparables
+4. **Cálculo de similitud:** Se aplican algoritmos para determinar el porcentaje de coincidencia
+5. **Generación de reporte:** Se crea un informe detallado con los resultados
+
+---
+
+## Interpretación de resultados
+
+<Aside type="caution" title="Importante">
+Un alto porcentaje de similitud **no implica automáticamente plagio**. 
+Pueden existir coincidencias legítimas como:
+- Citas correctamente referenciadas
+- Metodologías estándar del campo
+- Definiciones técnicas comunes
+- Contenido propio reutilizado del mismo autor
+</Aside>
+
+---
+
+## Funcionalidades principales
+
+### 1. Dashboard de Comparaciones
+
+La vista principal muestra un resumen de todas las comparaciones realizadas:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Evidencia 1** | Primera evidencia comparada |
+| **Evidencia 2** | Segunda evidencia comparada |
+| **Similitud General** | Porcentaje promedio de similitud |
+| **Fecha Comparación** | Cuándo se realizó el análisis |
+| **Estado** | Revisado / Pendiente de revisión |
+| **Acciones** | Ver detalle, marcar como revisado |
+
+{/* ![Dashboard comparaciones](@assets/guias/revision_inteligente/dashboard_comparaciones.png) */}
+
+### 2. Ejecutar Nueva Comparación
+
+<Steps>
+1. **Iniciar comparación**
+    
+    Presiona el botón **`+ Nueva Comparación`**.
+
+    {/* ![Botón nueva comparación](@assets/guias/revision_inteligente/boton_nueva_comparacion.png) */}
+
+2. **Seleccionar primera evidencia**
+    
+    Busca y selecciona la evidencia base para la comparación:
+    - Filtra por período, producto o investigador
+    - Haz clic en la evidencia deseada
+
+    {/* ![Seleccionar evidencia 1](@assets/guias/revision_inteligente/seleccionar_evidencia_1.png) */}
+
+3. **Seleccionar segunda evidencia**
+    
+    Elige la evidencia con la que deseas comparar:
+    
+    <Aside type="note" title="Sugerencias automáticas">
+    El sistema puede sugerir evidencias para comparar basándose en:
+    - Mismo tipo de producto
+    - Mismo período académico
+    - Misma área temática
+    </Aside>
+
+4. **Ejecutar análisis**
+    
+    Presiona **`Comparar`** para iniciar el proceso de análisis.
+    
+    <Aside type="tip" title="Tiempo de procesamiento">
+    El análisis puede tomar entre 10-60 segundos dependiendo de la 
+    extensión de las evidencias.
+    </Aside>
+
+5. **Ver resultados**
+    
+    Una vez completado, se mostrará el reporte de similitud.
+
+</Steps>
+
+### 3. Comparación Automática
+
+El sistema puede ejecutar comparaciones automáticamente:
+
+<Tabs>
+  <TabItem label="Al aprobar evidencia">
+    Cuando un coordinador aprueba una evidencia, el sistema automáticamente 
+    la compara con:
+    - Evidencias del mismo producto de otros autores
+    - Evidencias del mismo tipo de otros investigadores
+    - Evidencias previas del mismo período
+  </TabItem>
+  <TabItem label="Comparación masiva">
+    Los administradores pueden ejecutar comparaciones masivas:
+    1. Accede a **Configuración → Comparación Masiva**
+    2. Selecciona el período académico
+    3. Define los criterios (por grupo, por tipo de producto, etc.)
+    4. Ejecuta el análisis
+    
+    El sistema procesará todas las combinaciones y generará un reporte.
+  </TabItem>
+</Tabs>
+
+### 4. Ver Detalle de Comparación
+
+Al acceder al detalle de una comparación, encontrarás:
+
+<Tabs>
+  <TabItem label="Resumen General">
+    Información consolidada de la comparación:
+    - Evidencias comparadas (título, autor, producto, fecha)
+    - **Grado de similitud general:** Promedio ponderado
+    - **Resultado:** Interpretación automática del sistema
+    - Fecha y hora del análisis
+    
+    {/* ![Resumen comparación](@assets/guias/revision_inteligente/resumen_comparacion.png) */}
+  </TabItem>
+  <TabItem label="Vista de Coincidencias">
+    Visualización lado a lado del texto coincidente:
+    
+    ```
+    ┌─────────────────────┬─────────────────────┐
+    │    EVIDENCIA A      │    EVIDENCIA B      │
+    ├─────────────────────┼─────────────────────┤
+    │ "La metodología     │ "La metodología     │
+    │ utilizada fue de    │ empleada consistió  │
+    │ tipo cuantitativo   │ en un enfoque       │
+    │ con enfoque         │ cuantitativo        │
+    │ descriptivo..."     │ descriptivo..."     │
+    └─────────────────────┴─────────────────────┘
+              ▲ Texto resaltado en amarillo ▲
+    ```
+    
+    Los fragmentos coincidentes se resaltan para fácil identificación.
+  </TabItem>
+</Tabs>
+
+### 5. Gestionar Resultados
+
+Una vez revisada la comparación:
+
+<Steps>
+1. **Evaluar el contexto**
+    
+    Analiza si las coincidencias son:
+    - ✅ Legítimas (citas, metodologías estándar)
+    - ⚠️ Requieren aclaración
+    - ❌ Indican posible plagio
+
+2. **Registrar observaciones**
+    
+    En el campo **"Observaciones del revisor"**, documenta tu análisis:
+    - Justificación de coincidencias aceptables
+    - Aspectos que requieren seguimiento
+    - Acciones recomendadas
+
+3. **Marcar como revisado**
+    
+    Presiona **`Marcar como Revisado`** para indicar que la comparación 
+    ha sido evaluada.
+
+4. **Acciones adicionales (si aplica)**
+    
+    Si se detecta plagio confirmado:
+    - Presiona **`Reportar Incidencia`**
+    - Completa el formulario de reporte
+    - El sistema notificará a las partes involucradas
+
+</Steps>
+
+---
+
+## Reportes y Estadísticas
+
+### Reporte de Similitudes por Período
+
+Accede a **Reportes → Similitudes por Período** para visualizar:
+
+- Número total de comparaciones realizadas
+- Distribución por nivel de similitud
+- Investigadores con mayor índice de coincidencias
+- Tendencias comparativas con períodos anteriores
+
+{/* ![Reporte por período](@assets/guias/revision_inteligente/reporte_periodo.png) */}
+
+### Exportar Resultados
+
+Presiona **`Exportar`** para descargar:
+
+<CardGrid>
+  <Card title="PDF" icon="document">
+    Reporte formal con gráficos y análisis detallado.
+    Ideal para documentación oficial.
+  </Card>
+  <Card title="Excel" icon="spreadsheet">
+    Datos tabulados para análisis personalizado.
+    Incluye todas las comparaciones y métricas.
+  </Card>
+</CardGrid>
+
+---
+
+## Configuración del Sistema
+
+### Ajustar Umbrales de Alerta
+
+Los administradores pueden configurar los umbrales:
+
+<Steps>
+1. Accede a **Configuración → Revisión Inteligente**
+2. Ajusta los porcentajes para cada nivel:
+   - Umbral de alerta moderada (por defecto: 40%)
+   - Umbral de alerta alta (por defecto: 60%)
+   - Umbral crítico (por defecto: 80%)
+3. Guarda los cambios
+</Steps>
+
+### Exclusiones de Comparación
+
+Puedes excluir ciertos patrones de la comparación:
+
+- **Bibliografías:** Referencias bibliográficas estándar
+- **Citas textuales:** Texto entre comillas con referencia
+- **Términos técnicos:** Glosario de términos del área
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Solo evidencias aprobadas" icon="warning">
+    Las comparaciones solo se realizan entre evidencias con estado "Aprobado".
+  </Card>
+  <Card title="Comparación única" icon="warning">
+    No se puede comparar una evidencia consigo misma.
+  </Card>
+  <Card title="Sin duplicados" icon="information">
+    Si ya existe una comparación entre dos evidencias, se muestra la existente.
+  </Card>
+  <Card title="Acceso restringido" icon="lock">
+    Solo coordinadores y administradores pueden acceder a este módulo.
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Evidencia no disponible" | La evidencia no está aprobada | Espera la aprobación de la evidencia |
+| "Comparación ya existe" | Ya se compararon estas evidencias | Busca la comparación existente en el historial |
+| "Sin contenido para comparar" | Las evidencias no tienen secciones | Verifica que las evidencias tengan contenido registrado |
+| "Tiempo de espera agotado" | Evidencias muy extensas | Intenta nuevamente o contacta soporte |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿El sistema detecta plagio de internet?">
+No, el sistema solo compara entre evidencias registradas en la plataforma. 
+Para detectar plagio de fuentes externas, se recomienda usar herramientas 
+especializadas como Turnitin o iThenticate.
+</Aside>
+
+<Aside type="tip" title="¿Qué hago si detecto plagio confirmado?">
+1. Documenta el hallazgo con capturas y el reporte del sistema
+2. Utiliza la función "Reportar Incidencia"
+3. Sigue el protocolo institucional para casos de plagio
+4. El sistema notificará automáticamente a los involucrados
+</Aside>
+
+<Aside type="tip" title="¿Con qué frecuencia debo revisar las comparaciones?">
+Se recomienda revisar las comparaciones marcadas como "Alto" o "Crítico" 
+inmediatamente después de su generación. Las de nivel moderado pueden 
+revisarse semanalmente.
+</Aside>
+
+<Aside type="tip" title="¿Puedo comparar evidencias de diferentes períodos?">
+Sí, puedes comparar evidencias de cualquier período. Esto es útil para 
+detectar si un investigador está reutilizando contenido de períodos anteriores 
+sin el debido avance.
+</Aside>
+
+<Aside type="tip" title="¿Los investigadores pueden ver los resultados?">
+Por defecto, los investigadores no tienen acceso al módulo de Revisión 
+Inteligente. Sin embargo, si se reporta una incidencia, serán notificados 
+según el protocolo institucional.
+</Aside>

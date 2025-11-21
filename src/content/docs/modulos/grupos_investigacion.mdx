@@ -1,0 +1,152 @@
+---
+title: Grupos de Investigación
+description: Módulo para la gestión y administración de los grupos de investigación, incluyendo su información básica, miembros y proyectos asociados.
+template: doc
+sidebar:
+    label: Grupos de Investigación
+    order: 1
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Grupos de Investigación** permite gestionar las unidades organizativas 
+    donde se agrupan los investigadores según sus líneas de trabajo. Desde aquí se puede 
+    crear, editar y consultar la información institucional de cada grupo, así como 
+    visualizar sus miembros y proyectos vinculados.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Módulos → Grupos de Investigación**
+
+{/* ![Vista inicial del módulo de Grupos de Investigación](@assets/guias/grupos/vista_inicial_grupos.png) */}
+
+---
+
+## Funcionalidades principales
+
+### 1. Listado de Grupos de Investigación
+
+Al ingresar al módulo, se muestra una tabla con todos los grupos registrados en el sistema.
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Nombre oficial del grupo de investigación |
+| **Correo** | Correo electrónico de contacto del grupo |
+| **Investigadores** | Cantidad de miembros activos en el grupo |
+| **Acciones** | Botones para ver, editar o eliminar el grupo |
+
+
+### 2. Crear un Nuevo Grupo
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Grupo`** ubicado en la parte superior derecha de la pantalla.
+
+    {/* ![Botón crear nuevo grupo](@assets/guias/grupos/boton_nuevo_grupo.png) */}
+
+2. **Completar información básica**
+    
+    Se desplegará un formulario con los siguientes campos:
+
+    - **Nombre:** Nombre oficial del grupo de investigación (requerido)
+    - **Correo:** Correo electrónico institucional del grupo (requerido)
+    - **Descripción:** Breve descripción de las actividades del grupo
+    - **Objetivos:** Objetivos principales del grupo de investigación
+    - **Misión:** Declaración de misión del grupo
+    - **Visión:** Declaración de visión del grupo
+
+    {/* ![Formulario de creación de grupo](@assets/guias/grupos/formulario_crear_grupo.png) */}
+
+3. **Adjuntar Plan de Trabajo (Opcional)**
+    
+    Puedes cargar un archivo PDF con el plan de trabajo del grupo usando el botón 
+    **`Seleccionar archivo`**.
+
+    <Aside type="note" title="Formatos aceptados">
+    El sistema acepta archivos en formato PDF con un tamaño máximo de 5MB.
+    </Aside>
+
+4. **Guardar el grupo**
+    
+    Presiona el botón **`Guardar`** para registrar el nuevo grupo en el sistema.
+    El sistema mostrará un mensaje de confirmación si la operación fue exitosa.
+
+</Steps>
+
+### 3. Editar un Grupo Existente
+
+<Steps>
+1. **Seleccionar el grupo**
+    
+    En la tabla de grupos, localiza el grupo que deseas editar y presiona el botón 
+    de **edición** (ícono de lápiz) en la columna de acciones.
+
+2. **Modificar información**
+    
+    Se abrirá el formulario con los datos actuales del grupo. Realiza las 
+    modificaciones necesarias en los campos disponibles.
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para guardar los cambios realizados.
+
+</Steps>
+
+### 4. Ver Detalle del Grupo
+
+Al presionar el botón de **ver** (ícono de ojo), se despliega una vista detallada que incluye:
+
+- Muestra todos los datos registrados del grupo: nombre, correo, descripción, 
+  objetivos, misión y visión.
+- Lista de todos los investigadores que pertenecen al grupo, con su nombre, 
+  correo y escalafón profesoral.
+- Proyectos de investigación vinculados al grupo, mostrando título, estado 
+  y fecha de creación.
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Correo único" icon="warning">
+    No pueden existir dos grupos con el mismo correo electrónico registrado.
+  </Card>
+  <Card title="Eliminación restringida" icon="warning">
+    Un grupo no puede ser eliminado si tiene investigadores o proyectos asociados.
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "El correo ya está registrado" | Existe otro grupo con el mismo correo | Utiliza un correo diferente para el grupo |
+| "No se puede eliminar el grupo" | El grupo tiene miembros o proyectos | Primero reasigna o elimina los miembros y proyectos |
+| "Error al cargar archivo" | El archivo excede el tamaño permitido | Reduce el tamaño del PDF a menos de 5MB |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Cómo asigno investigadores a un grupo?">
+La asignación de investigadores se realiza desde el módulo de **Investigadores**. 
+Al crear o editar un investigador, puedes seleccionar el grupo al que pertenece.
+</Aside>
+
+<Aside type="tip" title="¿Puedo tener un investigador en varios grupos?">
+No, actualmente cada investigador solo puede pertenecer a un grupo de investigación 
+a la vez. Si necesita participar en proyectos de otro grupo, puede ser vinculado 
+directamente al proyecto.
+</Aside>

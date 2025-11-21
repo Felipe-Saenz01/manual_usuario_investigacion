@@ -1,0 +1,353 @@
+---
+title: Entregas de Productos
+description: Módulo para gestionar las planeaciones y evidencias de avance de los productos investigativos, incluyendo la carga de documentos.
+template: doc
+sidebar:
+    label: Entregas de Productos
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Entregas de Productos** permite a los investigadores registrar 
+    el avance de sus productos investigativos mediante dos tipos de entregas: 
+    **Planeación** (proyección del trabajo a realizar) y **Evidencia** (demostración 
+    del trabajo completado). El sistema incluye funcionalidades de comparación para 
+    detectar similitudes entre entregas.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Investigación → Entregas**
+
+También puedes acceder desde un producto específico:
+
+**Productos → [Producto] → Pestaña "Entregas" → `+ Nueva Entrega`**
+
+{/* ![Vista inicial de Entregas](@assets/guias/entregas/vista_inicial_entregas.png) */}
+
+---
+
+## Tipos de entrega
+
+El sistema maneja dos tipos de entregas por período académico:
+
+<CardGrid>
+  <Card title="Planeación" icon="pencil">
+    **¿Qué es?** Documento que describe el trabajo proyectado para el período.
+    
+    **¿Cuándo se entrega?** Al inicio del período, antes de la fecha límite de planeación.
+    
+    **Contenido:** Objetivos del período, actividades programadas, horas estimadas.
+  </Card>
+  <Card title="Evidencia" icon="document">
+    **¿Qué es?** Documento que demuestra el trabajo realizado durante el período.
+    
+    **¿Cuándo se entrega?** Al final del período, antes de la fecha límite de evidencias.
+    
+    **Contenido:** Secciones del producto desarrolladas, archivos de soporte.
+  </Card>
+</CardGrid>
+
+---
+
+## Flujo de trabajo
+
+```
+1. Planeación (inicio del período)
+   ↓
+2. Desarrollo del trabajo
+   ↓
+3. Evidencia (final del período)
+   ↓
+4. Revisión por coordinador
+   ↓
+5. Aprobación o Corrección
+```
+
+---
+
+## Estados de una entrega
+
+| Estado | Descripción | Color |
+|--------|-------------|-------|
+| **Pendiente** | Entrega creada, sin enviar a revisión | 🟡 Amarillo |
+| **En revisión** | Enviada y esperando evaluación | 🔵 Azul |
+| **Corrección** | Requiere ajustes según observaciones | 🟠 Naranja |
+| **Aprobado** | Entrega aceptada por el coordinador | 🟢 Verde |
+| **Rechazado** | Entrega no aceptada | 🔴 Rojo |
+
+---
+
+## Funcionalidades principales
+
+### 1. Listado de Entregas
+
+La vista principal muestra las entregas organizadas por período:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Producto** | Producto investigativo asociado |
+| **Tipo** | Planeación o Evidencia |
+| **Período** | Período académico |
+| **Progreso** | Porcentaje de avance reportado |
+| **Estado** | Estado actual de la entrega |
+| **Acciones** | Ver, editar, enviar a revisión |
+
+### 2. Crear una Planeación
+
+<Steps>
+1. **Verificar período activo**
+    
+    Asegúrate de que el período académico esté activo y dentro del plazo 
+    de planeación.
+
+    <Aside type="note" title="Fechas límite">
+    Puedes ver las fechas límite en **Períodos** o en la parte superior 
+    del módulo de entregas.
+    </Aside>
+
+2. **Iniciar creación**
+    
+    Presiona **`+ Nueva Entrega`** y selecciona tipo **"Planeación"**.
+
+    {/* ![Crear planeación](@assets/guias/entregas/crear_planeacion.png) */}
+
+3. **Seleccionar producto**
+    
+    Elige el producto investigativo para el cual registrarás la planeación.
+
+4. **Definir horas planeadas**
+    
+    Indica el número de horas que dedicarás al producto durante el período.
+
+    <Aside type="caution" title="Límite de horas">
+    Las horas planeadas no pueden exceder las horas de investigación 
+    asignadas para el período. El sistema validará automáticamente.
+    </Aside>
+
+5. **Describir actividades planeadas**
+    
+    En el campo de planeación (formato JSON o texto estructurado), describe:
+    - Objetivos específicos para el período
+    - Actividades a desarrollar
+    - Entregables esperados
+
+    {/* ![Formulario planeación](@assets/guias/entregas/formulario_planeacion.png) */}
+
+6. **Establecer progreso esperado**
+    
+    Define el porcentaje de avance que esperas alcanzar al final del período.
+
+7. **Guardar planeación**
+    
+    Presiona **`Guardar`** para almacenar la planeación como borrador.
+
+</Steps>
+
+### 3. Crear una Evidencia
+
+<Steps>
+1. **Verificar existencia de planeación**
+    
+    Para crear una evidencia, debe existir una planeación aprobada 
+    para el mismo producto y período.
+
+    <Aside type="danger" title="Requisito previo">
+    No podrás crear evidencias si no tienes una planeación aprobada 
+    para el período actual.
+    </Aside>
+
+2. **Iniciar creación**
+    
+    Presiona **`+ Nueva Entrega`** y selecciona tipo **"Evidencia"**.
+
+3. **Seleccionar producto**
+    
+    El sistema mostrará solo los productos con planeación aprobada.
+
+4. **Registrar secciones desarrolladas**
+    
+    Para cada elemento/sección del producto trabajada:
+
+    1. Presiona **`+ Agregar Sección`**
+    2. Selecciona el elemento del producto (ej: "Metodología")
+    3. Ingresa el **título** de la sección
+    4. Redacta el **contenido** desarrollado
+
+    {/* ![Agregar sección](@assets/guias/entregas/agregar_seccion.png) */}
+
+    <Aside type="tip" title="Múltiples secciones">
+    Puedes agregar tantas secciones como elementos hayas trabajado 
+    durante el período.
+    </Aside>
+
+5. **Adjuntar archivo de evidencia (opcional)**
+    
+    Si tienes un documento de soporte (PDF, DOC, etc.), puedes adjuntarlo:
+    - Presiona **`Seleccionar archivo`**
+    - Elige el archivo desde tu computador
+    - Formatos permitidos: PDF, DOC, DOCX (máx. 10MB)
+
+6. **Indicar progreso alcanzado**
+    
+    Registra el porcentaje de avance real alcanzado durante el período.
+
+7. **Guardar evidencia**
+    
+    Presiona **`Guardar`** para almacenar la evidencia como borrador.
+
+</Steps>
+
+### 4. Enviar a Revisión
+
+Una vez completada la entrega:
+
+<Steps>
+1. Abre la entrega (planeación o evidencia)
+2. Verifica que toda la información esté completa
+3. Presiona el botón **`Enviar a Revisión`**
+4. Confirma la acción en el diálogo emergente
+5. La entrega cambiará a estado "En revisión"
+</Steps>
+
+<Aside type="caution" title="Acción irreversible">
+Una vez enviada a revisión, no podrás editar la entrega hasta que 
+el coordinador emita su concepto.
+</Aside>
+
+### 5. Proceso de Revisión (Coordinadores)
+
+<Tabs>
+  <TabItem label="Aprobar Entrega">
+    1. Accede a **Revisiones Pendientes**
+    2. Selecciona la entrega a revisar
+    3. Revisa el contenido y las secciones
+    4. Presiona **`Aprobar`**
+    5. Agrega comentarios de retroalimentación (opcional)
+    6. Confirma la aprobación
+    
+    El progreso del producto se actualizará automáticamente.
+  </TabItem>
+  <TabItem label="Solicitar Corrección">
+    1. Identifica los aspectos a mejorar
+    2. Presiona **`Solicitar Corrección`**
+    3. Detalla las observaciones específicas
+    4. Confirma el envío
+    
+    El investigador recibirá notificación para realizar ajustes.
+  </TabItem>
+  <TabItem label="Rechazar">
+    1. Documenta las razones del rechazo
+    2. Presiona **`Rechazar`**
+    3. Ingresa justificación detallada
+    4. Confirma el rechazo
+  </TabItem>
+</Tabs>
+
+---
+
+## Sistema de Comparación (Antiplagio)
+
+El sistema incluye una funcionalidad de **comparación de evidencias** para 
+detectar similitudes entre entregas de diferentes investigadores.
+
+### ¿Cómo funciona?
+
+1. **Comparación automática:** Al aprobar una evidencia, el sistema compara 
+   automáticamente su contenido con evidencias previas.
+
+2. **Análisis por secciones:** Se comparan las secciones correspondientes 
+   (ej: "Metodología" vs "Metodología" de otras entregas).
+
+3. **Grado de similitud:** Se calcula un porcentaje de similitud entre 0% y 100%.
+
+### Interpretación de resultados
+
+| Similitud | Interpretación | Acción sugerida |
+|-----------|----------------|-----------------|
+| 0-30% | Normal | Sin acción |
+| 31-50% | Moderada | Revisar coincidencias |
+| 51-70% | Alta | Investigar fuentes |
+| 71-100% | Muy alta | Posible plagio, verificar |
+
+### Ver resultados de comparación
+
+<Steps>
+1. Accede al detalle de la evidencia
+2. Navega a la pestaña **"Comparaciones"**
+3. Visualiza las similitudes detectadas
+4. Haz clic en cada comparación para ver el detalle por sección
+</Steps>
+
+{/* ![Resultados comparación](@assets/guias/entregas/resultados_comparacion.png) */}
+
+<Aside type="note" title="Uso de la comparación">
+Esta herramienta es de apoyo para la revisión. Un alto porcentaje de 
+similitud no implica necesariamente plagio; puede deberse a citas 
+correctamente referenciadas o secciones metodológicas estándar.
+</Aside>
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Una entrega por tipo/período" icon="warning">
+    Solo puedes tener una planeación y una evidencia por producto 
+    en cada período académico.
+  </Card>
+  <Card title="Planeación antes de evidencia" icon="warning">
+    Debes tener una planeación aprobada para poder crear la evidencia.
+  </Card>
+  <Card title="Fechas límite" icon="warning">
+    Las entregas deben realizarse antes de las fechas límite del período.
+  </Card>
+  <Card title="Horas limitadas" icon="information">
+    Las horas planeadas no pueden exceder las horas asignadas al investigador.
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Fuera del plazo" | La fecha límite ha pasado | Contacta al coordinador para solicitar extensión |
+| "Planeación no aprobada" | La planeación está pendiente o rechazada | Espera aprobación o corrige la planeación |
+| "Horas excedidas" | Las horas planeadas superan las asignadas | Reduce las horas o ajusta en otros productos |
+| "Sin secciones" | La evidencia no tiene contenido | Agrega al menos una sección con contenido |
+| "Archivo muy grande" | El archivo excede 10MB | Comprime el archivo o divide en partes |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Puedo modificar una entrega aprobada?">
+No, las entregas aprobadas quedan bloqueadas. Si necesitas hacer cambios, 
+deberás esperar al siguiente período o contactar al administrador.
+</Aside>
+
+<Aside type="tip" title="¿Qué pasa si no entrego a tiempo?">
+Si no entregas dentro del plazo, deberás solicitar una extensión al 
+coordinador. Las entregas fuera de plazo pueden afectar la evaluación 
+del período.
+</Aside>
+
+<Aside type="tip" title="¿La comparación detecta plagio de internet?">
+No, el sistema solo compara entre entregas registradas en la plataforma. 
+Para verificar plagio externo, se recomienda usar herramientas especializadas.
+</Aside>
+
+<Aside type="tip" title="¿Puedo entregar el mismo contenido en diferentes períodos?">
+Se espera que cada período muestre avance. Si la similitud entre tus 
+propias entregas es muy alta, el coordinador puede solicitar justificación.
+</Aside>

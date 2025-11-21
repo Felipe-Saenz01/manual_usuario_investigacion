@@ -1,0 +1,314 @@
+---
+title: Productos Investigativos
+description: Módulo para la gestión de productos derivados de proyectos de investigación, incluyendo artículos, libros, software, patentes y otros entregables clasificados según tipología.
+template: doc
+sidebar:
+    label: Productos Investigativos
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="open-book">
+    El módulo de **Productos Investigativos** permite registrar, clasificar y dar 
+    seguimiento a los productos generados por los proyectos de investigación. Cada 
+    producto se clasifica según su tipo (artículo, libro, software, etc.) y se 
+    vincula a los autores responsables de su desarrollo.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Investigación → Productos**
+
+{/* ![Vista inicial de Productos](@assets/guias/productos/vista_inicial_productos.png) */}
+
+---
+
+## Clasificación de productos
+
+Los productos se organizan en una estructura jerárquica:
+
+```
+Actividad de Investigación
+└── Tipo de Producto
+    └── Subtipo de Producto
+        └── Producto Investigativo
+```
+
+### Tipos de productos disponibles
+
+<Tabs>
+  <TabItem label="Generación de Conocimiento">
+    - Artículos de investigación (A1, A2, B, C)
+    - Libros resultado de investigación
+    - Capítulos de libro
+    - Productos tecnológicos patentados
+    - Variedades vegetales y animales
+  </TabItem>
+  <TabItem label="Desarrollo Tecnológico">
+    - Software
+    - Prototipos industriales
+    - Plantas piloto
+    - Signos distintivos
+    - Regulaciones y normas
+  </TabItem>
+  <TabItem label="Apropiación Social">
+    - Participación en eventos
+    - Redes de conocimiento
+    - Comunicación social del conocimiento
+    - Circulación de conocimiento especializado
+  </TabItem>
+  <TabItem label="Formación de RRHH">
+    - Tesis de doctorado
+    - Tesis de maestría
+    - Trabajos de grado de pregrado
+    - Proyectos de investigación formativa
+  </TabItem>
+</Tabs>
+
+---
+
+## Funcionalidades principales
+
+### 1. Listado de Productos
+
+La vista principal muestra los productos según tu rol:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Título** | Nombre del producto |
+| **Tipo** | Categoría del producto |
+| **Subtipo** | Clasificación específica |
+| **Proyecto** | Proyecto de investigación asociado |
+| **Autores** | Investigadores responsables |
+| **Progreso** | Porcentaje de avance |
+| **Acciones** | Ver, editar, gestionar entregas |
+
+<Aside type="tip" title="Filtros disponibles">
+Filtra los productos por:
+- Proyecto de investigación
+- Tipo de producto
+- Estado de progreso
+- Autor
+</Aside>
+
+### 2. Crear un Nuevo Producto
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Producto`** en la parte superior.
+
+    {/* ![Botón nuevo producto](@assets/guias/productos/boton_nuevo_producto.png) */}
+
+2. **Seleccionar proyecto**
+    
+    Elige el proyecto de investigación al que pertenece el producto.
+
+    <Aside type="note" title="Proyectos disponibles">
+    Solo se mostrarán los proyectos en estado "Aprobado" o "En ejecución" 
+    en los que participes.
+    </Aside>
+
+3. **Definir información básica**
+    
+    Completa los campos requeridos:
+    - **Título:** Nombre descriptivo del producto (requerido)
+    - **Resumen:** Descripción breve del producto y su alcance (requerido)
+
+    {/* ![Formulario producto](@assets/guias/productos/formulario_producto.png) */}
+
+4. **Clasificar el producto**
+    
+    Selecciona la clasificación del producto:
+    
+    1. **Tipo de Producto:** Selecciona la categoría principal
+    2. **Subtipo:** Elige la clasificación específica
+    
+    <Aside type="note" title="Clasificación automática">
+    Al seleccionar el subtipo, el sistema asocia automáticamente la 
+    **Actividad de Investigación** correspondiente, lo cual es importante 
+    para el registro en el Plan de Trabajo.
+    </Aside>
+
+5. **Asignar autores**
+    
+    Agrega los investigadores que participarán como autores:
+    
+    1. Presiona **`+ Agregar Autor`**
+    2. Busca y selecciona al investigador
+    3. Repite para cada autor adicional
+
+    {/* ![Agregar autores](@assets/guias/productos/agregar_autores.png) */}
+
+    <Aside type="caution" title="Autores requeridos">
+    Debes agregar al menos un autor para poder guardar el producto.
+    </Aside>
+
+6. **Guardar producto**
+    
+    Presiona **`Guardar`** para registrar el producto.
+
+</Steps>
+
+### 3. Gestionar Elementos del Producto
+
+Cada producto se compone de **elementos** o secciones que permiten 
+hacer seguimiento detallado del avance:
+
+<Steps>
+1. **Acceder a elementos**
+    
+    Abre el producto y navega a la pestaña **"Elementos"**.
+
+2. **Agregar elemento**
+    
+    Presiona **`+ Nuevo Elemento`** y define:
+    - **Nombre:** Nombre de la sección (ej: "Introducción", "Metodología")
+    - **Progreso inicial:** Porcentaje de avance actual (0-100)
+
+    {/* ![Gestión de elementos](@assets/guias/productos/gestion_elementos.png) */}
+
+3. **Elementos sugeridos**
+    
+    El sistema puede sugerir elementos según el tipo de producto:
+
+    | Tipo de Producto | Elementos Sugeridos |
+    |------------------|---------------------|
+    | Artículo | Resumen, Introducción, Marco teórico, Metodología, Resultados, Conclusiones, Bibliografía |
+    | Software | Análisis, Diseño, Implementación, Pruebas, Documentación |
+    | Libro | Prefacio, Capítulos, Bibliografía, Índices |
+
+4. **Actualizar progreso**
+    
+    Modifica el porcentaje de cada elemento a medida que avanza el desarrollo.
+    El **progreso total del producto** se calcula automáticamente como el 
+    promedio de todos sus elementos.
+
+</Steps>
+
+### 4. Ver Detalle del Producto
+
+Al abrir un producto, se muestra información organizada en pestañas:
+
+<Tabs>
+  <TabItem label="Información General">
+    - Título y resumen del producto
+    - Clasificación (tipo y subtipo)
+    - Proyecto asociado
+    - Fecha de creación
+    - Progreso general
+  </TabItem>
+  <TabItem label="Autores">
+    Lista de investigadores que participan como autores del producto, 
+    con opción de agregar o remover autores.
+  </TabItem>
+  <TabItem label="Elementos">
+    Secciones del producto con su progreso individual. Permite agregar, 
+    editar y actualizar el avance de cada elemento.
+  </TabItem>
+  <TabItem label="Entregas">
+    Historial de planeaciones y evidencias entregadas por período. 
+    Desde aquí se accede al módulo de Entregas.
+  </TabItem>
+</Tabs>
+
+### 5. Editar un Producto
+
+<Steps>
+1. Localiza el producto en el listado
+2. Presiona el botón de **edición** (ícono de lápiz)
+3. Modifica los campos necesarios
+4. Presiona **`Actualizar`** para guardar los cambios
+</Steps>
+
+<Aside type="caution" title="Restricciones de edición">
+No puedes cambiar el **proyecto asociado** una vez creado el producto. 
+Si necesitas reasignarlo, deberás crear un nuevo producto.
+</Aside>
+
+---
+
+## Seguimiento de progreso
+
+### Barra de progreso
+
+Cada producto muestra una barra visual de progreso:
+
+- 🔴 **0-25%:** Etapa inicial
+- 🟠 **26-50%:** En desarrollo
+- 🟡 **51-75%:** Avanzado
+- 🟢 **76-100%:** Próximo a completar
+
+### Cálculo del progreso
+
+El progreso total se calcula automáticamente:
+
+```
+Progreso Total = Σ(Progreso de Elementos) / Número de Elementos
+```
+
+<Aside type="note" title="Actualización automática">
+Al registrar evidencias en las entregas, el progreso de los elementos 
+asociados se actualiza automáticamente según lo reportado.
+</Aside>
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Proyecto requerido" icon="warning">
+    Todo producto debe estar asociado a un proyecto de investigación aprobado.
+  </Card>
+  <Card title="Mínimo un autor" icon="warning">
+    Cada producto debe tener al menos un investigador como autor.
+  </Card>
+  <Card title="Clasificación obligatoria" icon="warning">
+    Es obligatorio seleccionar el tipo y subtipo de producto.
+  </Card>
+  <Card title="Eliminación restringida" icon="information">
+    No se puede eliminar un producto que tenga entregas registradas.
+  </Card>
+</CardGrid>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Proyecto no disponible" | El proyecto no está aprobado | Verifica que el proyecto esté en estado "Aprobado" o "En ejecución" |
+| "Sin autores asignados" | No se agregaron autores | Agrega al menos un investigador como autor |
+| "No se puede eliminar" | Tiene entregas asociadas | Elimina primero las entregas del producto |
+| "Subtipo no válido" | Cambió el tipo de producto | Selecciona nuevamente el subtipo correcto |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Un producto puede tener autores de diferentes grupos?">
+Sí, puedes agregar como autores a investigadores de cualquier grupo, 
+siempre que participen en el proyecto asociado.
+</Aside>
+
+<Aside type="tip" title="¿Cómo registro el avance de mi producto?">
+El avance se registra a través del módulo de **Entregas**, donde puedes 
+subir planeaciones y evidencias por período.
+</Aside>
+
+<Aside type="tip" title="¿Puedo cambiar el tipo de un producto?">
+Sí, siempre que el producto no tenga entregas registradas. Si ya tiene 
+entregas, deberás crear un nuevo producto con la clasificación correcta.
+</Aside>
+
+<Aside type="tip" title="¿Qué pasa cuando el progreso llega al 100%?">
+El producto se considera completado. Deberás registrar la evidencia final 
+en el módulo de Entregas para documentar el resultado obtenido.
+</Aside>
