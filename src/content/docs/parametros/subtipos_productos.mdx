@@ -1,0 +1,412 @@
+---
+title: Subtipos de Producto
+description: Configuración del nivel más específico de clasificación de productos investigativos, permitiendo categorización detallada según criterios de calidad, alcance o reconocimiento.
+template: doc
+sidebar:
+    label: Subtipos de Producto
+    order: 4
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="setting">
+    Los **Subtipos de Producto** son el nivel más detallado de clasificación en 
+    la jerarquía. Cada subtipo pertenece a un Tipo de Producto y representa una 
+    categorización específica según criterios como calidad de indexación, alcance, 
+    reconocimiento o cualquier otro parámetro definido por la institución.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Parámetros → Subtipos de Producto**
+
+{/* ![Vista inicial de Subtipos](@assets/guias/configuracion/subtipos/vista_inicial_subtipos.png) */}
+
+---
+
+## Jerarquía completa
+
+Los subtipos ocupan el tercer y último nivel de clasificación:
+
+```
+┌───────────────────────────────────────┐
+│  Actividad de Investigación           │
+│  (Generación de Nuevo Conocimiento)   │
+└──────────────┬────────────────────────┘
+               │
+               ▼
+┌───────────────────────────────────────┐
+│  Tipo de Producto                     │
+│  (Artículo de investigación)          │
+└──────────────┬────────────────────────┘
+               │
+       ┌───────┼───────┬───────┐
+       ▼       ▼       ▼       ▼
+    ┌────┐  ┌────┐  ┌────┐  ┌────┐
+    │ A1 │  │ A2 │  │ B  │  │ C  │
+    └────┘  └────┘  └────┘  └────┘
+     Subtipos de Producto
+```
+
+---
+
+## Listado de Subtipos
+
+La vista principal muestra todos los subtipos registrados:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Nombre del subtipo |
+| **Tipo de Producto** | Tipo al que pertenece |
+| **Actividad** | Actividad de investigación asociada |
+| **Productos** | Cantidad de productos con este subtipo |
+| **Acciones** | Editar, eliminar |
+
+{/* ![Listado de subtipos](@assets/guias/configuracion/subtipos/listado_subtipos.png) */}
+
+<Aside type="tip" title="Filtros en cascada">
+Usa los filtros para navegar por la jerarquía:
+1. Selecciona una **Actividad de Investigación**
+2. Luego filtra por **Tipo de Producto**
+3. Verás solo los subtipos correspondientes
+</Aside>
+
+---
+
+## Crear un Nuevo Subtipo
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Subtipo`** en la parte superior derecha.
+
+    {/* ![Botón nuevo subtipo](@assets/guias/configuracion/subtipos/boton_nuevo_subtipo.png) */}
+
+2. **Seleccionar tipo padre**
+    
+    Primero debes elegir el **Tipo de Producto** al que pertenecerá este subtipo.
+    
+    El sistema mostrará los tipos agrupados por actividad:
+
+    ```
+    Generación de Nuevo Conocimiento
+      ├── Artículo de investigación
+      ├── Libro resultado de investigación
+      └── Capítulo de libro
+    
+    Desarrollo Tecnológico
+      ├── Software
+      ├── Patente
+      └── Prototipo industrial
+    ```
+
+    {/* ![Seleccionar tipo](@assets/guias/configuracion/subtipos/seleccionar_tipo.png) */}
+
+3. **Ingresar nombre del subtipo**
+    
+    Escribe un nombre descriptivo y específico (requerido):
+
+    **Ejemplos por tipo de producto:**
+
+    | Tipo de Producto | Subtipos comunes |
+    |------------------|------------------|
+    | Artículo de investigación | A1 (Q1), A2 (Q2-Q3), B (Scopus), C (Nacional), D (Local) |
+    | Libro resultado | Internacional reconocido, Nacional reconocido, Regional |
+    | Software | Registrado ante autoridad, Certificado funcionalmente, Prototipo |
+    | Patente | De invención, De modelo de utilidad, Diseño industrial |
+    | Tesis doctoral | Aprobada con distinción, Aprobada, Meritoria |
+
+    {/* ![Formulario subtipo](@assets/guias/configuracion/subtipos/formulario_subtipo.png) */}
+
+    <Aside type="note" title="Convenciones de nomenclatura">
+    Muchas instituciones siguen modelos de clasificación como:
+    - **Minciencias Colombia:** A1, A2, B, C, D
+    - **Qualis Brasil:** A1, A2, B1, B2, B3, B4, B5, C
+    - **ANVUR Italia:** A, B, C
+    
+    Adopta el estándar de tu país o institución para facilitar reportes.
+    </Aside>
+
+4. **Guardar subtipo**
+    
+    Presiona **`Guardar`** para crear el subtipo.
+    
+    El subtipo quedará disponible para clasificar productos investigativos.
+
+</Steps>
+
+---
+
+## Editar un Subtipo
+
+<Steps>
+1. **Seleccionar subtipo**
+    
+    En la tabla, localiza el subtipo y presiona el botón de **edición** 
+    (ícono de lápiz).
+
+2. **Modificar datos**
+    
+    Puedes actualizar:
+    - **Nombre del subtipo:** Cambia la denominación
+    - **Tipo asociado:** Reasigna a otro tipo de producto
+
+    <Aside type="caution" title="Reclasificación automática">
+    Si cambias el tipo asociado, todos los productos clasificados con este 
+    subtipo cambiarán automáticamente de tipo y actividad. El sistema 
+    mostrará cuántos productos serán afectados.
+    </Aside>
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para confirmar las modificaciones.
+
+</Steps>
+
+---
+
+## Eliminar un Subtipo
+
+<Steps>
+1. Localiza el subtipo en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Verifica cuántos productos usan este subtipo
+4. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación restringida">
+    No puedes eliminar un subtipo si existen productos investigativos 
+    clasificados con él.
+
+    **Opciones:**
+    - Reclasifica los productos a otro subtipo
+    - Si ya no se usa, desactívalo en lugar de eliminarlo
+    </Aside>
+</Steps>
+
+---
+
+## Ejemplos de configuración completa
+
+### Ejemplo 1: Artículos de investigación (Modelo Minciencias)
+
+```
+Actividad: Generación de Nuevo Conocimiento
+└── Tipo: Artículo de investigación
+    ├── Subtipo: A1 - Artículo en revista Q1
+    ├── Subtipo: A2 - Artículo en revista Q2 o Q3
+    ├── Subtipo: B - Artículo en revista Scopus o equivalente
+    ├── Subtipo: C - Artículo en revista nacional indexada
+    └── Subtipo: D - Artículo en revista no indexada
+```
+
+### Ejemplo 2: Software
+
+```
+Actividad: Desarrollo Tecnológico e Innovación
+└── Tipo: Software
+    ├── Subtipo: Software con registro nacional
+    ├── Subtipo: Software con certificación de calidad
+    ├── Subtipo: Software de código abierto publicado
+    └── Subtipo: Prototipo funcional validado
+```
+
+### Ejemplo 3: Patentes
+
+```
+Actividad: Desarrollo Tecnológico e Innovación
+└── Tipo: Patente
+    ├── Subtipo: Patente de invención otorgada
+    ├── Subtipo: Patente de invención en trámite
+    ├── Subtipo: Modelo de utilidad otorgado
+    └── Subtipo: Diseño industrial registrado
+```
+
+### Ejemplo 4: Formación de recurso humano
+
+```
+Actividad: Formación de Recurso Humano
+├── Tipo: Tesis de doctorado
+│   ├── Subtipo: Summa Cum Laude
+│   ├── Subtipo: Cum Laude
+│   └── Subtipo: Aprobada
+│
+├── Tipo: Tesis de maestría
+│   ├── Subtipo: Meritoria
+│   └── Subtipo: Aprobada
+│
+└── Tipo: Trabajo de grado pregrado
+    ├── Subtipo: Laureada
+    ├── Subtipo: Meritoria
+    └── Subtipo: Aprobada
+```
+
+---
+
+## Gestionar orden de los subtipos
+
+Los subtipos pueden ordenarse para que aparezcan en un orden lógico:
+
+<Steps>
+1. **Acceder a gestión de orden**
+    
+    En la vista de detalle de un tipo de producto, presiona 
+    **`Ordenar Subtipos`**.
+
+2. **Arrastrar y soltar**
+    
+    Arrastra los subtipos para reorganizarlos según tu preferencia.
+    
+    **Ejemplo de orden lógico:**
+    ```
+    1. A1 (mayor categoría)
+    2. A2
+    3. B
+    4. C
+    5. D (menor categoría)
+    ```
+
+3. **Guardar orden**
+    
+    El nuevo orden se aplicará automáticamente en todos los selectores 
+    del sistema.
+
+</Steps>
+
+<Aside type="tip" title="Orden por relevancia">
+Ordena los subtipos de mayor a menor relevancia institucional. Esto 
+facilita la selección por parte de los investigadores.
+</Aside>
+
+---
+
+## Uso en productos investigativos
+
+Cuando un investigador crea un producto, debe seleccionar el subtipo 
+específico:
+
+```
+1. Selecciona Actividad: "Generación de Nuevo Conocimiento"
+   ↓
+2. Selecciona Tipo: "Artículo de investigación"
+   ↓
+3. Selecciona Subtipo: "A1 - Artículo en revista Q1"
+   ↓
+4. El producto queda completamente clasificado
+```
+
+Esta clasificación permite:
+- ✅ Reportes por nivel de calidad
+- ✅ Evaluación diferenciada según categoría
+- ✅ Cumplimiento de requisitos institucionales
+- ✅ Generación de CvLAC, ORCID, etc.
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Tipo obligatorio" icon="warning">
+    Todo subtipo debe estar asociado a un tipo de producto.
+  </Card>
+  <Card title="Nombre único por tipo" icon="warning">
+    No pueden existir dos subtipos con el mismo nombre dentro del mismo tipo.
+  </Card>
+  <Card title="Eliminación restringida" icon="danger">
+    No se puede eliminar un subtipo si hay productos clasificados con él.
+  </Card>
+  <Card title="Nivel final de clasificación" icon="information">
+    Los subtipos son el nivel más granular; no tienen sub-niveles adicionales.
+  </Card>
+</CardGrid>
+
+---
+
+## Impacto en otros módulos
+
+Los subtipos afectan directamente a:
+
+| Módulo | Impacto |
+|--------|---------|
+| **Productos Investigativos** | Clasificación final del producto |
+| **Reportes** | Análisis detallado por categoría de producto |
+| **Evaluación** | Ponderación según calidad del subtipo |
+| **Exportación** | Generación de CvLAC y reportes externos |
+
+---
+
+## Buenas prácticas
+
+<Steps>
+1. **Usa estándares reconocidos**
+    
+    Si tu país o institución tiene un modelo de clasificación oficial 
+    (Minciencias, Qualis, etc.), úsalo para facilitar reportes externos.
+
+2. **Nombres claros y descriptivos**
+    
+    ✅ **Bien:** "A1 - Artículo en revista Q1"  
+    ❌ **Mal:** "Tipo 1"
+    
+    El nombre debe ser autoexplicativo para los investigadores.
+
+3. **Mantén coherencia**
+    
+    Si usas nomenclatura alfanumérica (A1, A2, B, C), mantenla en todos 
+    los tipos similares.
+
+4. **No crear demasiados niveles**
+    
+    5-7 subtipos por tipo suelen ser suficientes. Demasiados niveles 
+    confunden y dificultan la clasificación.
+
+5. **Documenta criterios**
+    
+    Crea una guía que explique qué productos califican para cada subtipo.
+    Por ejemplo:
+    - **A1:** Revista en Q1 de Web of Science o Scopus
+    - **A2:** Revista en Q2-Q3
+    - **B:** Revista indexada en Scopus sin cuartil
+
+</Steps>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Nombre duplicado" | Ya existe ese subtipo en el tipo seleccionado | Usa un nombre diferente |
+| "Tipo no seleccionado" | No se eligió un tipo de producto | Selecciona el tipo padre |
+| "No se puede eliminar" | Hay productos con este subtipo | Reclasifica los productos primero |
+| "Tipo no encontrado" | El tipo fue eliminado | Selecciona otro tipo válido |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Cuántos subtipos debo crear?">
+Depende de la diversidad y criterios de evaluación. Para artículos, 
+4-6 subtipos (A1, A2, B, C) suelen ser suficientes. Para otros productos 
+pueden ser menos.
+</Aside>
+
+<Aside type="tip" title="¿Puedo cambiar un producto de subtipo después?">
+Sí, desde el módulo de Productos Investigativos puedes reclasificar 
+un producto a otro subtipo si fue mal clasificado inicialmente.
+</Aside>
+
+<Aside type="tip" title="¿Los subtipos tienen alguna ponderación?">
+La ponderación se define en el módulo de evaluación, no aquí. Los 
+subtipos solo clasifican; el sistema de evaluación les asigna puntajes.
+</Aside>
+
+<Aside type="tip" title="¿Qué hago si cambio de modelo de clasificación?">
+Puedes crear los nuevos subtipos y reclasificar gradualmente los productos, 
+o hacer una migración masiva con ayuda del administrador del sistema.
+</Aside>

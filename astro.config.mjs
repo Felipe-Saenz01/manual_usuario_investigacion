@@ -31,10 +31,10 @@ export default defineConfig({
 					label: 'Módulos',
 					autogenerate: { directory: 'modulos' },
 				},
-				// {
-				// 	label: 'Parametrízación',
-				// 	autogenerate: { directory: 'parametros' },
-				// },
+				{
+					label: 'Parametrízación',
+					autogenerate: { directory: 'parametros' },
+				},
 			],
 		}),
 	],

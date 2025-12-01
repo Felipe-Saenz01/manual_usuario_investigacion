@@ -1,0 +1,349 @@
+---
+title: Tipo de Contrato
+description: Configuración de las modalidades de vinculación laboral de los investigadores, incluyendo duración y características específicas de cada tipo de contrato.
+template: doc
+sidebar:
+    label: Tipo de Contrato
+    order: 5
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="setting">
+    Los **Tipos de Contrato** definen las diferentes modalidades de vinculación 
+    laboral del personal investigador. Esta clasificación permite gestionar 
+    expectativas de dedicación, duración de asignaciones y políticas específicas 
+    según el tipo de vinculación.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Parámetros → Tipos de Contrato**
+
+{/* ![Vista inicial de Tipos de Contrato](@assets/guias/configuracion/contratos/vista_inicial_contratos.png) */}
+
+<Aside type="note" title="Permisos requeridos">
+Este módulo está disponible únicamente para usuarios con rol de **Administrador**.
+</Aside>
+
+---
+
+## ¿Por qué son importantes?
+
+Los tipos de contrato permiten:
+
+- 📋 **Clasificar investigadores** según su modalidad de vinculación
+- ⏱️ **Definir expectativas** de dedicación temporal
+- 📊 **Generar reportes** por tipo de vinculación
+- 🔄 **Gestionar renovaciones** según número de períodos
+
+---
+
+## Listado de Tipos de Contrato
+
+La vista principal muestra todos los tipos registrados:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Denominación del tipo de contrato |
+| **Número de Períodos** | Duración en períodos académicos (opcional) |
+| **Investigadores** | Cantidad de investigadores con este contrato |
+| **Acciones** | Editar, eliminar |
+
+{/* ![Listado de contratos](@assets/guias/configuracion/contratos/listado_contratos.png) */}
+
+---
+
+## Crear un Nuevo Tipo de Contrato
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Tipo de Contrato`** en la parte superior.
+
+    {/* ![Botón nuevo contrato](@assets/guias/configuracion/contratos/boton_nuevo_contrato.png) */}
+
+2. **Ingresar información**
+    
+    Completa los campos del formulario:
+
+    - **Nombre:** Denominación del tipo de contrato (requerido)
+      - Debe ser descriptivo y claro
+      - Ejemplos: "Planta", "Contrato término fijo", "Hora cátedra", 
+        "Provisional", "Ocasional", "Prestación de servicios"
+    
+    - **Número de Períodos:** Duración del contrato en períodos académicos 
+      (opcional)
+      - Deja vacío para contratos indefinidos
+      - Ingresa un número para contratos con duración específica
+      - Ejemplo: 2 (un año académico), 4 (dos años), 6 (tres años)
+
+    {/* ![Formulario contrato](@assets/guias/configuracion/contratos/formulario_contrato.png) */}
+
+    <Aside type="note" title="Contratos indefinidos">
+    Para contratos de planta o indefinidos, deja el campo "Número de 
+    Períodos" vacío o en 0. Esto indica que no hay límite temporal.
+    </Aside>
+
+3. **Guardar tipo de contrato**
+    
+    Presiona **`Guardar`** para crear el tipo de contrato.
+    
+    El tipo quedará disponible al registrar o editar investigadores.
+
+</Steps>
+
+---
+
+## Editar un Tipo de Contrato
+
+<Steps>
+1. **Seleccionar tipo**
+    
+    En la tabla, localiza el tipo y presiona el botón de **edición** 
+    (ícono de lápiz).
+
+2. **Modificar datos**
+    
+    Actualiza los campos necesarios:
+    - Nombre del tipo de contrato
+    - Número de períodos (si aplica)
+
+    <Aside type="caution" title="Impacto en investigadores existentes">
+    Los cambios se aplicarán automáticamente a todos los investigadores 
+    que tengan este tipo de contrato asignado.
+    </Aside>
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para confirmar las modificaciones.
+
+</Steps>
+
+---
+
+## Eliminar un Tipo de Contrato
+
+<Steps>
+1. Localiza el tipo en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Verifica si hay investigadores asociados
+4. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación restringida">
+    No puedes eliminar un tipo de contrato si:
+    - ✗ Hay investigadores actualmente vinculados con este tipo
+    - ✗ Existe historial de investigadores que lo usaron
+
+    **Solución:** Reasigna los investigadores a otro tipo de contrato antes 
+    de eliminar.
+    </Aside>
+</Steps>
+
+---
+
+## Ejemplos de tipos de contrato
+
+### Configuración típica para una universidad
+
+<CardGrid>
+  <Card title="Planta / Indefinido" icon="briefcase">
+    **Número de períodos:** Sin límite (vacío o 0)
+    
+    Investigadores con contrato indefinido o nombramiento en planta.
+    Mayor estabilidad y expectativa de permanencia.
+  </Card>
+  
+  <Card title="Término Fijo 1 año" icon="calendar">
+    **Número de períodos:** 2 períodos
+    
+    Contrato por un año académico completo. Se renueva según desempeño 
+    y disponibilidad presupuestal.
+  </Card>
+  
+  <Card title="Término Fijo 2 años" icon="calendar">
+    **Número de períodos:** 4 períodos
+    
+    Vinculación por dos años académicos. Común para proyectos de 
+    mediano plazo.
+  </Card>
+  
+  <Card title="Hora Cátedra" icon="clock">
+    **Número de períodos:** 1 período
+    
+    Vinculación por horas de clase. Renovación semestral según 
+    carga académica.
+  </Card>
+  
+  <Card title="Prestación de Servicios" icon="document-text">
+    **Número de períodos:** Variable (definir según proyecto)
+    
+    Contrato por producto o servicio específico. Duración según 
+    alcance del proyecto.
+  </Card>
+  
+  <Card title="Provisional" icon="warning">
+    **Número de períodos:** 1-2 períodos
+    
+    Vinculación temporal mientras se completa proceso de selección 
+    definitiva.
+  </Card>
+</CardGrid>
+
+---
+
+## Uso del número de períodos
+
+El número de períodos se utiliza para:
+
+### 1. Control de renovaciones
+
+El sistema puede alertar automáticamente cuando un investigador está 
+próximo a cumplir su número de períodos:
+
+```
+Investigador: Juan Pérez
+Tipo de contrato: Término Fijo 1 año (2 períodos)
+Período de inicio: 2024-1
+Período actual: 2024-2
+
+⚠️ Alerta: El contrato vence al final del período actual.
+   Considere iniciar proceso de renovación.
+```
+
+### 2. Reportes de vinculación
+
+Genera reportes de investigadores por:
+- Contratos próximos a vencer
+- Contratos indefinidos vs. temporales
+- Distribución por tipo de vinculación
+
+### 3. Planificación institucional
+
+Permite proyectar:
+- Necesidades de renovación
+- Presupuesto para vinculaciones
+- Estabilidad del equipo investigador
+
+---
+
+## Relación con otros módulos
+
+| Módulo | Impacto |
+|--------|---------|
+| **Investigadores** | Define la modalidad de vinculación |
+| **Horas de Investigación** | Puede condicionar horas asignables |
+| **Reportes** | Agrupa investigadores por tipo de contrato |
+| **Alertas** | Notifica vencimientos de contratos temporales |
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Nombre único" icon="warning">
+    No pueden existir dos tipos de contrato con el mismo nombre.
+  </Card>
+  <Card title="Períodos opcionales" icon="information">
+    El número de períodos es opcional. Úsalo solo para contratos con 
+    duración definida.
+  </Card>
+  <Card title="Períodos positivos" icon="warning">
+    Si se define, el número de períodos debe ser mayor a 0.
+  </Card>
+  <Card title="Eliminación condicional" icon="danger">
+    Solo se pueden eliminar tipos sin investigadores asociados.
+  </Card>
+</CardGrid>
+
+---
+
+## Configuración inicial recomendada
+
+Al configurar el sistema por primera vez, crea estos tipos básicos:
+
+<Steps>
+1. **Planta / Indefinido** - Sin límite de períodos
+2. **Término Fijo 1 año** - 2 períodos
+3. **Término Fijo 2 años** - 4 períodos
+4. **Hora Cátedra** - 1 período
+5. **Prestación de Servicios** - Variable según proyecto
+</Steps>
+
+<Aside type="tip" title="Personalización institucional">
+Ajusta estos tipos según la estructura contractual de tu institución. 
+Algunas pueden requerir tipos adicionales como "Ocasional", "Temporal", 
+"Consultor externo", etc.
+</Aside>
+
+---
+
+## Buenas prácticas
+
+<Steps>
+1. **Nombres estandarizados**
+    
+    Usa las denominaciones oficiales de tu institución para facilitar 
+    la generación de reportes legales y administrativos.
+
+2. **Define períodos con precisión**
+    
+    Si un contrato es de 6 meses, define 1 período. Si es de 1 año, 
+    define 2 períodos. Mantén coherencia con el calendario académico.
+
+3. **No crear tipos innecesarios**
+    
+    Agrupa contratos similares. Por ejemplo, en lugar de tener 
+    "Término Fijo 6 meses", "Término Fijo 8 meses", "Término Fijo 10 meses", 
+    ten solo "Término Fijo 1 año" y ajusta fechas individuales.
+
+4. **Documenta políticas**
+    
+    Para cada tipo de contrato, documenta:
+    - Expectativas de dedicación horaria
+    - Políticas de renovación
+    - Requisitos específicos
+
+</Steps>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Nombre duplicado" | Ya existe un tipo con ese nombre | Usa un nombre diferente |
+| "Períodos inválidos" | Número negativo o no numérico | Ingresa un número entero positivo o déjalo vacío |
+| "No se puede eliminar" | Hay investigadores con este contrato | Reasigna los investigadores primero |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Qué pasa cuando un contrato vence?">
+El sistema puede enviar alertas automáticas próximo al vencimiento. 
+El administrador debe actualizar manualmente el tipo de contrato del 
+investigador o renovar su vinculación.
+</Aside>
+
+<Aside type="tip" title="¿Puedo cambiar el tipo de contrato de un investigador?">
+Sí, desde el módulo de Investigadores puedes actualizar el tipo de 
+contrato en cualquier momento (por ejemplo, cuando pasa de temporal a planta).
+</Aside>
+
+<Aside type="tip" title="¿El número de períodos es obligatorio?">
+No, es opcional. Úsalo solo cuando el contrato tenga una duración específica. 
+Para contratos indefinidos, déjalo vacío.
+</Aside>
+
+<Aside type="tip" title="¿Puedo tener diferentes duraciones para el mismo tipo?">
+No directamente. Si necesitas flexibilidad, crea tipos generales 
+(ej: "Prestación de Servicios") y gestiona las fechas específicas en el 
+perfil de cada investigador.
+</Aside>

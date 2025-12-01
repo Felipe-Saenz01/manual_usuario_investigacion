@@ -1,0 +1,333 @@
+---
+title: Tipos de Producto
+description: Configuración de las categorías intermedias de productos investigativos que clasifican los diferentes resultados esperados dentro de cada actividad de investigación.
+template: doc
+sidebar:
+    label: Tipos de Producto
+    order: 3
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="setting">
+    Los **Tipos de Producto** son la categoría intermedia en la clasificación 
+    jerárquica de productos investigativos. Cada tipo pertenece a una Actividad 
+    de Investigación y agrupa varios Subtipos de Producto relacionados.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Parámetros → Tipos de Producto**
+
+{/* ![Vista inicial de Tipos](@assets/guias/configuracion/tipos/vista_inicial_tipos.png) */}
+
+---
+
+## Posición en la jerarquía
+
+Los tipos de producto ocupan el segundo nivel de clasificación:
+
+```
+┌─────────────────────────────────────────┐
+│   Actividad de Investigación            │
+│   (Ej: Generación de Nuevo Conocimiento)│
+└────────────────┬────────────────────────┘
+                 │
+        ┌────────┴────────┐
+        ▼                 ▼
+┌───────────────┐  ┌──────────────────┐
+│ Tipo Producto │  │  Tipo Producto   │
+│   (Artículo)  │  │ (Libro resultado)│
+└───────┬───────┘  └────────┬─────────┘
+        │                   │
+   ┌────┴────┐         ┌────┴────┐
+   ▼         ▼         ▼         ▼
+Subtipo  Subtipo   Subtipo  Subtipo
+ (A1)     (A2)       (B)      (C)
+```
+
+---
+
+## Listado de Tipos de Producto
+
+La vista principal muestra todos los tipos registrados:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Nombre del tipo de producto |
+| **Actividad** | Actividad de investigación a la que pertenece |
+| **Subtipos** | Cantidad de subtipos asociados |
+| **Productos** | Número de productos investigativos de este tipo |
+| **Acciones** | Editar, eliminar |
+
+{/* ![Listado de tipos](@assets/guias/configuracion/tipos/listado_tipos.png) */}
+
+<Aside type="tip" title="Filtrar por actividad">
+Usa el selector en la parte superior para filtrar los tipos por actividad 
+de investigación y facilitar la búsqueda.
+</Aside>
+
+---
+
+## Crear un Nuevo Tipo de Producto
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Tipo`** en la parte superior derecha.
+
+    {/* ![Botón nuevo tipo](@assets/guias/configuracion/tipos/boton_nuevo_tipo.png) */}
+
+2. **Seleccionar actividad padre**
+    
+    Elige la **Actividad de Investigación** a la cual pertenecerá este tipo:
+    - Generación de Nuevo Conocimiento
+    - Desarrollo Tecnológico e Innovación
+    - Apropiación Social del Conocimiento
+    - Formación de Recurso Humano
+    - Otra actividad configurada
+
+    {/* ![Seleccionar actividad](@assets/guias/configuracion/tipos/seleccionar_actividad.png) */}
+
+3. **Ingresar nombre del tipo**
+    
+    Escribe el nombre descriptivo del tipo de producto (requerido):
+    
+    **Ejemplos según actividad:**
+    
+    | Actividad | Tipos comunes |
+    |-----------|---------------|
+    | Generación de Conocimiento | Artículo de investigación, Libro resultado de investigación, Capítulo de libro |
+    | Desarrollo Tecnológico | Software, Prototipo industrial, Diseño industrial, Patente |
+    | Apropiación Social | Participación ciudadana, Evento científico, Estrategia pedagógica |
+    | Formación RRHH | Tesis de doctorado, Tesis de maestría, Trabajo de grado pregrado |
+
+    {/* ![Formulario tipo](@assets/guias/configuracion/tipos/formulario_tipo.png) */}
+
+    <Aside type="note" title="Nombre único dentro de la actividad">
+    El nombre debe ser único dentro de la actividad seleccionada, pero 
+    puede repetirse en diferentes actividades si es necesario.
+    </Aside>
+
+4. **Guardar tipo**
+    
+    Presiona **`Guardar`** para crear el tipo de producto.
+    
+    El tipo quedará disponible para asociar subtipos.
+
+</Steps>
+
+---
+
+## Editar un Tipo de Producto
+
+<Steps>
+1. **Seleccionar tipo**
+    
+    En la tabla, localiza el tipo y presiona el botón de **edición** 
+    (ícono de lápiz).
+
+2. **Modificar datos**
+    
+    Puedes actualizar:
+    - **Nombre del tipo:** Cambia la denominación
+    - **Actividad asociada:** Reasigna a otra actividad
+
+    <Aside type="caution" title="Impacto del cambio de actividad">
+    Si cambias la actividad asociada, todos los subtipos y productos 
+    clasificados bajo este tipo también cambiarán de actividad. El sistema 
+    mostrará una advertencia indicando cuántos elementos serán afectados.
+    </Aside>
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para confirmar las modificaciones.
+
+</Steps>
+
+---
+
+## Eliminar un Tipo de Producto
+
+<Steps>
+1. Localiza el tipo en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Revisa la advertencia sobre elementos dependientes
+4. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación en cascada">
+    Al eliminar un tipo de producto:
+    - ✗ Se eliminarán todos sus subtipos asociados
+    - ✗ Los productos investigativos perderán su clasificación
+
+    **Esta acción es irreversible.** Solo elimina tipos que ya no se utilicen.
+    </Aside>
+</Steps>
+
+---
+
+## Gestionar Subtipos
+
+Desde cada tipo de producto puedes administrar sus subtipos:
+
+<Steps>
+1. **Ver subtipos asociados**
+    
+    Haz clic en el nombre del tipo para ver su detalle.
+    
+    Se mostrará la lista de subtipos vinculados.
+
+2. **Crear subtipo rápido**
+    
+    En la vista de detalle, presiona **`+ Nuevo Subtipo`** para crear 
+    un subtipo directamente asociado a este tipo.
+
+    {/* ![Crear subtipo desde tipo](@assets/guias/configuracion/tipos/crear_subtipo_rapido.png) */}
+
+3. **Reordenar subtipos**
+    
+    Puedes arrastrar y soltar los subtipos para ordenarlos según tu preferencia.
+    Este orden se reflejará en los selectores del sistema.
+
+</Steps>
+
+---
+
+## Ejemplos de configuración
+
+### Ejemplo 1: Generación de Nuevo Conocimiento
+
+```
+Actividad: Generación de Nuevo Conocimiento
+├── Tipo: Artículo de investigación
+│   ├── Subtipo: A1 - Artículo en revista Q1
+│   ├── Subtipo: A2 - Artículo en revista Q2
+│   ├── Subtipo: B - Artículo en Scopus
+│   └── Subtipo: C - Artículo en revista nacional
+│
+├── Tipo: Libro resultado de investigación
+│   ├── Subtipo: Libro publicado por editorial internacional
+│   └── Subtipo: Libro publicado por editorial nacional
+│
+└── Tipo: Capítulo de libro
+    ├── Subtipo: Capítulo en libro internacional
+    └── Subtipo: Capítulo en libro nacional
+```
+
+### Ejemplo 2: Desarrollo Tecnológico e Innovación
+
+```
+Actividad: Desarrollo Tecnológico e Innovación
+├── Tipo: Software
+│   ├── Subtipo: Software registrado
+│   └── Subtipo: Software certificado
+│
+├── Tipo: Patente
+│   ├── Subtipo: Patente de invención
+│   └── Subtipo: Patente de modelo de utilidad
+│
+└── Tipo: Prototipo industrial
+    └── Subtipo: Prototipo funcional
+```
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Actividad obligatoria" icon="warning">
+    Todo tipo de producto debe estar asociado a una actividad de investigación.
+  </Card>
+  <Card title="Nombre único por actividad" icon="warning">
+    No pueden existir dos tipos con el mismo nombre dentro de la misma actividad.
+  </Card>
+  <Card title="Al menos un subtipo" icon="information">
+    Se recomienda que cada tipo tenga al menos un subtipo para clasificación 
+    precisa.
+  </Card>
+  <Card title="Eliminación condicional" icon="danger">
+    Eliminar un tipo eliminará todos sus subtipos y afectará productos 
+    relacionados.
+  </Card>
+</CardGrid>
+
+---
+
+## Impacto en otros módulos
+
+Los tipos de producto afectan a:
+
+| Módulo | Impacto |
+|--------|---------|
+| **Subtipos de Producto** | Define las categorías padre de los subtipos |
+| **Productos Investigativos** | Segundo nivel de clasificación |
+| **Entregas** | Agrupa productos para reportes |
+| **Reportes** | Análisis por tipo de producto |
+
+---
+
+## Buenas prácticas
+
+<Steps>
+1. **Mantén coherencia con estándares**
+    
+    Si tu institución sigue modelos como Minciencias, CvLAC o similares, 
+    usa las mismas denominaciones para facilitar reportes externos.
+
+2. **No crees demasiados tipos**
+    
+    Limita los tipos a categorías realmente distintas. Usa los subtipos 
+    para las variaciones específicas.
+    
+    ✅ **Bien:** Tipo "Artículo" → Subtipos A1, A2, B, C  
+    ❌ **Mal:** Tipos separados para A1, A2, B, C
+
+3. **Nombres descriptivos**
+    
+    Usa nombres claros que cualquier investigador pueda entender:
+    - ✅ "Artículo de investigación"
+    - ❌ "Art. Inv. Tipo I"
+
+4. **Revisa antes de eliminar**
+    
+    Antes de eliminar un tipo, verifica cuántos productos lo están usando.
+    Considera desactivar en lugar de eliminar si tiene historial.
+
+</Steps>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Nombre duplicado" | Ya existe un tipo con ese nombre en la actividad | Usa un nombre diferente o cámbialo de actividad |
+| "Actividad no seleccionada" | No se eligió una actividad padre | Selecciona una actividad de investigación |
+| "No se puede eliminar" | Tiene subtipos o productos asociados | Elimina primero los dependientes o reasígnalos |
+| "Actividad no encontrada" | La actividad fue eliminada | Selecciona otra actividad válida |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Cuántos tipos debo crear por actividad?">
+Depende de la diversidad de productos. Generalmente entre 3 y 8 tipos 
+por actividad es suficiente. Recuerda que los subtipos permiten mayor 
+granularidad.
+</Aside>
+
+<Aside type="tip" title="¿Puedo mover un tipo a otra actividad?">
+Sí, al editar el tipo puedes cambiar su actividad asociada. Ten en cuenta 
+que esto afectará todos sus subtipos y productos relacionados.
+</Aside>
+
+<Aside type="tip" title="¿Qué pasa si elimino un tipo con productos?">
+El sistema impedirá la eliminación. Primero debes reclasificar o eliminar 
+los productos asociados.
+</Aside>

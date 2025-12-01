@@ -1,0 +1,315 @@
+---
+title: Actividades de Investigación
+description: Configuración de las categorías principales de actividades investigativas que agrupan los tipos de productos y definen las horas máximas permitidas.
+template: doc
+sidebar:
+    label: Actividades de Investigación
+    order: 2
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="setting">
+    Las **Actividades de Investigación** son las categorías de más alto nivel en 
+    la clasificación de productos investigativos. Cada actividad agrupa tipos de 
+    productos relacionados y define el límite máximo de horas que se pueden asignar 
+    en el plan de trabajo para esa categoría.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Parámetros → Actividades de Investigación**
+
+{/* ![Vista inicial de Actividades](@assets/guias/configuracion/actividades/vista_inicial_actividades.png) */}
+
+---
+
+## Jerarquía de clasificación
+
+Las actividades de investigación son el primer nivel de una estructura jerárquica:
+
+```
+Actividad de Investigación
+    └── Tipo de Producto
+        └── Subtipo de Producto
+            └── Producto Investigativo
+```
+
+### Ejemplos de actividades comunes
+
+<CardGrid>
+  <Card title="Generación de Nuevo Conocimiento" icon="star">
+    Agrupa productos como artículos científicos, libros resultado de 
+    investigación, capítulos de libro, etc.
+  </Card>
+  <Card title="Desarrollo Tecnológico e Innovación" icon="rocket">
+    Incluye software, prototipos, diseños industriales, patentes, etc.
+  </Card>
+  <Card title="Apropiación Social del Conocimiento" icon="group">
+    Eventos de divulgación, participación en redes, comunicación del 
+    conocimiento, etc.
+  </Card>
+  <Card title="Formación de Recurso Humano" icon="academic-cap">
+    Dirección de tesis, trabajos de grado, proyectos de investigación 
+    formativa, etc.
+  </Card>
+</CardGrid>
+
+---
+
+## Listado de Actividades
+
+La vista principal muestra todas las actividades registradas:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Nombre de la actividad de investigación |
+| **Horas Máximas** | Límite de horas asignables en planes de trabajo |
+| **Tipos Asociados** | Cantidad de tipos de producto vinculados |
+| **Acciones** | Editar, eliminar |
+
+{/* ![Listado de actividades](@assets/guias/configuracion/actividades/listado_actividades.png) */}
+
+---
+
+## Crear una Nueva Actividad
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nueva Actividad`** en la parte superior derecha.
+
+    {/* ![Botón nueva actividad](@assets/guias/configuracion/actividades/boton_nueva_actividad.png) */}
+
+2. **Completar información**
+    
+    Ingresa los datos en el formulario:
+
+    - **Nombre:** Nombre descriptivo de la actividad de investigación (requerido)
+      - Debe ser claro y representativo
+      - Ejemplo: "Generación de Nuevo Conocimiento"
+    
+    - **Horas Máximas:** Número máximo de horas semanales que se pueden 
+      asignar a esta actividad en el plan de trabajo (requerido)
+      - Valor entre 1 y 40 horas
+      - Ejemplo: 10 horas
+
+    {/* ![Formulario actividad](@assets/guias/configuracion/actividades/formulario_actividad.png) */}
+
+    <Aside type="note" title="¿Cómo definir las horas máximas?">
+    Las horas máximas deben considerar:
+    - La complejidad típica de los productos de esta categoría
+    - El tiempo promedio requerido para su desarrollo
+    - Las políticas institucionales de dedicación horaria
+    
+    Por ejemplo:
+    - **Generación de Conocimiento:** 10-12 horas (artículos requieren más tiempo)
+    - **Apropiación Social:** 4-6 horas (eventos de divulgación)
+    - **Desarrollo Tecnológico:** 8-10 horas (desarrollo de software)
+    </Aside>
+
+3. **Guardar actividad**
+    
+    Presiona **`Guardar`** para crear la actividad.
+    
+    La actividad quedará disponible para asociar tipos de productos.
+
+</Steps>
+
+---
+
+## Editar una Actividad Existente
+
+<Steps>
+1. **Seleccionar actividad**
+    
+    En la tabla, localiza la actividad y presiona el botón de **edición** 
+    (ícono de lápiz).
+
+2. **Modificar datos**
+    
+    Actualiza los campos necesarios:
+    - Nombre de la actividad
+    - Horas máximas permitidas
+
+    <Aside type="caution" title="Impacto en planes de trabajo">
+    Si **reduces las horas máximas**, puede afectar planes de trabajo 
+    existentes que hayan asignado más horas. El sistema mostrará una 
+    advertencia si esto ocurre.
+    </Aside>
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para confirmar las modificaciones.
+
+</Steps>
+
+---
+
+## Eliminar una Actividad
+
+<Steps>
+1. Localiza la actividad en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Lee la advertencia en el diálogo de confirmación
+4. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación restringida">
+    No puedes eliminar una actividad si:
+    - ✗ Tiene tipos de productos asociados
+    - ✗ Existen planes de trabajo que la utilizan
+    - ✗ Hay productos investigativos clasificados bajo esta actividad
+
+    Primero debes reasignar o eliminar todos los elementos dependientes.
+    </Aside>
+</Steps>
+
+---
+
+## Gestionar Tipos de Producto
+
+Desde el detalle de cada actividad puedes ver y gestionar sus tipos asociados:
+
+<Steps>
+1. **Ver tipos asociados**
+    
+    Haz clic en el nombre de la actividad para ver su detalle.
+    
+    Se mostrará una lista de todos los tipos de producto vinculados.
+
+2. **Crear tipo desde aquí**
+    
+    En la vista de detalle, presiona **`+ Nuevo Tipo de Producto`** para 
+    crear un tipo directamente asociado a esta actividad.
+    
+    <Aside type="tip" title="Acceso rápido">
+    Esta es una forma rápida de crear tipos sin tener que ir al módulo 
+    de Tipos de Producto.
+    </Aside>
+
+3. **Ver jerarquía completa**
+    
+    La vista de detalle muestra la estructura completa:
+    ```
+    Actividad de Investigación
+    ├── Tipo de Producto 1
+    │   ├── Subtipo 1.1
+    │   └── Subtipo 1.2
+    └── Tipo de Producto 2
+        ├── Subtipo 2.1
+        └── Subtipo 2.2
+    ```
+
+</Steps>
+
+---
+
+## Validación de Horas en Plan de Trabajo
+
+Las horas máximas de cada actividad se utilizan para validar los planes:
+
+### Ejemplo de validación
+
+Un investigador con 10 horas semanales de investigación crea su plan de trabajo:
+
+| Actividad | Horas Máximas | Horas Asignadas | Estado |
+|-----------|---------------|-----------------|--------|
+| Generación de Conocimiento | 10 horas | 6 horas | ✅ Válido |
+| Apropiación Social | 6 horas | 4 horas | ✅ Válido |
+| **Total** | - | **10 horas** | ✅ OK |
+
+Si intenta asignar más horas de las permitidas:
+
+| Actividad | Horas Máximas | Horas Asignadas | Estado |
+|-----------|---------------|-----------------|--------|
+| Generación de Conocimiento | 10 horas | **12 horas** | ❌ Excede límite |
+
+El sistema mostrará un error y no permitirá guardar el plan.
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Nombre único" icon="warning">
+    No pueden existir dos actividades con el mismo nombre.
+  </Card>
+  <Card title="Horas positivas" icon="warning">
+    Las horas máximas deben ser mayor a 0 y menor o igual a 40.
+  </Card>
+  <Card title="Eliminación condicional" icon="information">
+    Solo se pueden eliminar actividades sin tipos de producto asociados.
+  </Card>
+  <Card title="Base de clasificación" icon="link">
+    Toda clasificación de productos debe partir de una actividad de investigación.
+  </Card>
+</CardGrid>
+
+---
+
+## Impacto en otros módulos
+
+La configuración de actividades afecta a:
+
+| Módulo | Impacto |
+|--------|---------|
+| **Tipos de Producto** | Define las categorías padre de los tipos |
+| **Plan de Trabajo** | Establece límites de horas por actividad |
+| **Productos Investigativos** | Base de la clasificación jerárquica |
+| **Reportes** | Agrupación de productos por actividad |
+
+---
+
+## Configuración inicial recomendada
+
+Al configurar el sistema por primera vez, se recomienda crear estas actividades 
+basadas en el modelo Minciencias:
+
+<Steps>
+1. **Generación de Nuevo Conocimiento** - 12 horas máximas
+2. **Desarrollo Tecnológico e Innovación** - 10 horas máximas
+3. **Apropiación Social del Conocimiento** - 6 horas máximas
+4. **Formación de Recurso Humano en CTeI** - 8 horas máximas
+</Steps>
+
+<Aside type="tip" title="Personalización institucional">
+Estas son sugerencias generales. Cada institución debe ajustar las 
+actividades y horas máximas según sus políticas y necesidades específicas.
+</Aside>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Nombre duplicado" | Ya existe una actividad con ese nombre | Usa un nombre diferente |
+| "Horas inválidas" | Valor fuera del rango permitido | Ingresa un valor entre 1 y 40 |
+| "No se puede eliminar" | Tiene tipos de producto asociados | Elimina primero los tipos asociados |
+| "Planes excedidos" | Reducción de horas afecta planes existentes | Ajusta los planes antes de reducir |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Puedo cambiar las horas máximas después?">
+Sí, pero ten en cuenta que puede afectar planes de trabajo existentes 
+que hayan asignado más horas. El sistema te alertará si esto ocurre.
+</Aside>
+
+<Aside type="tip" title="¿Cuántas actividades debo crear?">
+Se recomienda crear entre 4 y 8 actividades principales. Demasiadas 
+actividades complican la clasificación, muy pocas limitan la granularidad.
+</Aside>
+
+<Aside type="tip" title="¿Las horas se suman entre actividades?">
+No, las horas máximas son por actividad individual. Un investigador puede 
+distribuir sus horas totales entre múltiples actividades, respetando el 
+límite de cada una.
+</Aside>

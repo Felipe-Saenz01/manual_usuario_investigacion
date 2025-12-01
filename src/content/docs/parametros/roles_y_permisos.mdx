@@ -1,0 +1,565 @@
+---
+title: Roles y Permisos
+description: Configuración del sistema de control de acceso basado en roles, incluyendo la creación de permisos, definición de roles y asignación de privilegios.
+template: doc
+sidebar:
+    label: Roles y Permisos
+    order: 7
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="setting">
+    El módulo de **Roles y Permisos** permite configurar el sistema de control 
+    de acceso del aplicativo. Aquí se definen los permisos específicos que existen 
+    en el sistema, se crean roles agrupando permisos relacionados, y se asignan 
+    estos roles a los usuarios para controlar qué pueden hacer en la plataforma.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Parámetros → Roles y Permisos**
+
+{/* ![Vista inicial de Roles y Permisos](@assets/guias/configuracion/roles/vista_inicial_roles.png) */}
+
+<Aside type="danger" title="Módulo crítico">
+Este módulo controla la seguridad y acceso al sistema. Solo debe ser 
+gestionado por **Administradores del Sistema**. Cambios incorrectos pueden 
+bloquear el acceso a usuarios o exponer información sensible.
+</Aside>
+
+---
+
+## Conceptos clave
+
+Antes de trabajar con este módulo, es importante entender:
+
+<CardGrid>
+  <Card title="Permiso" icon="key">
+    **Acción específica** que se puede realizar en el sistema.
+    
+    Ejemplos:
+    - `crear-proyecto`
+    - `editar-producto`
+    - `eliminar-usuario`
+    - `ver-reportes`
+  </Card>
+  
+  <Card title="Rol" icon="user-group">
+    **Conjunto de permisos** agrupados que se asignan a usuarios.
+    
+    Ejemplos:
+    - Administrador (todos los permisos)
+    - Coordinador (gestión de grupo)
+    - Investigador (gestión propia)
+  </Card>
+  
+  <Card title="Usuario con Rol" icon="identification">
+    **Investigador** al que se le asigna uno o más roles.
+    
+    El usuario hereda automáticamente todos los permisos 
+    de sus roles asignados.
+  </Card>
+</CardGrid>
+
+---
+
+## Estructura del módulo
+
+El módulo está dividido en dos secciones principales:
+
+```
+Roles y Permisos
+├── Permisos
+│   ├── Crear permiso
+│   ├── Editar permiso
+│   └── Eliminar permiso
+│
+└── Roles
+    ├── Crear rol
+    ├── Asignar permisos a rol
+    ├── Editar rol
+    └── Eliminar rol
+```
+
+---
+
+## Sección 1: Gestión de Permisos
+
+### Listado de Permisos
+
+La pestaña de permisos muestra todos los permisos del sistema:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Identificador único del permiso (slug) |
+| **Descripción** | Explicación de qué permite hacer |
+| **Módulo** | Módulo al que pertenece |
+| **Roles** | Roles que tienen este permiso |
+| **Acciones** | Editar, eliminar |
+
+{/* ![Listado de permisos](@assets/guias/configuracion/roles/listado_permisos.png) */}
+
+<Aside type="tip" title="Agrupación por módulo">
+Los permisos se organizan por módulos para facilitar su gestión:
+- Proyectos
+- Productos
+- Entregas
+- Usuarios
+- Configuración
+- etc.
+</Aside>
+
+### Crear un Nuevo Permiso
+
+<Steps>
+1. **Acceder a la pestaña Permisos**
+    
+    En el módulo de Roles y Permisos, selecciona la pestaña **"Permisos"**.
+
+2. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Permiso`**.
+
+    {/* ![Botón nuevo permiso](@assets/guias/configuracion/roles/boton_nuevo_permiso.png) */}
+
+3. **Completar información**
+    
+    Ingresa los datos del permiso:
+
+    - **Nombre:** Identificador único en formato slug (requerido)
+      - Usa guiones para separar palabras
+      - Formato: `verbo-modulo` o `verbo-modulo-detalle`
+      - Ejemplos: `crear-proyecto`, `editar-producto`, `eliminar-usuario`, 
+        `ver-reportes-financieros`
+    
+    - **Descripción:** Explicación clara de qué permite hacer (requerido)
+      - Ejemplos:
+        - "Permite crear nuevos proyectos de investigación"
+        - "Permite editar productos investigativos propios"
+        - "Permite eliminar cualquier usuario del sistema"
+
+    - **Módulo:** Categoría a la que pertenece (opcional)
+      - Ayuda a organizar los permisos
+      - Ejemplos: "Proyectos", "Usuarios", "Productos", "Configuración"
+
+    {/* ![Formulario permiso](@assets/guias/configuracion/roles/formulario_permiso.png) */}
+
+4. **Guardar permiso**
+    
+    Presiona **`Guardar`** para crear el permiso.
+    
+    El permiso quedará disponible para asignarse a roles.
+
+</Steps>
+
+<Aside type="note" title="Nomenclatura recomendada">
+Usa verbos en infinitivo para nombrar permisos:
+- **Crear:** `crear-proyecto`, `crear-producto`
+- **Ver/Listar:** `ver-proyectos`, `listar-usuarios`
+- **Editar:** `editar-proyecto`, `editar-producto`
+- **Eliminar:** `eliminar-proyecto`, `eliminar-usuario`
+- **Aprobar:** `aprobar-entrega`, `aprobar-plan-trabajo`
+- **Exportar:** `exportar-reportes`, `exportar-datos`
+</Aside>
+
+### Editar un Permiso
+
+<Steps>
+1. Localiza el permiso en la tabla
+2. Presiona el botón de **edición** (ícono de lápiz)
+3. Modifica la descripción o módulo (el nombre no se puede cambiar)
+4. Presiona **`Actualizar`**
+</Steps>
+
+### Eliminar un Permiso
+
+<Steps>
+1. Localiza el permiso en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación en cascada">
+    Al eliminar un permiso:
+    - Se removerá automáticamente de todos los roles que lo tienen
+    - Los usuarios perderán ese privilegio inmediatamente
+    - **Esta acción es irreversible**
+
+    Solo elimina permisos que ya no se utilicen en el sistema.
+    </Aside>
+</Steps>
+
+---
+
+## Sección 2: Gestión de Roles
+
+### Listado de Roles
+
+La pestaña de roles muestra todos los roles del sistema:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Denominación del rol |
+| **Permisos** | Cantidad de permisos asignados |
+| **Usuarios** | Cantidad de usuarios con este rol |
+| **Acciones** | Ver permisos, editar, eliminar |
+
+{/* ![Listado de roles](@assets/guias/configuracion/roles/listado_roles.png) */}
+
+### Crear un Nuevo Rol
+
+<Steps>
+1. **Acceder a la pestaña Roles**
+    
+    Selecciona la pestaña **"Roles"** en el módulo.
+
+2. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Rol`**.
+
+    {/* ![Botón nuevo rol](@assets/guias/configuracion/roles/boton_nuevo_rol.png) */}
+
+3. **Ingresar nombre del rol**
+    
+    Define un nombre descriptivo para el rol (requerido):
+    - **Administrador:** Control total del sistema
+    - **Coordinador:** Gestiona su grupo de investigación
+    - **Investigador:** Gestiona sus propios productos
+    - **Evaluador:** Revisa y aprueba entregas
+    - **Consultor:** Solo lectura de información
+
+    {/* ![Formulario rol](@assets/guias/configuracion/roles/formulario_rol.png) */}
+
+4. **Asignar permisos al rol**
+    
+    Selecciona los permisos que tendrá este rol. Los permisos están 
+    organizados por módulos para facilitar la selección.
+
+    <Tabs>
+      <TabItem label="Por Módulo">
+        Expande cada módulo y marca los permisos correspondientes:
+        
+        **Proyectos**
+        - ☑ Crear proyecto
+        - ☑ Ver proyectos
+        - ☑ Editar proyectos propios
+        - ☐ Editar cualquier proyecto
+        - ☐ Eliminar proyectos
+        
+        **Productos**
+        - ☑ Crear producto
+        - ☑ Ver productos
+        - ☑ Editar productos propios
+        - ☐ Eliminar productos
+      </TabItem>
+      <TabItem label="Selección Rápida">
+        Usa los botones de selección rápida:
+        - **Seleccionar todos:** Marca todos los permisos
+        - **Seleccionar módulo:** Marca todos de un módulo específico
+        - **Deseleccionar todos:** Desmarca todos los permisos
+      </TabItem>
+    </Tabs>
+
+    {/* ![Asignación de permisos](@assets/guias/configuracion/roles/asignar_permisos.png) */}
+
+5. **Guardar rol**
+    
+    Presiona **`Guardar`** para crear el rol con los permisos seleccionados.
+
+</Steps>
+
+### Modificar Permisos de un Rol
+
+<Steps>
+1. **Acceder a permisos del rol**
+    
+    En el listado de roles, haz clic en **"Ver permisos"** o en el 
+    botón de edición del rol.
+
+2. **Ajustar permisos**
+    
+    - **Agregar permisos:** Marca los checkboxes adicionales
+    - **Quitar permisos:** Desmarca los checkboxes correspondientes
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para aplicar los cambios.
+
+    <Aside type="danger" title="Cambios inmediatos">
+    Los cambios en permisos se aplican inmediatamente. Todos los usuarios 
+    con este rol obtendrán o perderán los permisos modificados en tiempo real.
+    </Aside>
+
+</Steps>
+
+### Eliminar un Rol
+
+<Steps>
+1. Localiza el rol en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Verifica cuántos usuarios tienen este rol
+4. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación restringida">
+    No puedes eliminar un rol si:
+    - ✗ Hay usuarios asignados a este rol
+    - ✗ Es un rol del sistema (Administrador, por ejemplo)
+
+    **Solución:** Reasigna los usuarios a otros roles antes de eliminar.
+    </Aside>
+</Steps>
+
+---
+
+## Roles predefinidos recomendados
+
+### 1. Administrador
+
+<Card title="Administrador" icon="star">
+**Permisos:** Todos
+
+**Descripción:** Control total del sistema. Puede realizar cualquier 
+acción sin restricciones.
+
+**Usuarios típicos:**
+- Director de investigación
+- Administrador del sistema
+- Personal de TI autorizado
+</Card>
+
+**Permisos incluidos:**
+- ✅ Todos los permisos de configuración
+- ✅ Gestión completa de usuarios
+- ✅ Creación de períodos y parametrización
+- ✅ Acceso a todos los módulos
+- ✅ Exportación de datos sensibles
+
+---
+
+### 2. Coordinador
+
+<Card title="Coordinador" icon="academic-cap">
+**Permisos:** Gestión de su grupo de investigación
+
+**Descripción:** Puede administrar investigadores de su grupo, revisar 
+y aprobar sus entregas y planes de trabajo.
+
+**Usuarios típicos:**
+- Líder de grupo de investigación
+- Director de línea de investigación
+</Card>
+
+**Permisos incluidos:**
+- ✅ Ver proyectos del grupo
+- ✅ Ver productos del grupo
+- ✅ Revisar entregas de su grupo
+- ✅ Aprobar/rechazar planes de trabajo
+- ✅ Asignar horas de investigación
+- ❌ Modificar configuración global
+- ❌ Gestionar usuarios de otros grupos
+
+---
+
+### 3. Investigador
+
+<Card title="Investigador" icon="book-open">
+**Permisos:** Gestión de su propia producción
+
+**Descripción:** Puede crear y gestionar sus proyectos, productos y 
+entregas. Solo tiene acceso a su propia información.
+
+**Usuarios típicos:**
+- Docentes investigadores
+- Investigadores junior
+</Card>
+
+**Permisos incluidos:**
+- ✅ Crear proyectos
+- ✅ Crear productos
+- ✅ Crear entregas
+- ✅ Ver sus propios datos
+- ✅ Postularse a convocatorias
+- ❌ Ver datos de otros investigadores
+- ❌ Aprobar entregas
+- ❌ Acceder a configuración
+
+---
+
+### 4. Evaluador / Revisor
+
+<Card title="Evaluador" icon="clipboard-check">
+**Permisos:** Revisión de entregas y productos
+
+**Descripción:** Puede revisar, comentar y aprobar entregas asignadas. 
+No puede crear ni modificar productos.
+
+**Usuarios típicos:**
+- Pares evaluadores externos
+- Comité de evaluación
+</Card>
+
+**Permisos incluidos:**
+- ✅ Ver proyectos asignados
+- ✅ Ver productos asignados
+- ✅ Revisar entregas
+- ✅ Aprobar/rechazar/solicitar corrección
+- ✅ Agregar comentarios
+- ❌ Crear proyectos o productos
+- ❌ Modificar datos de investigadores
+
+---
+
+### 5. Consultor / Solo Lectura
+
+<Card title="Consultor" icon="eye">
+**Permisos:** Solo visualización de información
+
+**Descripción:** Puede ver información consolidada y reportes pero no 
+puede modificar nada.
+
+**Usuarios típicos:**
+- Directivos
+- Personal de planeación
+- Auditores
+</Card>
+
+**Permisos incluidos:**
+- ✅ Ver proyectos
+- ✅ Ver productos
+- ✅ Ver reportes
+- ✅ Exportar reportes
+- ❌ Crear o editar cualquier información
+- ❌ Aprobar o rechazar entregas
+
+---
+
+## Asignar roles a usuarios
+
+La asignación de roles se realiza desde el módulo de **Investigadores**:
+
+<Steps>
+1. Accede a **Investigadores**
+2. Edita el perfil del investigador
+3. En la sección **"Roles"**, selecciona uno o más roles
+4. Guarda los cambios
+
+    <Aside type="note" title="Múltiples roles">
+    Un usuario puede tener múltiples roles simultáneamente. Los permisos 
+    se combinan (unión), no se limitan (intersección).
+
+    **Ejemplo:**
+    - Usuario con roles "Investigador" + "Evaluador"
+    - Tendrá todos los permisos de ambos roles
+    </Aside>
+</Steps>
+
+---
+
+## Matriz de permisos recomendada
+
+| Permiso / Módulo | Admin | Coordinador | Investigador | Evaluador | Consultor |
+|------------------|-------|-------------|--------------|-----------|-----------|
+| **Proyectos** |
+| Crear proyecto | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Ver proyectos | ✅ | ✅ (grupo) | ✅ (propios) | ✅ (asignados) | ✅ |
+| Editar proyecto | ✅ | ✅ (grupo) | ✅ (propios) | ❌ | ❌ |
+| Eliminar proyecto | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Productos** |
+| Crear producto | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Ver productos | ✅ | ✅ (grupo) | ✅ (propios) | ✅ (asignados) | ✅ |
+| Editar producto | ✅ | ✅ (grupo) | ✅ (propios) | ❌ | ❌ |
+| **Entregas** |
+| Crear entrega | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Ver entregas | ✅ | ✅ (grupo) | ✅ (propias) | ✅ (asignadas) | ✅ |
+| Revisar entregas | ✅ | ✅ | ❌ | ✅ | ❌ |
+| Aprobar entregas | ✅ | ✅ | ❌ | ✅ | ❌ |
+| **Usuarios** |
+| Crear usuario | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Ver usuarios | ✅ | ✅ (grupo) | ❌ | ❌ | ✅ |
+| Editar usuario | ✅ | ✅ (grupo) | ❌ | ❌ | ❌ |
+| **Configuración** |
+| Gestionar períodos | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Gestionar roles | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Ver configuración | ✅ | ✅ | ❌ | ❌ | ✅ |
+
+---
+
+## Buenas prácticas
+
+<Steps>
+1. **Principio de mínimo privilegio**
+    
+    Asigna solo los permisos estrictamente necesarios para cada rol. 
+    Es mejor agregar permisos después que dar demasiados al inicio.
+
+2. **Documenta cada rol**
+    
+    Crea un documento que describa:
+    - Propósito del rol
+    - Usuarios típicos
+    - Permisos incluidos
+    - Limitaciones
+
+3. **Revisa periódicamente**
+    
+    Audita trimestral o semestralmente:
+    - ¿Los roles siguen siendo apropiados?
+    - ¿Hay usuarios con permisos innecesarios?
+    - ¿Se necesitan nuevos roles?
+
+4. **Usa roles, no permisos directos**
+    
+    Siempre asigna roles a usuarios, nunca permisos individuales. 
+    Esto facilita la gestión y mantiene la coherencia.
+
+5. **Protege el rol Administrador**
+    
+    - Limita la cantidad de administradores (máximo 2-3)
+    - Usa contraseñas fuertes
+    - Habilita autenticación de dos factores si está disponible
+    - Monitorea acciones de administradores
+
+</Steps>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Permiso duplicado" | Ya existe un permiso con ese nombre | Usa un nombre único |
+| "Rol sin permisos" | No se asignaron permisos al rol | Asigna al menos un permiso antes de guardar |
+| "No se puede eliminar rol" | Hay usuarios con este rol | Reasigna usuarios a otro rol primero |
+| "Usuario sin acceso" | No tiene ningún rol asignado | Asigna al menos un rol al usuario |
+| "Permisos contradictorios" | Usuario tiene múltiples roles conflictivos | Revisa y ajusta los roles asignados |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Cuántos roles debo crear?">
+Entre 4 y 7 roles suelen ser suficientes para la mayoría de instituciones. 
+Demasiados roles complican la administración.
+</Aside>
+
+<Aside type="tip" title="¿Puedo crear permisos personalizados?">
+Sí, puedes crear todos los permisos que necesites según las funcionalidades 
+de tu sistema y requisitos institucionales.
+</Aside>
+
+<Aside type="tip" title="¿Los cambios en roles afectan usuarios conectados?">
+Sí, los cambios se aplican inmediatamente. Los usuarios deberán cerrar 
+sesión y volver a iniciarla para que se reflejen completamente.
+</Aside>
+
+<Aside type="tip" title="¿Puedo tener roles jerárquicos?">
+No directamente. Si necesitas jerarquía, crea roles con permisos 
+progresivos (Investigador Junior → Investigador Senior → Coordinador).
+</Aside>

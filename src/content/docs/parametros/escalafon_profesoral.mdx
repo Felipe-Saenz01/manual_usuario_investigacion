@@ -1,0 +1,383 @@
+---
+title: Escalafón Profesoral
+description: Configuración de las categorías académicas del escalafón docente, incluyendo las horas semanales de investigación asignadas a cada nivel.
+template: doc
+sidebar:
+    label: Escalafón Profesoral
+    order: 6
+lastUpdated: 2025-01-15
+tableOfContents: true
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+<Card title="Objetivo Funcional" icon="setting">
+    El **Escalafón Profesoral** define las categorías académicas de los docentes 
+    investigadores y establece las horas semanales de investigación asociadas a 
+    cada nivel. Esta clasificación es fundamental para la asignación automática 
+    de horas y el reconocimiento institucional.
+</Card>
+
+## Acceso y navegación
+
+Para acceder a este módulo, sigue la siguiente ruta:
+
+**Menú Principal → Parámetros → Escalafón Profesoral**
+
+{/* ![Vista inicial de Escalafón](@assets/guias/configuracion/escalafon/vista_inicial_escalafon.png) */}
+
+<Aside type="note" title="Permisos requeridos">
+Este módulo está disponible únicamente para usuarios con rol de **Administrador**.
+</Aside>
+
+---
+
+## ¿Qué es el escalafón profesoral?
+
+El escalafón profesoral es el sistema de clasificación que reconoce:
+
+- 🎓 **Formación académica** del docente
+- 📚 **Experiencia** en investigación y docencia
+- 🏆 **Producción científica** acumulada
+- ⏱️ **Dedicación** esperada a actividades de investigación
+
+---
+
+## Listado de Escalafones
+
+La vista principal muestra todas las categorías registradas:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Nombre** | Denominación del escalafón |
+| **Horas Semanales** | Horas de investigación asignadas por semana |
+| **Investigadores** | Cantidad de docentes en este escalafón |
+| **Acciones** | Editar, eliminar |
+
+{/* ![Listado de escalafones](@assets/guias/configuracion/escalafon/listado_escalafones.png) */}
+
+---
+
+## Crear un Nuevo Escalafón
+
+<Steps>
+1. **Iniciar creación**
+    
+    Presiona el botón **`+ Nuevo Escalafón`** en la parte superior.
+
+    {/* ![Botón nuevo escalafón](@assets/guias/configuracion/escalafon/boton_nuevo_escalafon.png) */}
+
+2. **Ingresar información**
+    
+    Completa los campos del formulario:
+
+    - **Nombre:** Denominación oficial del escalafón (requerido)
+      - Debe coincidir con la nomenclatura institucional
+      - Ejemplos: "Titular", "Asociado", "Asistente", "Auxiliar", 
+        "Instructor", "Profesor de Carrera"
+    
+    - **Horas Semanales:** Número de horas por semana dedicadas a 
+      investigación (opcional)
+      - Valor entre 0 y 40 horas
+      - Se usa para asignación automática de horas
+      - Si no se define, debe asignarse manualmente por investigador
+
+    {/* ![Formulario escalafón](@assets/guias/configuracion/escalafon/formulario_escalafon.png) */}
+
+    <Aside type="note" title="Definición de horas">
+    Las horas semanales suelen definirse según:
+    - Políticas institucionales
+    - Normatividad nacional
+    - Carga académica total del docente
+    - Proporción docencia/investigación esperada
+    </Aside>
+
+3. **Guardar escalafón**
+    
+    Presiona **`Guardar`** para crear el escalafón.
+    
+    El escalafón quedará disponible al registrar investigadores.
+
+</Steps>
+
+---
+
+## Editar un Escalafón
+
+<Steps>
+1. **Seleccionar escalafón**
+    
+    En la tabla, localiza el escalafón y presiona el botón de **edición** 
+    (ícono de lápiz).
+
+2. **Modificar datos**
+    
+    Actualiza los campos necesarios:
+    - Nombre del escalafón
+    - Horas semanales asignadas
+
+    <Aside type="caution" title="Impacto en asignaciones existentes">
+    Si modificas las horas semanales:
+    - **No afecta** asignaciones de períodos anteriores (quedan como están)
+    - **Sí afecta** nuevas asignaciones de horas de investigación
+    - Los investigadores con este escalafón recibirán las nuevas horas 
+      en futuros períodos
+    </Aside>
+
+3. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para confirmar las modificaciones.
+
+</Steps>
+
+---
+
+## Eliminar un Escalafón
+
+<Steps>
+1. Localiza el escalafón en la tabla
+2. Presiona el botón de **eliminación** (ícono de basura)
+3. Verifica cuántos investigadores tienen este escalafón
+4. Confirma la eliminación
+
+    <Aside type="danger" title="Eliminación restringida">
+    No puedes eliminar un escalafón si:
+    - ✗ Hay investigadores actualmente clasificados con este escalafón
+
+    **Solución:** Reasigna los investigadores a otro escalafón antes de eliminar.
+    </Aside>
+</Steps>
+
+---
+
+## Ejemplos de configuración
+
+### Sistema tradicional universitario (Colombia)
+
+<CardGrid>
+  <Card title="Titular" icon="star">
+    **Horas semanales:** 10-12 horas
+    
+    Máxima categoría del escalafón. Docentes con doctorado, amplia 
+    trayectoria y producción científica destacada.
+  </Card>
+  
+  <Card title="Asociado" icon="academic-cap">
+    **Horas semanales:** 8-10 horas
+    
+    Docentes con doctorado o maestría, experiencia significativa y 
+    producción científica consistente.
+  </Card>
+  
+  <Card title="Asistente" icon="book-open">
+    **Horas semanales:** 6-8 horas
+    
+    Docentes en formación doctoral o con maestría, iniciando carrera 
+    investigativa.
+  </Card>
+  
+  <Card title="Auxiliar" icon="user">
+    **Horas semanales:** 4-6 horas
+    
+    Docentes con especialización o maestría, enfoque principalmente 
+    en docencia.
+  </Card>
+  
+  <Card title="Instructor" icon="pencil">
+    **Horas semanales:** 2-4 horas
+    
+    Docentes en formación, dedicación limitada a investigación.
+  </Card>
+</CardGrid>
+
+### Sistema alternativo (por dedicación)
+
+| Escalafón | Dedicación | Horas Investigación |
+|-----------|-----------|---------------------|
+| Tiempo Completo | 40 horas/semana | 12-16 horas |
+| Medio Tiempo | 20 horas/semana | 6-8 horas |
+| Hora Cátedra | Variable | 0-4 horas |
+
+---
+
+## Uso de las horas semanales
+
+Las horas definidas en el escalafón se utilizan para:
+
+### 1. Asignación automática
+
+Cuando se crean horas de investigación para un período:
+
+```
+Investigador: María González
+Escalafón: Asociado (8 horas semanales)
+
+Al crear asignación para período 2024-1:
+→ Horas sugeridas automáticamente: 8 horas
+→ El administrador puede ajustar si es necesario
+```
+
+### 2. Validación de planes de trabajo
+
+El sistema verifica que el plan no exceda las horas asignadas:
+
+```
+Investigador con 8 horas semanales intenta planear:
+✅ 6 horas → Válido
+✅ 8 horas → Válido  
+❌ 10 horas → Error: Excede horas disponibles
+```
+
+### 3. Reportes y estadísticas
+
+Genera análisis como:
+- Distribución de investigadores por escalafón
+- Horas totales de investigación por categoría
+- Productividad por nivel de escalafón
+
+---
+
+## Relación con otros módulos
+
+| Módulo | Impacto |
+|--------|---------|
+| **Investigadores** | Define la categoría académica del docente |
+| **Horas de Investigación** | Sugiere automáticamente las horas a asignar |
+| **Plan de Trabajo** | Limita las horas planificables |
+| **Reportes** | Agrupa y analiza por escalafón |
+
+---
+
+## Reglas de negocio
+
+<CardGrid>
+  <Card title="Nombre único" icon="warning">
+    No pueden existir dos escalafones con el mismo nombre.
+  </Card>
+  <Card title="Horas opcionales" icon="information">
+    Las horas semanales son opcionales pero muy recomendadas para 
+    automatización.
+  </Card>
+  <Card title="Horas válidas" icon="warning">
+    Si se definen, las horas deben estar entre 0 y 40.
+  </Card>
+  <Card title="Eliminación condicional" icon="danger">
+    Solo se pueden eliminar escalafones sin investigadores asociados.
+  </Card>
+</CardGrid>
+
+---
+
+## Configuración inicial recomendada
+
+### Para instituciones colombianas
+
+Basado en el Decreto 1279 de 2002:
+
+<Steps>
+1. **Titular** - 10 horas semanales
+2. **Asociado** - 8 horas semanales
+3. **Asistente** - 6 horas semanales
+4. **Auxiliar** - 4 horas semanales
+</Steps>
+
+### Para instituciones con sistema propio
+
+<Steps>
+1. Identifica las categorías oficiales de tu institución
+2. Define las horas según políticas internas
+3. Asegúrate de que la suma docencia + investigación + extensión no 
+   exceda la dedicación total del docente
+</Steps>
+
+<Aside type="tip" title="Coherencia con políticas institucionales">
+Las horas de investigación deben ser coherentes con:
+- Normatividad interna
+- Acuerdos sindicales o convenciones colectivas
+- Reglamento docente
+- Sistema de evaluación docente
+</Aside>
+
+---
+
+## Impacto en la evaluación docente
+
+El escalafón puede usarse para:
+
+| Aspecto | Uso |
+|---------|-----|
+| **Expectativas** | Productos esperados según categoría |
+| **Ponderación** | Mayor peso a productos de escalafones superiores |
+| **Requisitos de ascenso** | Productividad mínima para cambiar de categoría |
+| **Incentivos** | Bonificaciones diferenciadas por escalafón |
+
+---
+
+## Buenas prácticas
+
+<Steps>
+1. **Alineación institucional**
+    
+    Usa las denominaciones exactas del reglamento docente de tu institución.
+
+2. **Horas realistas**
+    
+    Define horas que realmente puedan dedicarse a investigación, 
+    considerando la carga docente y administrativa.
+
+3. **Jerarquía clara**
+    
+    Ordena los escalafones de mayor a menor categoría, con horas 
+    decrecientes (Titular > Asociado > Asistente > Auxiliar).
+
+4. **Revisión periódica**
+    
+    Revisa anualmente si las horas asignadas son adecuadas según la 
+    producción real y las políticas institucionales.
+
+5. **Documentación**
+    
+    Para cada escalafón, documenta:
+    - Requisitos de ingreso
+    - Requisitos de permanencia
+    - Requisitos para ascenso
+    - Expectativas de producción
+
+</Steps>
+
+---
+
+## Errores comunes y soluciones
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Nombre duplicado" | Ya existe un escalafón con ese nombre | Usa un nombre diferente |
+| "Horas inválidas" | Valor fuera del rango 0-40 | Ingresa un valor válido |
+| "No se puede eliminar" | Hay investigadores con este escalafón | Reasigna los investigadores primero |
+| "Horas inconsistentes" | Escalafón superior tiene menos horas que inferior | Revisa la jerarquía y ajusta |
+
+---
+
+## Preguntas frecuentes
+
+<Aside type="tip" title="¿Las horas son obligatorias o sugeridas?">
+Son **sugeridas** al crear asignaciones. El administrador siempre puede 
+ajustarlas según necesidades específicas (proyectos especiales, comisiones, etc.).
+</Aside>
+
+<Aside type="tip" title="¿Puedo tener investigadores sin escalafón?">
+Técnicamente sí, pero no es recomendable. Todo docente investigador 
+debería tener un escalafón asignado para facilitar gestión y reportes.
+</Aside>
+
+<Aside type="tip" title="¿Qué pasa si un docente asciende de escalafón?">
+Actualiza su escalafón en el perfil del investigador. Las nuevas asignaciones 
+de horas considerarán el nuevo escalafón.
+</Aside>
+
+<Aside type="tip" title="¿Las horas se acumulan entre períodos?">
+No, las horas son por período académico. Un docente no puede "guardar" 
+horas no utilizadas para períodos futuros.
+</Aside>
