@@ -38,10 +38,10 @@ Este módulo está disponible únicamente para usuarios con rol de **Administrad
 
 Un período académico representa un **semestre** o **ciclo académico** y define:
 
-- 📅 **Nombre:** Identificación del período (ej: "2024-1", "Enero-Junio 2024")
-- 📆 **Fecha límite de planeación:** Hasta cuándo se pueden crear/editar planes de trabajo
-- 📆 **Fecha límite de evidencias:** Hasta cuándo se pueden entregar productos
-- 🔄 **Estado:** Activo o Inactivo
+- 📅 **Nombre:** Identificación única del períod, compuesta por el año y letra correspondientes (ej: "2024-A", "2025-B")
+- 📆 **Fecha límite de planeación:** Hasta cuándo se pueden presentar planeaciones de prodcutos.
+- 📆 **Fecha límite de evidencias:** Hasta cuándo se pueden entregar evidencia de productos
+- 🔄 **Estado:** Activo o Inactivo (solo puede haber un período activo a la vez)
 
 ---
 
@@ -52,8 +52,8 @@ La vista principal muestra todos los períodos registrados:
 | Campo | Descripción |
 |-------|-------------|
 | **Nombre** | Identificación del período |
-| **Fecha Límite Planeación** | Fecha tope para planes de trabajo |
-| **Fecha Límite Evidencias** | Fecha tope para entregas de productos |
+| **Fecha Límite Planeación** | Fecha tope para planeacion de productos |
+| **Fecha Límite Evidencias** | Fecha tope para evidencia de productos |
 | **Estado** | Activo / Inactivo |
 | **Acciones** | Editar, cambiar estado, eliminar |
 
@@ -92,20 +92,19 @@ fácil identificación.
 
     <Aside type="note" title="Validación de fechas">
     El sistema valida que:
-    - El nombre no esté duplicado
+    - El nombre no esté duplicado (debe ser único)
     - La fecha de planeación sea anterior a la de evidencias
-    - Las fechas sean futuras (para períodos nuevos)
     </Aside>
 
-3. **Definir estado inicial**
+3. **Estado inicial**
     
-    Selecciona el estado del período:
-    - **Activo:** Los investigadores pueden trabajar en este período
-    - **Inactivo:** El período existe pero no está disponible para uso
+    Por defecto, el período se crea en estado **Inactivo**. Debes activarlo 
+    manualmente cuando corresponda.
 
     <Aside type="caution" title="Solo un período activo">
     El sistema permite tener **solo un período activo a la vez**. Si activas 
-    un período nuevo, el anterior se desactivará automáticamente.
+    un período nuevo, cualquier otro período activo se desactivará 
+    automáticamente.
     </Aside>
 
 4. **Guardar período**
@@ -134,49 +133,15 @@ fácil identificación.
     - Fecha límite de planeación
     - Fecha límite de evidencias
 
-    <Aside type="caution" title="Restricción en períodos activos">
-    No puedes **reducir** las fechas límite de un período activo si ya 
-    existen planes de trabajo o entregas registradas. Solo puedes extenderlas.
+    <Aside type="caution" title="Modificar fechas">
+    Puedes modificar las fechas límite en cualquier momento, pero ten en 
+    cuenta el impacto en planes de trabajo y entregas ya creados.
     </Aside>
 
 3. **Guardar cambios**
     
     Presiona **`Actualizar`** para confirmar las modificaciones.
 
-</Steps>
-
----
-
-## Gestionar Estado de Períodos
-
-### Activar un Período
-
-<Steps>
-1. Localiza el período inactivo en la tabla
-2. Presiona el interruptor en la columna **Estado**
-3. Confirma la activación en el diálogo emergente
-
-    <Aside type="danger" title="Desactivación automática">
-    Al activar este período, cualquier otro período activo se desactivará 
-    automáticamente. Esta acción es irreversible.
-    </Aside>
-
-4. El período cambiará a estado **Activo** y los investigadores podrán 
-   comenzar a trabajar en él
-</Steps>
-
-### Desactivar un Período
-
-<Steps>
-1. Localiza el período activo en la tabla
-2. Presiona el interruptor en la columna **Estado**
-3. Confirma la desactivación
-    <Aside type="caution" title="Impacto de desactivación">
-    Al desactivar un período:
-    - Los investigadores no podrán crear nuevos planes de trabajo
-    - No se podrán entregar nuevos productos
-    - Los datos existentes permanecen intactos pero en modo solo lectura
-    </Aside>
 </Steps>
 
 ---
@@ -198,33 +163,6 @@ fácil identificación.
 
     Solo se pueden eliminar períodos sin datos vinculados.
     </Aside>
-</Steps>
-
----
-
-## Flujo típico de uso
-
-```mermaid
-graph TD
-    A[Crear nuevo período] --> B[Configurar fechas límite]
-    B --> C[Guardar como Inactivo]
-    C --> D[Cuando corresponda, Activar]
-    D --> E[Investigadores trabajan en el período]
-    E --> F[Llega fecha límite]
-    F --> G[Desactivar período]
-    G --> H[Activar siguiente período]
-```
-
-### Ciclo semestral típico
-
-<Steps>
-1. **2 semanas antes del semestre:** Crear el nuevo período en estado Inactivo
-2. **Inicio del semestre:** Activar el período
-3. **Primeras 4 semanas:** Los investigadores crean sus planes de trabajo
-4. **Durante el semestre:** Los investigadores desarrollan sus productos
-5. **Últimas 2 semanas:** Los investigadores entregan evidencias
-6. **Fin del semestre:** Desactivar el período
-7. **Inicio del siguiente:** Activar el nuevo período
 </Steps>
 
 ---
@@ -265,11 +203,9 @@ La configuración de períodos afecta directamente a:
 
 | Error | Causa | Solución |
 |-------|-------|----------|
-| "Nombre duplicado" | Ya existe un período con ese nombre | Usa un nombre diferente |
-| "Fecha inválida" | Fecha de planeación posterior a evidencias | Ajusta las fechas correctamente |
-| "Ya existe período activo" | Hay otro período activo | Desactiva el período actual primero |
-| "No se puede eliminar" | El período tiene datos asociados | No se puede eliminar, solo desactivar |
-| "Fecha pasada" | Intentas crear un período con fechas antiguas | Verifica las fechas ingresadas |
+| "Nombre duplicado" | Ya existe un período con ese nombre | Usa un nombre diferente y único |
+| "Fecha inválida" | Fecha de planeación posterior a evidencias | Ajusta las fechas correctamente (planeación antes de evidencias) |
+| "No se puede eliminar" | El período tiene datos asociados (planes, entregas, horas) | No se puede eliminar, solo desactivar |
 
 ---
 

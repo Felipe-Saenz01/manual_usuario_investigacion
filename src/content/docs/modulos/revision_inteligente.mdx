@@ -38,38 +38,56 @@ Este módulo está disponible únicamente para usuarios con rol de
 
 ## ¿Cómo funciona?
 
-El sistema de Revisión Inteligente utiliza algoritmos de comparación textual 
-para analizar las similitudes entre evidencias:
+El sistema de Revisión Inteligente utiliza **Inteligencia Artificial (OpenAI)** 
+para analizar y comparar evidencias de productos investigativos:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    FLUJO DE COMPARACIÓN                     │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│   Evidencia A                    Evidencia B                │
+│   Evidencia A (PDF)              Evidencia B (PDF)          │
 │   ┌──────────┐                   ┌──────────┐               │
-│   │ Sección 1│ ◄─── Compara ───► │ Sección 1│               │
-│   │ Sección 2│ ◄─── Compara ───► │ Sección 2│               │
-│   │ Sección 3│ ◄─── Compara ───► │ Sección 3│               │
-│   └──────────┘                   └──────────┘               │
-│         │                              │                    │
-│         └──────────┬───────────────────┘                    │
-│                    ▼                                        │
-│           ┌───────────────┐                                 │
-│           │  Resultado de │                                 │
-│           │  Similitud %  │                                 │
-│           └───────────────┘                                 │
+│   │ Extrae   │                   │ Extrae   │               │
+│   │ texto    │                   │ texto    │               │
+│   └────┬─────┘                   └────┬─────┘               │
+│        │                              │                    │
+│        ▼                              ▼                    │
+│   ┌──────────┐                   ┌──────────┐               │
+│   │ Sección 1│                   │ Sección 1│               │
+│   │ Sección 2│                   │ Sección 2│               │
+│   │ Sección 3│                   │ Sección 3│               │
+│   └────┬─────┘                   └────┬─────┘               │
+│        │                              │                    │
+│        └──────────┬───────────────────┘                    │
+│                   ▼                                        │
+│        ┌──────────────────────┐                            │
+│        │ OpenAI Embeddings    │                            │
+│        │ (text-embedding-3-   │                            │
+│        │  small)              │                            │
+│        └──────────┬───────────┘                            │
+│                   ▼                                        │
+│        ┌──────────────────────┐                            │
+│        │ Similitud Coseno     │                            │
+│        │ (0-100%)             │                            │
+│        └──────────┬───────────┘                            │
+│                   ▼                                        │
+│        ┌──────────────────────┐                            │
+│        │ GPT-4o-mini          │                            │
+│        │ Análisis de progreso │                            │
+│        └──────────────────────┘                            │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Proceso de análisis
 
-1. **Extracción de texto:** Se obtiene el contenido de cada sección de la evidencia
-2. **Normalización:** Se estandariza el texto (minúsculas, eliminación de caracteres especiales)
-3. **Tokenización:** Se divide el texto en unidades comparables
-4. **Cálculo de similitud:** Se aplican algoritmos para determinar el porcentaje de coincidencia
-5. **Generación de reporte:** Se crea un informe detallado con los resultados
+1. **Extracción de texto PDF:** Se extrae el texto de los archivos PDF usando `smalot/pdfparser`
+2. **División en secciones:** El sistema identifica y divide automáticamente el contenido en secciones
+3. **Generación de embeddings:** Se crean embeddings vectoriales usando OpenAI (`text-embedding-3-small`)
+4. **Cálculo de similitud:** Se calcula la similitud coseno entre los embeddings (0-100%)
+5. **Análisis con IA:** GPT-4o-mini analiza el progreso y coherencia entre secciones
+6. **Generación de reporte:** Se crea un informe detallado con porcentaje de similitud y análisis textual
 
 ---
 
@@ -88,225 +106,230 @@ Pueden existir coincidencias legítimas como:
 
 ## Funcionalidades principales
 
-### 1. Dashboard de Comparaciones
+### 1. Listado de Productos
 
-La vista principal muestra un resumen de todas las comparaciones realizadas:
+La vista principal muestra productos que tienen al menos 2 entregas de tipo evidencia:
 
 | Campo | Descripción |
 |-------|-------------|
-| **Evidencia 1** | Primera evidencia comparada |
-| **Evidencia 2** | Segunda evidencia comparada |
-| **Similitud General** | Porcentaje promedio de similitud |
-| **Fecha Comparación** | Cuándo se realizó el análisis |
-| **Estado** | Revisado / Pendiente de revisión |
-| **Acciones** | Ver detalle, marcar como revisado |
+| **Título** | Nombre del producto investigativo |
+| **Subtipo** | Clasificación del producto |
+| **Autores** | Investigadores responsables |
+| **Evidencias** | Cantidad de evidencias disponibles |
+| **Acciones** | Ver evidencias, comparar |
 
-{/* ![Dashboard comparaciones](@assets/guias/revision_inteligente/dashboard_comparaciones.png) */}
+<Aside type="note" title="Requisito mínimo">
+Solo se muestran productos con al menos 2 evidencias, ya que se necesitan 
+mínimo dos entregas para realizar una comparación.
+</Aside>
 
-### 2. Ejecutar Nueva Comparación
+### 2. Seleccionar Evidencias para Comparar
 
 <Steps>
-1. **Iniciar comparación**
+1. **Acceder a producto**
     
-    Presiona el botón **`+ Nueva Comparación`**.
+    Haz clic en un producto del listado para ver sus evidencias.
 
-    {/* ![Botón nueva comparación](@assets/guias/revision_inteligente/boton_nueva_comparacion.png) */}
-
-2. **Seleccionar primera evidencia**
+2. **Ver evidencias disponibles**
     
-    Busca y selecciona la evidencia base para la comparación:
-    - Filtra por período, producto o investigador
-    - Haz clic en la evidencia deseada
+    Se mostrarán todas las evidencias del producto con:
+    - Usuario que entregó la evidencia
+    - Período académico
+    - Fecha de entrega
+    - Comparaciones existentes
 
-    {/* ![Seleccionar evidencia 1](@assets/guias/revision_inteligente/seleccionar_evidencia_1.png) */}
+3. **Seleccionar dos evidencias**
+    
+    Selecciona dos evidencias diferentes para comparar:
+    - Evidencia 1: Primera entrega a comparar
+    - Evidencia 2: Segunda entrega a comparar
 
-3. **Seleccionar segunda evidencia**
-    
-    Elige la evidencia con la que deseas comparar:
-    
-    <Aside type="note" title="Sugerencias automáticas">
-    El sistema puede sugerir evidencias para comparar basándose en:
-    - Mismo tipo de producto
-    - Mismo período académico
-    - Misma área temática
+    <Aside type="caution" title="Evidencias diferentes">
+    No puedes comparar una evidencia consigo misma. Deben ser dos 
+    evidencias distintas del mismo producto.
     </Aside>
 
-4. **Ejecutar análisis**
+4. **Iniciar comparación**
     
-    Presiona **`Comparar`** para iniciar el proceso de análisis.
-    
+    Presiona **`Comparar`** para iniciar el proceso.
+
     <Aside type="tip" title="Tiempo de procesamiento">
-    El análisis puede tomar entre 10-60 segundos dependiendo de la 
-    extensión de las evidencias.
+    El análisis puede tomar entre 10-60 segundos dependiendo de:
+    - Tamaño de los archivos PDF
+    - Número de secciones extraídas
+    - Complejidad del contenido
     </Aside>
-
-5. **Ver resultados**
-    
-    Una vez completado, se mostrará el reporte de similitud.
 
 </Steps>
 
-### 3. Comparación Automática
+### 3. Extracción Automática de Secciones
 
-El sistema puede ejecutar comparaciones automáticamente:
+El sistema extrae automáticamente secciones de los PDFs:
 
-<Tabs>
-  <TabItem label="Al aprobar evidencia">
-    Cuando un coordinador aprueba una evidencia, el sistema automáticamente 
-    la compara con:
-    - Evidencias del mismo producto de otros autores
-    - Evidencias del mismo tipo de otros investigadores
-    - Evidencias previas del mismo período
-  </TabItem>
-  <TabItem label="Comparación masiva">
-    Los administradores pueden ejecutar comparaciones masivas:
-    1. Accede a **Configuración → Comparación Masiva**
-    2. Selecciona el período académico
-    3. Define los criterios (por grupo, por tipo de producto, etc.)
-    4. Ejecuta el análisis
+<Steps>
+1. **Al seleccionar evidencias**
     
-    El sistema procesará todas las combinaciones y generará un reporte.
-  </TabItem>
-</Tabs>
+    Cuando seleccionas evidencias para comparar, el sistema verifica si 
+    ya tienen secciones extraídas.
+
+2. **Extracción automática**
+    
+    Si no existen secciones, el sistema:
+    - Extrae el texto del PDF usando `smalot/pdfparser`
+    - Identifica secciones automáticamente usando patrones de texto
+    - Guarda cada sección con su título y contenido
+
+3. **Reextracción (si es necesario)**
+    
+    Puedes recalcular las secciones si el PDF fue actualizado o si 
+    la extracción inicial no fue correcta.
+</Steps>
 
 ### 4. Ver Detalle de Comparación
 
 Al acceder al detalle de una comparación, encontrarás:
 
 <Tabs>
-  <TabItem label="Resumen General">
-    Información consolidada de la comparación:
-    - Evidencias comparadas (título, autor, producto, fecha)
-    - **Grado de similitud general:** Promedio ponderado
-    - **Resultado:** Interpretación automática del sistema
-    - Fecha y hora del análisis
+  <TabItem label="Información General">
+    Información de las evidencias comparadas:
+    - Producto investigativo
+    - Evidencia 1: Usuario, período, fecha
+    - Evidencia 2: Usuario, período, fecha
+    - Comparaciones de secciones realizadas
     
     {/* ![Resumen comparación](@assets/guias/revision_inteligente/resumen_comparacion.png) */}
   </TabItem>
-  <TabItem label="Vista de Coincidencias">
-    Visualización lado a lado del texto coincidente:
+  <TabItem label="Secciones de Evidencias">
+    Visualización de las secciones extraídas de cada evidencia:
     
-    ```
-    ┌─────────────────────┬─────────────────────┐
-    │    EVIDENCIA A      │    EVIDENCIA B      │
-    ├─────────────────────┼─────────────────────┤
-    │ "La metodología     │ "La metodología     │
-    │ utilizada fue de    │ empleada consistió  │
-    │ tipo cuantitativo   │ en un enfoque       │
-    │ con enfoque         │ cuantitativo        │
-    │ descriptivo..."     │ descriptivo..."     │
-    └─────────────────────┴─────────────────────┘
-              ▲ Texto resaltado en amarillo ▲
-    ```
+    - **Evidencia 1:** Lista de secciones con título y contenido
+    - **Evidencia 2:** Lista de secciones con título y contenido
     
-    Los fragmentos coincidentes se resaltan para fácil identificación.
+    Desde aquí puedes seleccionar secciones específicas para comparar.
+  </TabItem>
+  <TabItem label="Comparaciones de Secciones">
+    Lista de comparaciones realizadas entre secciones:
+    
+    - Sección 1 vs Sección 2
+    - Grado de similitud (0-100%)
+    - Análisis de progreso generado por IA
+    - Elemento del producto asociado
   </TabItem>
 </Tabs>
 
-### 5. Gestionar Resultados
+### 5. Comparar Secciones Específicas
 
-Una vez revisada la comparación:
+Para comparar secciones específicas de las evidencias:
 
 <Steps>
-1. **Evaluar el contexto**
+1. **Seleccionar secciones**
     
-    Analiza si las coincidencias son:
-    - ✅ Legítimas (citas, metodologías estándar)
-    - ⚠️ Requieren aclaración
-    - ❌ Indican posible plagio
+    En la vista de comparación, selecciona:
+    - **Sección 1:** De la primera evidencia
+    - **Sección 2:** De la segunda evidencia
+    - **Elemento del producto:** Para contextualizar la comparación
 
-2. **Registrar observaciones**
+2. **Ejecutar comparación**
     
-    En el campo **"Observaciones del revisor"**, documenta tu análisis:
-    - Justificación de coincidencias aceptables
-    - Aspectos que requieren seguimiento
-    - Acciones recomendadas
+    Presiona **`Comparar Secciones`** para iniciar el análisis con IA.
 
-3. **Marcar como revisado**
+3. **Proceso de análisis**
     
-    Presiona **`Marcar como Revisado`** para indicar que la comparación 
-    ha sido evaluada.
+    El sistema:
+    - Genera embeddings de ambas secciones usando OpenAI
+    - Calcula similitud coseno (0-100%)
+    - Analiza el progreso reportado vs contenido real usando GPT-4o-mini
+    - Genera un análisis textual del avance
 
-4. **Acciones adicionales (si aplica)**
+4. **Ver resultados**
     
-    Si se detecta plagio confirmado:
-    - Presiona **`Reportar Incidencia`**
-    - Completa el formulario de reporte
-    - El sistema notificará a las partes involucradas
+    Se mostrará:
+    - **Grado de similitud:** Porcentaje de similitud entre secciones
+    - **Análisis de progreso:** Evaluación de coherencia del progreso reportado
+    - **Diferencias principales:** Identificación de avances o cambios
+
+    <Aside type="note" title="Análisis contextualizado">
+    El análisis considera el progreso reportado en cada evidencia para 
+    evaluar si el contenido es coherente con el avance declarado.
+    </Aside>
 
 </Steps>
 
 ---
 
-## Reportes y Estadísticas
+### 6. Recalcular Secciones
 
-### Reporte de Similitudes por Período
+Si necesitas reextraer las secciones de las evidencias:
 
-Accede a **Reportes → Similitudes por Período** para visualizar:
+<Steps>
+1. **Acceder a opción**
+    
+    En la vista de comparación, presiona **`Recalcular Secciones`**.
 
-- Número total de comparaciones realizadas
-- Distribución por nivel de similitud
-- Investigadores con mayor índice de coincidencias
-- Tendencias comparativas con períodos anteriores
+2. **Confirmar acción**
+    
+    Confirma que deseas eliminar las secciones existentes y regenerarlas.
 
-{/* ![Reporte por período](@assets/guias/revision_inteligente/reporte_periodo.png) */}
+3. **Proceso automático**
+    
+    El sistema:
+    - Elimina todas las secciones existentes de ambas evidencias
+    - Elimina las comparaciones de secciones asociadas
+    - Reextrae el texto de los PDFs
+    - Regenera las secciones automáticamente
 
-### Exportar Resultados
+    <Aside type="caution" title="Pérdida de comparaciones">
+    Al recalcular, se perderán todas las comparaciones de secciones 
+    existentes. Deberás volver a comparar las secciones que necesites.
+    </Aside>
 
-Presiona **`Exportar`** para descargar:
+</Steps>
+
+---
+
+## Tecnología Utilizada
+
+El módulo utiliza las siguientes tecnologías de IA:
 
 <CardGrid>
-  <Card title="PDF" icon="document">
-    Reporte formal con gráficos y análisis detallado.
-    Ideal para documentación oficial.
+  <Card title="OpenAI Embeddings" icon="sparkles">
+    **Modelo:** `text-embedding-3-small`
+    
+    Convierte el texto de las secciones en vectores numéricos para 
+    calcular similitud semántica.
   </Card>
-  <Card title="Excel" icon="spreadsheet">
-    Datos tabulados para análisis personalizado.
-    Incluye todas las comparaciones y métricas.
+  <Card title="Similitud Coseno" icon="calculator">
+    Algoritmo matemático que calcula el grado de similitud entre 
+    dos vectores (0-100%).
+  </Card>
+  <Card title="GPT-4o-mini" icon="brain">
+    Modelo de lenguaje que analiza el contenido y evalúa la coherencia 
+    del progreso reportado.
+  </Card>
+  <Card title="PDF Parser" icon="document">
+    **Librería:** `smalot/pdfparser`
+    
+    Extrae texto de archivos PDF para análisis.
   </Card>
 </CardGrid>
-
----
-
-## Configuración del Sistema
-
-### Ajustar Umbrales de Alerta
-
-Los administradores pueden configurar los umbrales:
-
-<Steps>
-1. Accede a **Configuración → Revisión Inteligente**
-2. Ajusta los porcentajes para cada nivel:
-   - Umbral de alerta moderada (por defecto: 40%)
-   - Umbral de alerta alta (por defecto: 60%)
-   - Umbral crítico (por defecto: 80%)
-3. Guarda los cambios
-</Steps>
-
-### Exclusiones de Comparación
-
-Puedes excluir ciertos patrones de la comparación:
-
-- **Bibliografías:** Referencias bibliográficas estándar
-- **Citas textuales:** Texto entre comillas con referencia
-- **Términos técnicos:** Glosario de términos del área
 
 ---
 
 ## Reglas de negocio
 
 <CardGrid>
-  <Card title="Solo evidencias aprobadas" icon="warning">
-    Las comparaciones solo se realizan entre evidencias con estado "Aprobado".
+  <Card title="Mínimo 2 evidencias" icon="warning">
+    Solo se pueden comparar productos que tengan al menos 2 evidencias entregadas.
   </Card>
-  <Card title="Comparación única" icon="warning">
+  <Card title="Evidencias diferentes" icon="warning">
     No se puede comparar una evidencia consigo misma.
   </Card>
   <Card title="Sin duplicados" icon="information">
-    Si ya existe una comparación entre dos evidencias, se muestra la existente.
+    Si ya existe una comparación entre dos evidencias, se muestra la existente 
+    en lugar de crear una nueva.
   </Card>
-  <Card title="Acceso restringido" icon="lock">
-    Solo coordinadores y administradores pueden acceder a este módulo.
+  <Card title="Mismo producto" icon="information">
+    Las evidencias comparadas deben pertenecer al mismo producto investigativo.
   </Card>
 </CardGrid>
 
@@ -316,10 +339,10 @@ Puedes excluir ciertos patrones de la comparación:
 
 | Error | Causa | Solución |
 |-------|-------|----------|
-| "Evidencia no disponible" | La evidencia no está aprobada | Espera la aprobación de la evidencia |
-| "Comparación ya existe" | Ya se compararon estas evidencias | Busca la comparación existente en el historial |
-| "Sin contenido para comparar" | Las evidencias no tienen secciones | Verifica que las evidencias tengan contenido registrado |
-| "Tiempo de espera agotado" | Evidencias muy extensas | Intenta nuevamente o contacta soporte |
+| "Las evidencias no pertenecen al producto" | Seleccionaste evidencias de diferentes productos | Selecciona evidencias del mismo producto |
+| "Comparación ya existe" | Ya se compararon estas evidencias | Se mostrará la comparación existente automáticamente |
+| "Sin contenido para comparar" | No se pudo extraer texto del PDF | Verifica que el PDF tenga texto (no solo imágenes) |
+| "Error al realizar la comparación" | Problema con OpenAI o archivo | Verifica conexión a internet y formato del PDF |
 
 ---
 
@@ -331,27 +354,26 @@ Para detectar plagio de fuentes externas, se recomienda usar herramientas
 especializadas como Turnitin o iThenticate.
 </Aside>
 
-<Aside type="tip" title="¿Qué hago si detecto plagio confirmado?">
-1. Documenta el hallazgo con capturas y el reporte del sistema
-2. Utiliza la función "Reportar Incidencia"
-3. Sigue el protocolo institucional para casos de plagio
-4. El sistema notificará automáticamente a los involucrados
-</Aside>
-
-<Aside type="tip" title="¿Con qué frecuencia debo revisar las comparaciones?">
-Se recomienda revisar las comparaciones marcadas como "Alto" o "Crítico" 
-inmediatamente después de su generación. Las de nivel moderado pueden 
-revisarse semanalmente.
+<Aside type="tip" title="¿Qué significa el grado de similitud?">
+El grado de similitud (0-100%) indica qué tan similar es el contenido 
+semántico entre dos secciones. Un porcentaje alto no implica necesariamente 
+plagio; puede deberse a metodologías estándar, citas correctas o contenido 
+propio reutilizado.
 </Aside>
 
 <Aside type="tip" title="¿Puedo comparar evidencias de diferentes períodos?">
 Sí, puedes comparar evidencias de cualquier período. Esto es útil para 
-detectar si un investigador está reutilizando contenido de períodos anteriores 
-sin el debido avance.
+evaluar el progreso entre entregas y detectar si hay avance real en el 
+desarrollo del producto.
 </Aside>
 
-<Aside type="tip" title="¿Los investigadores pueden ver los resultados?">
-Por defecto, los investigadores no tienen acceso al módulo de Revisión 
-Inteligente. Sin embargo, si se reporta una incidencia, serán notificados 
-según el protocolo institucional.
+<Aside type="tip" title="¿Qué pasa si el PDF no tiene texto?">
+Si el PDF contiene solo imágenes escaneadas, el sistema no podrá extraer 
+el texto. Asegúrate de que los PDFs sean de texto seleccionable o usa 
+herramientas OCR antes de subirlos.
+</Aside>
+
+<Aside type="tip" title="¿Puedo recalcular secciones si el PDF cambió?">
+Sí, puedes usar la opción "Recalcular Secciones" para reextraer el contenido 
+si actualizaste el archivo PDF de la evidencia.
 </Aside>

@@ -343,13 +343,13 @@ acción sin restricciones.
 
 ---
 
-### 2. Coordinador
+### 2. Lider Grupo
 
-<Card title="Coordinador" icon="academic-cap">
+<Card title="Lider Grupo" icon="academic-cap">
 **Permisos:** Gestión de su grupo de investigación
 
-**Descripción:** Puede administrar investigadores de su grupo, revisar 
-y aprobar sus entregas y planes de trabajo.
+**Descripción:** Puede administrar proyectos de su grupo, revisar entregas 
+y postularse a convocatorias.
 
 **Usuarios típicos:**
 - Líder de grupo de investigación
@@ -357,11 +357,10 @@ y aprobar sus entregas y planes de trabajo.
 </Card>
 
 **Permisos incluidos:**
-- ✅ Ver proyectos del grupo
-- ✅ Ver productos del grupo
-- ✅ Revisar entregas de su grupo
-- ✅ Aprobar/rechazar planes de trabajo
-- ✅ Asignar horas de investigación
+- ✅ Ver proyectos de su grupo
+- ✅ Ver productos de su grupo
+- ✅ Postularse a convocatorias
+- ✅ Ver todas las convocatorias
 - ❌ Modificar configuración global
 - ❌ Gestionar usuarios de otros grupos
 
@@ -392,53 +391,6 @@ entregas. Solo tiene acceso a su propia información.
 
 ---
 
-### 4. Evaluador / Revisor
-
-<Card title="Evaluador" icon="clipboard-check">
-**Permisos:** Revisión de entregas y productos
-
-**Descripción:** Puede revisar, comentar y aprobar entregas asignadas. 
-No puede crear ni modificar productos.
-
-**Usuarios típicos:**
-- Pares evaluadores externos
-- Comité de evaluación
-</Card>
-
-**Permisos incluidos:**
-- ✅ Ver proyectos asignados
-- ✅ Ver productos asignados
-- ✅ Revisar entregas
-- ✅ Aprobar/rechazar/solicitar corrección
-- ✅ Agregar comentarios
-- ❌ Crear proyectos o productos
-- ❌ Modificar datos de investigadores
-
----
-
-### 5. Consultor / Solo Lectura
-
-<Card title="Consultor" icon="eye">
-**Permisos:** Solo visualización de información
-
-**Descripción:** Puede ver información consolidada y reportes pero no 
-puede modificar nada.
-
-**Usuarios típicos:**
-- Directivos
-- Personal de planeación
-- Auditores
-</Card>
-
-**Permisos incluidos:**
-- ✅ Ver proyectos
-- ✅ Ver productos
-- ✅ Ver reportes
-- ✅ Exportar reportes
-- ❌ Crear o editar cualquier información
-- ❌ Aprobar o rechazar entregas
-
----
 
 ## Asignar roles a usuarios
 
@@ -464,30 +416,32 @@ La asignación de roles se realiza desde el módulo de **Investigadores**:
 
 ## Matriz de permisos recomendada
 
-| Permiso / Módulo | Admin | Coordinador | Investigador | Evaluador | Consultor |
-|------------------|-------|-------------|--------------|-----------|-----------|
+| Permiso / Módulo | Admin | Lider Grupo | Investigador |
+|------------------|-------|-------------|--------------|
 | **Proyectos** |
-| Crear proyecto | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Ver proyectos | ✅ | ✅ (grupo) | ✅ (propios) | ✅ (asignados) | ✅ |
-| Editar proyecto | ✅ | ✅ (grupo) | ✅ (propios) | ❌ | ❌ |
-| Eliminar proyecto | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Crear proyecto | ✅ | ✅ | ✅ |
+| Ver proyectos | ✅ (todos) | ✅ (grupo) | ✅ (propios) |
+| Editar proyecto | ✅ | ✅ (si autor) | ✅ (si autor) |
+| Eliminar proyecto | ✅ | ✅ (si autor) | ✅ (si autor) |
 | **Productos** |
-| Crear producto | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Ver productos | ✅ | ✅ (grupo) | ✅ (propios) | ✅ (asignados) | ✅ |
-| Editar producto | ✅ | ✅ (grupo) | ✅ (propios) | ❌ | ❌ |
+| Crear producto | ✅ | ✅ | ✅ |
+| Ver productos | ✅ (todos) | ✅ (grupo) | ✅ (propios) |
+| Editar producto | ✅ | ✅ | ✅ |
 | **Entregas** |
-| Crear entrega | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Ver entregas | ✅ | ✅ (grupo) | ✅ (propias) | ✅ (asignadas) | ✅ |
-| Revisar entregas | ✅ | ✅ | ❌ | ✅ | ❌ |
-| Aprobar entregas | ✅ | ✅ | ❌ | ✅ | ❌ |
+| Crear entrega | ✅ | ✅ | ✅ |
+| Ver entregas | ✅ (todas) | ✅ (grupo) | ✅ (propias) |
+| **Convocatorias** |
+| Crear convocatoria | ✅ | ❌ | ❌ |
+| Ver convocatorias | ✅ (todas) | ✅ (todas) | ✅ (abiertas) |
+| Postularse | ✅ | ✅ | ❌ |
 | **Usuarios** |
-| Crear usuario | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Ver usuarios | ✅ | ✅ (grupo) | ❌ | ❌ | ✅ |
-| Editar usuario | ✅ | ✅ (grupo) | ❌ | ❌ | ❌ |
+| Crear usuario | ✅ | ❌ | ❌ |
+| Ver usuarios | ✅ (todos) | ❌ | ❌ |
+| Editar usuario | ✅ | ❌ | ❌ |
 | **Configuración** |
-| Gestionar períodos | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Gestionar roles | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Ver configuración | ✅ | ✅ | ❌ | ❌ | ✅ |
+| Gestionar períodos | ✅ | ❌ | ❌ |
+| Gestionar roles | ✅ | ❌ | ❌ |
+| Gestionar parámetros | ✅ | ❌ | ❌ |
 
 ---
 

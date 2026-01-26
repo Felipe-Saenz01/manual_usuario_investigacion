@@ -124,31 +124,26 @@ La vista principal muestra las entregas organizadas por período:
     
     Elige el producto investigativo para el cual registrarás la planeación.
 
-4. **Definir horas planeadas**
+4. **Registrar planeación**
     
-    Indica el número de horas que dedicarás al producto durante el período.
-
-    <Aside type="caution" title="Límite de horas">
-    Las horas planeadas no pueden exceder las horas de investigación 
-    asignadas para el período. El sistema validará automáticamente.
-    </Aside>
-
-5. **Describir actividades planeadas**
-    
-    En el campo de planeación (formato JSON o texto estructurado), describe:
-    - Objetivos específicos para el período
-    - Actividades a desarrollar
-    - Entregables esperados
+    Completa la información de planeación:
+    - **Planeación:** Describe las actividades y objetivos para el período (formato JSON)
+    - **Progreso planeado:** Porcentaje de avance que esperas alcanzar (0-100%)
 
     {/* ![Formulario planeación](@assets/guias/entregas/formulario_planeacion.png) */}
 
-6. **Establecer progreso esperado**
-    
-    Define el porcentaje de avance que esperas alcanzar al final del período.
+    <Aside type="note" title="Formato de planeación">
+    La planeación se almacena en formato JSON y puede incluir:
+    - Objetivos específicos
+    - Actividades programadas
+    - Entregables esperados
+    - Cronograma de trabajo
+    </Aside>
 
-7. **Guardar planeación**
+5. **Guardar planeación**
     
-    Presiona **`Guardar`** para almacenar la planeación como borrador.
+    Presiona **`Guardar`** para almacenar la planeación. Podrás editarla 
+    hasta enviarla a revisión.
 
 </Steps>
 
@@ -173,36 +168,27 @@ La vista principal muestra las entregas organizadas por período:
     
     El sistema mostrará solo los productos con planeación aprobada.
 
-4. **Registrar secciones desarrolladas**
+4. **Adjuntar archivo de evidencia**
     
-    Para cada elemento/sección del producto trabajada:
+    Carga el documento PDF que contiene la evidencia del trabajo realizado:
+    - Presiona **`Seleccionar archivo`**
+    - Elige el archivo PDF desde tu computador
+    - Formatos permitidos: PDF
 
-    1. Presiona **`+ Agregar Sección`**
-    2. Selecciona el elemento del producto (ej: "Metodología")
-    3. Ingresa el **título** de la sección
-    4. Redacta el **contenido** desarrollado
-
-    {/* ![Agregar sección](@assets/guias/entregas/agregar_seccion.png) */}
-
-    <Aside type="tip" title="Múltiples secciones">
-    Puedes agregar tantas secciones como elementos hayas trabajado 
-    durante el período.
+    <Aside type="note" title="Extracción automática">
+    El sistema extraerá automáticamente las secciones del PDF cuando se 
+    use en el módulo de Revisión Inteligente. Asegúrate de que el PDF 
+    tenga texto seleccionable.
     </Aside>
 
-5. **Adjuntar archivo de evidencia (opcional)**
+5. **Indicar progreso alcanzado**
     
-    Si tienes un documento de soporte (PDF, DOC, etc.), puedes adjuntarlo:
-    - Presiona **`Seleccionar archivo`**
-    - Elige el archivo desde tu computador
-    - Formatos permitidos: PDF, DOC, DOCX (máx. 10MB)
+    Registra el porcentaje de avance real alcanzado durante el período (0-100%).
 
-6. **Indicar progreso alcanzado**
+6. **Guardar evidencia**
     
-    Registra el porcentaje de avance real alcanzado durante el período.
-
-7. **Guardar evidencia**
-    
-    Presiona **`Guardar`** para almacenar la evidencia como borrador.
+    Presiona **`Guardar`** para almacenar la evidencia. Podrás editarla 
+    hasta enviarla a revisión.
 
 </Steps>
 
@@ -254,46 +240,18 @@ el coordinador emita su concepto.
 
 ---
 
-## Sistema de Comparación (Antiplagio)
+## Relación con Revisión Inteligente
 
-El sistema incluye una funcionalidad de **comparación de evidencias** para 
-detectar similitudes entre entregas de diferentes investigadores.
+Las evidencias entregadas pueden ser comparadas usando el módulo de 
+**Revisión Inteligente**:
 
-### ¿Cómo funciona?
+- Las evidencias se extraen automáticamente del PDF
+- Se dividen en secciones para análisis detallado
+- Se comparan con otras evidencias del mismo producto
+- Se calcula similitud usando IA (OpenAI)
 
-1. **Comparación automática:** Al aprobar una evidencia, el sistema compara 
-   automáticamente su contenido con evidencias previas.
-
-2. **Análisis por secciones:** Se comparan las secciones correspondientes 
-   (ej: "Metodología" vs "Metodología" de otras entregas).
-
-3. **Grado de similitud:** Se calcula un porcentaje de similitud entre 0% y 100%.
-
-### Interpretación de resultados
-
-| Similitud | Interpretación | Acción sugerida |
-|-----------|----------------|-----------------|
-| 0-30% | Normal | Sin acción |
-| 31-50% | Moderada | Revisar coincidencias |
-| 51-70% | Alta | Investigar fuentes |
-| 71-100% | Muy alta | Posible plagio, verificar |
-
-### Ver resultados de comparación
-
-<Steps>
-1. Accede al detalle de la evidencia
-2. Navega a la pestaña **"Comparaciones"**
-3. Visualiza las similitudes detectadas
-4. Haz clic en cada comparación para ver el detalle por sección
-</Steps>
-
-{/* ![Resultados comparación](@assets/guias/entregas/resultados_comparacion.png) */}
-
-<Aside type="note" title="Uso de la comparación">
-Esta herramienta es de apoyo para la revisión. Un alto porcentaje de 
-similitud no implica necesariamente plagio; puede deberse a citas 
-correctamente referenciadas o secciones metodológicas estándar.
-</Aside>
+Para más información sobre el proceso de comparación, consulta el módulo 
+de **Revisión Inteligente**.
 
 ---
 
@@ -304,14 +262,17 @@ correctamente referenciadas o secciones metodológicas estándar.
     Solo puedes tener una planeación y una evidencia por producto 
     en cada período académico.
   </Card>
-  <Card title="Planeación antes de evidencia" icon="warning">
-    Debes tener una planeación aprobada para poder crear la evidencia.
+  <Card title="Planeación opcional" icon="information">
+    La planeación no es estrictamente obligatoria, pero se recomienda 
+    para mejor seguimiento del avance.
   </Card>
   <Card title="Fechas límite" icon="warning">
-    Las entregas deben realizarse antes de las fechas límite del período.
+    Las entregas deben realizarse antes de las fechas límite del período 
+    (fecha límite de planeación y fecha límite de evidencias).
   </Card>
-  <Card title="Horas limitadas" icon="information">
-    Las horas planeadas no pueden exceder las horas asignadas al investigador.
+  <Card title="PDF requerido para evidencia" icon="information">
+    La evidencia debe incluir un archivo PDF que será procesado 
+    automáticamente para extracción de secciones.
   </Card>
 </CardGrid>
 
@@ -322,10 +283,10 @@ correctamente referenciadas o secciones metodológicas estándar.
 | Error | Causa | Solución |
 |-------|-------|----------|
 | "Fuera del plazo" | La fecha límite ha pasado | Contacta al coordinador para solicitar extensión |
-| "Planeación no aprobada" | La planeación está pendiente o rechazada | Espera aprobación o corrige la planeación |
-| "Horas excedidas" | Las horas planeadas superan las asignadas | Reduce las horas o ajusta en otros productos |
-| "Sin secciones" | La evidencia no tiene contenido | Agrega al menos una sección con contenido |
-| "Archivo muy grande" | El archivo excede 10MB | Comprime el archivo o divide en partes |
+| "Producto no encontrado" | El producto fue eliminado o no tienes acceso | Verifica que el producto exista y tengas permisos |
+| "Período no válido" | El período no está activo o no existe | Selecciona un período académico válido |
+| "Archivo requerido" | La evidencia debe incluir un archivo PDF | Adjunta el archivo PDF de la evidencia |
+| "Progreso inválido" | El porcentaje está fuera del rango 0-100 | Ingresa un valor válido entre 0 y 100 |
 
 ---
 
@@ -342,12 +303,12 @@ coordinador. Las entregas fuera de plazo pueden afectar la evaluación
 del período.
 </Aside>
 
-<Aside type="tip" title="¿La comparación detecta plagio de internet?">
-No, el sistema solo compara entre entregas registradas en la plataforma. 
-Para verificar plagio externo, se recomienda usar herramientas especializadas.
+<Aside type="tip" title="¿Qué formato debe tener el PDF de evidencia?">
+El PDF debe tener texto seleccionable (no solo imágenes escaneadas). 
+Si tienes un PDF escaneado, usa herramientas OCR antes de subirlo.
 </Aside>
 
-<Aside type="tip" title="¿Puedo entregar el mismo contenido en diferentes períodos?">
-Se espera que cada período muestre avance. Si la similitud entre tus 
-propias entregas es muy alta, el coordinador puede solicitar justificación.
+<Aside type="tip" title="¿Puedo actualizar una entrega después de guardarla?">
+Sí, puedes editar la entrega hasta que la envíes a revisión. Una vez 
+enviada, solo el coordinador puede cambiar su estado.
 </Aside>

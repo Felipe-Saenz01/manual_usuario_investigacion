@@ -36,8 +36,7 @@ Para acceder a este módulo, sigue la siguiente ruta:
 |--------|-------------|----------------------|
 | **Abierta** | Acepta postulaciones de investigadores | Postularse, editar convocatoria |
 | **Cerrada** | No acepta nuevas postulaciones | Solo consulta |
-| **En evaluación** | Las postulaciones están siendo revisadas | Evaluar postulaciones |
-| **Finalizada** | Proceso completado con resultados publicados | Solo consulta |
+| **Pendiente** | Convocatoria creada pero aún no abierta | Editar antes de abrir |
 
 ---
 
@@ -91,114 +90,118 @@ Filtra las convocatorias por:
 3. **Definir fechas**
     
     Establece el período de vigencia:
-    - **Fecha de Inicio:** Cuándo se abre la convocatoria
-    - **Fecha de Fin:** Fecha límite para postulaciones
+    - **Fecha de Inicio:** Cuándo se abre la convocatoria (requerido)
+    - **Fecha de Fin:** Fecha límite para postulaciones (requerido, debe ser posterior a inicio)
 
-    <Aside type="caution" title="Fechas automáticas">
-    Al llegar la fecha de fin, el sistema cambiará automáticamente el 
-    estado a "Cerrada" si no se ha hecho manualmente.
+    <Aside type="caution" title="Validación de fechas">
+    La fecha de fin debe ser posterior a la fecha de inicio. El sistema 
+    validará automáticamente esta condición.
     </Aside>
 
-4. **Guardar convocatoria**
+4. **Definir requisitos**
     
-    Presiona **`Guardar`**. La convocatoria se creará en estado "Abierta" 
-    si la fecha actual está dentro del rango definido.
-
-</Steps>
-
-### 3. Definir Requisitos de la Convocatoria
-
-Los requisitos son los documentos que los postulantes deben adjuntar:
-
-<Steps>
-1. **Acceder a requisitos**
-    
-    Abre la convocatoria y navega a la pestaña **"Requisitos"**.
-
-2. **Agregar requisito**
-    
-    Presiona **`+ Nuevo Requisito`** y completa:
-
-    - **Nombre:** Nombre del documento (ej: "Hoja de vida")
-    - **Descripción:** Instrucciones detalladas sobre el documento
-    - **Tipo de archivo:** Formatos aceptados (PDF, DOC, etc.)
+    Agrega los documentos requeridos para la postulación:
+    - **Nombre:** Nombre del requisito (ej: "Hoja de vida")
+    - **Descripción:** Instrucciones detalladas
+    - **Tipo de archivo:** PDF, Word, Excel, Imagen
     - **Obligatorio:** Indica si es requerido o opcional
 
-    {/* ![Agregar requisito](@assets/guias/convocatorias/agregar_requisito.png) */}
-
-3. **Ejemplos de requisitos comunes**
-
-    | Requisito | Descripción | Obligatorio |
-    |-----------|-------------|-------------|
-    | Hoja de vida | CV actualizado en formato institucional | ✅ Sí |
-    | Propuesta de investigación | Documento con la propuesta detallada | ✅ Sí |
-    | Certificado de estudios | Título o constancia de estudios | ✅ Sí |
-    | Carta de intención | Motivación para participar | ❌ No |
-    | Certificaciones adicionales | Cursos, diplomados, etc. | ❌ No |
-
-4. **Guardar requisitos**
+5. **Seleccionar estado inicial**
     
-    Los requisitos se guardan automáticamente al agregarlos.
+    Elige el estado inicial:
+    - **Abierta:** Si la fecha actual está dentro del rango
+    - **Pendiente:** Si aún no ha comenzado
+    - **Cerrada:** Si ya pasó la fecha de fin
+
+6. **Guardar convocatoria**
+    
+    Presiona **`Guardar`** para crear la convocatoria con sus requisitos.
 
 </Steps>
 
-<Aside type="note" title="Modificar requisitos">
-Puedes modificar los requisitos mientras la convocatoria esté abierta y 
-no tenga postulaciones. Una vez existan postulaciones, los requisitos 
-quedan bloqueados para mantener la equidad.
-</Aside>
+### 3. Modificar Requisitos de la Convocatoria
+
+Los requisitos se definen durante la creación, pero puedes editarlos:
+
+<Steps>
+1. **Acceder a edición**
+    
+    Abre la convocatoria y presiona **`Editar`**.
+
+2. **Modificar requisitos**
+    
+    Puedes agregar, modificar o eliminar requisitos:
+    - **Agregar:** Completa el formulario y guarda
+    - **Modificar:** Edita los campos necesarios
+    - **Eliminar:** Elimina requisitos que no tengan archivos asociados
+
+    <Aside type="caution" title="Restricción de modificación">
+    Si la convocatoria tiene postulaciones con archivos asociados, 
+    no podrás eliminar los requisitos que tengan archivos. Esto mantiene 
+    la integridad de las postulaciones recibidas.
+    </Aside>
+
+</Steps>
 
 ### 4. Gestionar Estado de la Convocatoria
 
-<Tabs>
-  <TabItem label="Cerrar Convocatoria">
-    1. Accede al detalle de la convocatoria
-    2. Presiona **`Cambiar Estado`**
-    3. Selecciona **"Cerrada"**
-    4. Confirma la acción
+<Steps>
+1. **Acceder a cambio de estado**
     
-    No se aceptarán nuevas postulaciones.
-  </TabItem>
-  <TabItem label="Pasar a Evaluación">
-    1. Cierra la convocatoria primero
-    2. Presiona **`Cambiar Estado`**
-    3. Selecciona **"En evaluación"**
-    4. Confirma la acción
-    
-    Se habilita la revisión de postulaciones.
-  </TabItem>
-  <TabItem label="Finalizar">
-    1. Completa la evaluación de todas las postulaciones
-    2. Presiona **`Cambiar Estado`**
-    3. Selecciona **"Finalizada"**
-    4. Confirma la acción
-    
-    Los resultados quedan publicados.
-  </TabItem>
-</Tabs>
+    En el detalle de la convocatoria, presiona **`Cambiar Estado`**.
 
-### 5. Evaluar Postulaciones
+2. **Seleccionar nuevo estado**
+    
+    Elige entre:
+    - **Abierta:** Acepta nuevas postulaciones
+    - **Cerrada:** No acepta nuevas postulaciones
+    - **Pendiente:** Convocatoria en preparación
+
+3. **Confirmar cambio**
+    
+    Presiona **`Actualizar`** para aplicar el nuevo estado.
+
+    <Aside type="note" title="Validación automática">
+    El sistema verifica automáticamente si la convocatoria puede estar 
+    "Abierta" según las fechas definidas.
+    </Aside>
+
+</Steps>
+
+### 5. Ver Postulaciones
 
 <Steps>
 1. **Acceder a postulaciones**
     
-    En la convocatoria, navega a la pestaña **"Postulaciones"**.
+    En la convocatoria, presiona **`Ver Postulaciones`** o navega a la 
+    sección correspondiente.
 
-2. **Revisar documentos**
+2. **Listado de postulaciones**
     
-    Para cada postulación:
-    - Haz clic en el nombre del postulante
-    - Revisa la información y archivos adjuntos
-    - Descarga los documentos para evaluación detallada
+    Se mostrarán todas las postulaciones con:
+    - Nombre del postulante
+    - Grupo de investigación
+    - Estado (Pendiente, En Revisión, Aprobada, Rechazada)
+    - Archivos adjuntos
+    - Fecha de postulación
+
+3. **Revisar postulación**
+    
+    Haz clic en una postulación para ver:
+    - Información del postulante
+    - Archivos cargados por requisito
+    - Observaciones del revisor (si aplica)
+    - Estado actual
 
     {/* ![Revisar postulación](@assets/guias/convocatorias/revisar_postulacion.png) */}
 
-3. **Emitir concepto**
+4. **Descargar archivos**
     
-    Utiliza el sistema de revisiones para:
-    - **Aprobar:** El postulante cumple los requisitos
-    - **Rechazar:** No cumple los requisitos (incluir justificación)
-    - **Solicitar corrección:** Faltan documentos o requieren ajustes
+    Puedes descargar cada archivo individualmente para revisión detallada.
+
+5. **Agregar observaciones**
+    
+    Puedes agregar observaciones a cada archivo cargado por el postulante.
 
 </Steps>
 
@@ -271,47 +274,28 @@ nuevas convocatorias de tu interés.
 
 </Steps>
 
-### 8. Consultar Estado de Postulación
-
-<Steps>
-1. Accede a **Mis Postulaciones** desde el menú o tu perfil
-2. Localiza la convocatoria
-3. Verifica el estado actual:
-   - **Pendiente:** En espera de evaluación
-   - **En revisión:** Siendo evaluada
-   - **Corrección:** Requiere ajustes
-   - **Aprobada:** ¡Felicitaciones!
-   - **Rechazada:** No aprobada
-</Steps>
-
-### 9. Corregir Postulación
-
-Si tu postulación requiere correcciones:
-
-<Steps>
-1. Accede a la postulación desde **Mis Postulaciones**
-2. Lee los comentarios del evaluador
-3. Presiona **`Editar Postulación`**
-4. Reemplaza o agrega los documentos solicitados
-5. Presiona **`Reenviar Postulación`**
-</Steps>
-
----
 
 ## Reglas de negocio
 
 <CardGrid>
   <Card title="Una postulación por convocatoria" icon="warning">
-    Cada investigador solo puede postularse una vez a cada convocatoria.
+    Cada investigador solo puede postularse una vez a cada convocatoria. 
+    La restricción es única por usuario y convocatoria.
   </Card>
-  <Card title="Requisitos bloqueados" icon="warning">
-    No se pueden modificar requisitos si existen postulaciones.
+  <Card title="Requisitos con archivos" icon="warning">
+    No se pueden eliminar requisitos que tengan archivos asociados en 
+    postulaciones existentes.
   </Card>
-  <Card title="Fechas estrictas" icon="warning">
-    No se aceptan postulaciones fuera del período establecido.
+  <Card title="Convocatoria abierta" icon="warning">
+    Solo se pueden crear postulaciones si la convocatoria está en estado 
+    "Abierta" y dentro del rango de fechas.
   </Card>
-  <Card title="Documentos únicos" icon="information">
-    Solo se permite un archivo por requisito en cada postulación.
+  <Card title="Solo líderes de grupo" icon="information">
+    Solo usuarios con rol "Lider Grupo" pueden postularse a convocatorias.
+  </Card>
+  <Card title="Eliminación restringida" icon="warning">
+    No se puede eliminar una convocatoria que tiene postulaciones o que 
+    está abierta con fechas futuras.
   </Card>
 </CardGrid>
 
@@ -321,32 +305,33 @@ Si tu postulación requiere correcciones:
 
 | Error | Causa | Solución |
 |-------|-------|----------|
-| "Convocatoria cerrada" | La fecha límite ha pasado | Espera futuras convocatorias |
-| "Ya tienes una postulación" | Ya te postulaste anteriormente | Edita tu postulación existente |
-| "Requisitos incompletos" | Faltan documentos obligatorios | Carga todos los documentos marcados con (*) |
-| "Formato no permitido" | El archivo no es del tipo aceptado | Convierte el documento al formato requerido |
-| "Archivo muy grande" | Excede el límite de tamaño | Comprime el archivo (máx. 5MB por archivo) |
+| "Convocatoria cerrada" | La convocatoria no está abierta o la fecha límite pasó | Verifica el estado y fechas de la convocatoria |
+| "Ya tienes una postulación" | Ya te postulaste anteriormente | Edita tu postulación existente desde "Mis Postulaciones" |
+| "Requisitos incompletos" | Faltan documentos obligatorios | Carga todos los documentos marcados como obligatorios |
+| "Formato no permitido" | El archivo no coincide con el tipo aceptado | Verifica el tipo de archivo requerido (PDF, Word, Excel, Image, Any) |
+| "No se puede eliminar" | Tiene postulaciones o está abierta | Cierra la convocatoria y elimina postulaciones primero |
 
 ---
 
 ## Preguntas frecuentes
 
 <Aside type="tip" title="¿Puedo modificar mi postulación después de enviarla?">
-Solo si el evaluador solicita correcciones. Una vez enviada, la postulación 
-queda bloqueada hasta recibir retroalimentación.
+Sí, puedes editar tu postulación para actualizar archivos o agregar 
+observaciones. Accede desde "Mis Postulaciones" y presiona "Editar".
 </Aside>
 
-<Aside type="tip" title="¿Cómo sé si fui seleccionado?">
-Recibirás una notificación por correo electrónico cuando tu postulación 
-sea evaluada. También puedes consultar el estado en "Mis Postulaciones".
+<Aside type="tip" title="¿Cómo sé el estado de mi postulación?">
+Puedes consultar el estado en la vista de la convocatoria o en "Mis 
+Postulaciones". Los estados posibles son: Pendiente, En Revisión, 
+Aprobada, Rechazada.
 </Aside>
 
-<Aside type="tip" title="¿Puedo retirar mi postulación?">
-Sí, mientras la convocatoria esté abierta. Accede a tu postulación y 
-presiona "Retirar Postulación". Esta acción es irreversible.
+<Aside type="tip" title="¿Puedo eliminar mi postulación?">
+Sí, puedes eliminar tu postulación mientras la convocatoria esté abierta. 
+Esta acción es irreversible.
 </Aside>
 
-<Aside type="tip" title="¿Qué pasa si la convocatoria cierra y no terminé?">
-Las postulaciones incompletas quedan descartadas automáticamente. 
-Asegúrate de completar y enviar antes de la fecha límite.
+<Aside type="tip" title="¿Qué pasa si no soy Lider Grupo?">
+Solo los usuarios con rol "Lider Grupo" pueden postularse a convocatorias. 
+Si necesitas postularte, contacta al administrador para asignarte el rol.
 </Aside>

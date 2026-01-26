@@ -36,13 +36,8 @@ Un proyecto puede encontrarse en los siguientes estados:
 
 | Estado | Descripción | Acciones permitidas |
 |--------|-------------|---------------------|
-| **En formulación** | El proyecto está siendo creado o editado | Editar todos los campos |
-| **En revisión** | Enviado para aprobación del coordinador | Solo lectura |
-| **Corrección** | Requiere ajustes según observaciones | Editar y reenviar |
-| **Aprobado** | Aprobado y listo para ejecución | Gestionar actividades y productos |
-| **En ejecución** | Proyecto activo con actividades en curso | Registrar avances |
-| **Finalizado** | Proyecto completado | Solo lectura |
-| **Rechazado** | No aprobado definitivamente | Solo lectura |
+| **En Formulación** | El proyecto está siendo creado o editado, campos pueden estar incompletos | Editar todos los campos, agregar participantes |
+| **Formulado** | Proyecto completo con todos los campos requeridos diligenciados | Gestionar actividades y productos, editar información |
 
 ---
 
@@ -74,130 +69,82 @@ La vista principal muestra todos los proyectos según tu rol:
 
     {/* ![Botón nuevo proyecto](@assets/guias/proyectos/boton_nuevo_proyecto.png) */}
 
-2. **Información básica**
+2. **Seleccionar tipo de proyecto**
+    
+    Elige el tipo de proyecto:
+    - **Formulado:** Proyecto completo con todos los campos requeridos
+    - **En Formulación:** Proyecto en proceso, campos pueden estar incompletos
+
+    <Aside type="note" title="Proyectos en Formulación">
+    Si seleccionas "En Formulación", el sistema creará automáticamente 
+    un producto "Formulación del Proyecto" asociado al proyecto.
+    </Aside>
+
+3. **Información básica**
     
     Completa los campos iniciales:
     - **Título:** Nombre descriptivo del proyecto (requerido)
-    - **Eje Temático:** Selecciona la línea de investigación
+    - **Eje Temático:** Selecciona la línea de investigación (requerido)
 
     {/* ![Formulario información básica](@assets/guias/proyectos/formulario_info_basica.png) */}
 
-3. **Resumen ejecutivo**
+4. **Campos de formulación (solo para proyectos Formulados)**
     
-    Redacta un resumen conciso del proyecto que incluya:
-    - Objetivo principal
-    - Alcance
-    - Resultados esperados
+    Si seleccionaste "Formulado", completa todos los campos requeridos:
+    - **Resumen ejecutivo:** Resumen conciso del proyecto
+    - **Planteamiento del problema:** Situación problemática identificada
+    - **Antecedentes:** Trabajos previos relacionados
+    - **Justificación:** Importancia y pertinencia del proyecto
+    - **Objetivos:** Objetivo general y específicos
+    - **Metodología:** Enfoque metodológico
+    - **Resultados:** Productos y resultados esperados
+    - **Riesgos:** Riesgos y estrategias de mitigación
+    - **Bibliografía:** Referencias bibliográficas
 
-    <Aside type="tip" title="Extensión recomendada">
-    El resumen ejecutivo debe tener entre 200 y 500 palabras, presentando 
-    de forma clara y concisa los aspectos más relevantes del proyecto.
+    <Aside type="tip" title="Campos opcionales en Formulación">
+    Si el proyecto está "En Formulación", estos campos son opcionales y 
+    se llenarán automáticamente con "En Formulación" si no se completan.
     </Aside>
 
-4. **Planteamiento del problema**
+5. **Seleccionar participantes**
     
-    Describe detalladamente:
-    - La situación problemática identificada
-    - El contexto en el que se presenta
-    - La pregunta de investigación
+    Agrega los investigadores que participarán en el proyecto:
+    - Selecciona uno o más investigadores de la lista
+    - El usuario logueado se agrega automáticamente
 
-5. **Antecedentes**
+6. **Guardar proyecto**
     
-    Presenta los trabajos previos relacionados con tu investigación:
-    - Investigaciones anteriores sobre el tema
-    - Estado actual del conocimiento
-    - Vacíos identificados en la literatura
-
-6. **Justificación**
-    
-    Argumenta la importancia y pertinencia del proyecto:
-    - Relevancia académica
-    - Impacto social o económico
-    - Aportes esperados al campo de conocimiento
-
-7. **Objetivos**
-    
-    Define claramente:
-    - **Objetivo general:** Meta principal del proyecto
-    - **Objetivos específicos:** Metas parciales que contribuyen al objetivo general
-
-    <Aside type="note" title="Formato sugerido">
-    Utiliza verbos en infinitivo para redactar los objetivos:
-    - Analizar, Diseñar, Desarrollar, Evaluar, Implementar, etc.
-    </Aside>
-
-8. **Metodología**
-    
-    Describe el enfoque metodológico:
-    - Tipo de investigación
-    - Población y muestra
-    - Técnicas e instrumentos de recolección
-    - Procedimiento de análisis
-
-9. **Resultados esperados**
-    
-    Lista los productos y resultados que se obtendrán:
-    - Artículos científicos
-    - Software
-    - Prototipos
-    - Patentes
-    - Otros entregables
-
-10. **Riesgos**
-    
-    Identifica posibles riesgos y estrategias de mitigación:
-    - Riesgos técnicos
-    - Riesgos de recursos
-    - Riesgos de tiempo
-
-11. **Bibliografía**
-    
-    Incluye las referencias bibliográficas utilizadas en formato APA, IEEE 
-    o el estándar de tu institución.
-
-12. **Guardar borrador**
-    
-    Presiona **`Guardar`** para almacenar el proyecto como borrador. 
-    Podrás continuar editándolo posteriormente.
+    Presiona **`Guardar`** para crear el proyecto. El sistema asociará 
+    automáticamente el proyecto al grupo de investigación del usuario.
 
 </Steps>
 
 ### 3. Gestionar Participantes
 
-Una vez creado el proyecto, puedes agregar participantes:
+Los participantes se gestionan durante la creación o edición del proyecto:
 
 <Steps>
-1. **Acceder al proyecto**
+1. **Seleccionar participantes**
     
-    Abre el proyecto y navega a la pestaña **"Participantes"**.
+    En el formulario de creación/edición, selecciona los investigadores 
+    que participarán en el proyecto desde el campo **"Usuarios"**.
 
-2. **Agregar investigador**
-    
-    Presiona **`+ Agregar Participante`** y busca al investigador.
-
-    {/* ![Agregar participante](@assets/guias/proyectos/agregar_participante.png) */}
-
-    <Aside type="note" title="Investigadores de otros grupos">
-    Puedes agregar investigadores de cualquier grupo de investigación 
-    como participantes del proyecto.
+    <Aside type="note" title="Investigadores disponibles">
+    Solo se muestran investigadores con tipo "Investigador" o "Lider Grupo".
+    Puedes agregar investigadores de cualquier grupo de investigación.
     </Aside>
 
-3. **Confirmar adición**
+2. **Confirmar selección**
     
-    Selecciona al investigador y presiona **`Agregar`**.
-
+    Los participantes seleccionados se asociarán automáticamente al proyecto 
+    al guardar.
 </Steps>
 
-### 4. Vincular Grupos de Investigación
-
-Para proyectos intergrupos:
-
-<Steps>
-1. Navega a la pestaña **"Grupos"**
-2. Presiona **`+ Vincular Grupo`**
-3. Selecciona el grupo de investigación
-4. Confirma la vinculación
-</Steps>
+<Aside type="note" title="Vinculación automática de grupos">
+El proyecto se vincula automáticamente al grupo de investigación del usuario 
+que lo crea. Si el usuario pertenece a un grupo, el proyecto quedará asociado 
+a ese grupo.
+</Aside>
 
 ### 5. Definir Actividades del Proyecto
 
@@ -222,50 +169,34 @@ Para proyectos intergrupos:
 
 </Steps>
 
-### 6. Enviar a Revisión
-
-Cuando el proyecto esté completo:
+### 6. Editar un Proyecto
 
 <Steps>
-1. Verifica que todos los campos obligatorios estén diligenciados
-2. Presiona el botón **`Enviar a Revisión`**
-3. Confirma la acción en el diálogo emergente
-4. El proyecto cambiará a estado "En revisión"
+1. **Acceder a edición**
+    
+    Solo el autor del proyecto (primer usuario asociado) puede editarlo. 
+    Presiona el botón de **edición** (ícono de lápiz).
+
+2. **Verificar permisos**
+    
+    El sistema verifica que tengas el permiso `editar-proyecto` y que seas 
+    el autor del proyecto.
+
+3. **Modificar información**
+    
+    Actualiza los campos necesarios. Si el proyecto estaba "En Formulación", 
+    puedes completar todos los campos para convertirlo en "Formulado".
+
+4. **Guardar cambios**
+    
+    Presiona **`Actualizar`** para guardar los cambios.
 </Steps>
 
-<Aside type="caution" title="Cambios bloqueados">
-Una vez enviado a revisión, no podrás editar el proyecto hasta que 
-el coordinador emita su concepto.
+<Aside type="caution" title="Restricciones de edición">
+- Solo el autor del proyecto puede editarlo
+- Se requiere el permiso `editar-proyecto`
+- No se puede cambiar el proyecto asociado de los productos una vez creados
 </Aside>
-
-### 7. Proceso de Revisión (Coordinadores)
-
-<Tabs>
-  <TabItem label="Aprobar">
-    1. Revisa toda la información del proyecto
-    2. Presiona **`Aprobar`**
-    3. Agrega comentarios (opcional)
-    4. Confirma la aprobación
-    
-    El proyecto pasará a estado "Aprobado".
-  </TabItem>
-  <TabItem label="Solicitar Corrección">
-    1. Identifica los aspectos a mejorar
-    2. Presiona **`Solicitar Corrección`**
-    3. Detalla las observaciones en el campo de comentarios
-    4. Confirma el envío
-    
-    El proyecto volverá al investigador para ajustes.
-  </TabItem>
-  <TabItem label="Rechazar">
-    1. Documenta las razones del rechazo
-    2. Presiona **`Rechazar`**
-    3. Ingresa la justificación detallada
-    4. Confirma el rechazo
-    
-    El proyecto quedará en estado "Rechazado".
-  </TabItem>
-</Tabs>
 
 ---
 
@@ -275,14 +206,17 @@ el coordinador emita su concepto.
   <Card title="Mínimo un participante" icon="warning">
     Todo proyecto debe tener al menos un investigador participante.
   </Card>
-  <Card title="Mínimo un grupo" icon="warning">
-    El proyecto debe estar vinculado a al menos un grupo de investigación.
+  <Card title="Vinculación automática" icon="information">
+    El proyecto se vincula automáticamente al grupo de investigación del usuario creador.
   </Card>
-  <Card title="Campos obligatorios" icon="warning">
-    Todos los campos de formulación son requeridos para enviar a revisión.
+  <Card title="Campos según tipo" icon="warning">
+    Los campos de formulación son requeridos solo para proyectos "Formulados".
   </Card>
   <Card title="Edición restringida" icon="information">
-    Solo se puede editar en estados "En formulación" o "Corrección".
+    Solo el autor del proyecto puede editarlo, y requiere el permiso `editar-proyecto`.
+  </Card>
+  <Card title="Eliminación condicional" icon="warning">
+    No se puede eliminar un proyecto que tenga productos investigativos asociados.
   </Card>
 </CardGrid>
 
@@ -302,8 +236,8 @@ el coordinador emita su concepto.
 ## Preguntas frecuentes
 
 <Aside type="tip" title="¿Puedo eliminar un proyecto?">
-Solo puedes eliminar proyectos en estado "En formulación" y si eres 
-el creador o tienes rol de administrador.
+Solo puedes eliminar proyectos si eres el autor, tienes el permiso 
+`eliminar-proyecto` y el proyecto no tiene productos investigativos asociados.
 </Aside>
 
 <Aside type="tip" title="¿Cómo agrego productos al proyecto?">
